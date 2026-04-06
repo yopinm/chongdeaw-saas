@@ -14,7 +14,7 @@ export default function Index() {
   const t = useTranslations("Home");
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 md:px-6 flex flex-col gap-4 pt-2">
+    <div className="w-full max-w-2xl mx-auto px-4 md:px-6 flex flex-col gap-4 pt-2">
       {/* Hero */}
       <section className="rounded-3xl bg-gradient-to-br from-orange-500 to-amber-400 p-6 text-white shadow-sm">
         <div className="flex items-center gap-2">

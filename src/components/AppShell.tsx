@@ -20,7 +20,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
       </header>
 
       <main className="min-w-0 flex-1 overflow-auto pb-24 md:pb-0">
-        <div className="w-full max-w-4xl mx-auto px-4 md:px-6 py-4">{children}</div>
+        <div className="w-full max-w-2xl mx-auto px-4 md:px-6 py-4">{children}</div>
       </main>
 
       {/* Mobile bottom nav */}

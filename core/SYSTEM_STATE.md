@@ -67,6 +67,7 @@ Begin TASK-021: review and align auth entry points for Phase 1 UAT.
 - TASK-021-ui2: DONE — Center layout (max-w-4xl mx-auto px-4 md:px-6); merge 3 hero stat cards into single "📊 ภาพรวมวันนี้" card with flex rows
 - TASK-022-home-layout: DONE — Remove AppShell from [locale]/layout.tsx (sidebar gone on Home); remove 3 info panel sections from page.tsx; Home is now standalone centered layout (3 sections only: hero + stats + menu)
 - TASK-023-layout: DONE — Remove <aside> sidebar from AppShell globally; update main container to w-full max-w-4xl mx-auto px-4 md:px-6 py-4; mobile header and bottom nav preserved
+- TASK-024-ui: DONE — Tighten content width: max-w-4xl → max-w-2xl in both AppShell.tsx and page.tsx
 
 ## In Progress
 - None

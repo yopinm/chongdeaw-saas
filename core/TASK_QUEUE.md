@@ -44,6 +44,7 @@
 - [DONE] TASK-021-ui2: center layout (max-w-4xl mx-auto) + รวม 3 stat card ใน hero เป็น card เดียว "📊 ภาพรวมวันนี้" แบบ flex rows
 - [DONE] TASK-022-home-layout: ลบ AppShell ออกจาก [locale]/layout.tsx (sidebar หายจาก Home), ลบ 3 info panel sections ออกจาก page.tsx, Home เป็น standalone centered layout (เหลือแค่ hero + stats + menu)
 - [DONE] TASK-023-layout: ลบ <aside> sidebar ออกจาก AppShell globally; อัปเดต main container เป็น max-w-4xl mx-auto; mobile header + bottom nav คงไว้
+- [DONE] TASK-024-ui: ลด content width จาก max-w-4xl เป็น max-w-2xl ใน AppShell.tsx และ page.tsx
 - [TODO] TASK-021: ทบทวน auth entry points และ route callback/login/logout ให้พร้อมสำหรับ UAT Phase 1
 - [TODO] TASK-022: เชื่อม Real LINE Auth + Supabase session แบบ safe mode
 - [TODO] TASK-023: bind real session เข้ากับ TenantContext ฝั่ง server โดยไม่เชื่อ client `store_id`
