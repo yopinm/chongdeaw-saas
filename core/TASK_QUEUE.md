@@ -23,7 +23,7 @@
 - [DONE] TASK-006: เพิ่ม navigation shell สำหรับ Home, Queue, Revenue, CRM, Settings แบบ placeholder ก่อน
 - [DONE] TASK-007: วาง baseline i18n สำหรับ TH/EN ให้สอดคล้องกับโครง route ปัจจุบัน
 - [DONE] TASK-008: เพิ่ม language toggle ใน layout shell
-- [TODO] TASK-009: ตั้งค่า Supabase client baseline แบบไม่ฝืนเชื่อม logic ที่ยังไม่พร้อม
+- [DONE] TASK-009: ตั้งค่า Supabase client baseline แบบไม่ฝืนเชื่อม logic ที่ยังไม่พร้อม
 - [TODO] TASK-010: ตรวจสอบ env wiring ที่จำเป็นและสรุปสิ่งที่ยังขาดอย่างปลอดภัย
 - [TODO] TASK-011: scaffold login entry และ auth entry points
 - [TODO] TASK-012: วาง LINE login integration point หรือ mock flow ให้ชัดเจนว่าอะไรยังไม่จริง

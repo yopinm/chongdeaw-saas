@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-008 complete. Language toggle added to AppShell (desktop sidebar + mobile header).
+TASK-009 complete. Supabase client baseline — browser + server clients in src/lib/supabase.ts.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -26,9 +26,10 @@ TASK-008 complete. Language toggle added to AppShell (desktop sidebar + mobile h
 - TASK-006: DONE — nav items (Home, Queue, Revenue, CRM, Settings) in AppShell; all href="#" placeholder
 - TASK-007: DONE — en.json duplicate key fixed; Nav section added to both en.json and th.json
 - TASK-008: DONE — LanguageToggle component created; wired in desktop sidebar + mobile top header
+- TASK-009: DONE — createClient (browser) + createSupabaseServerClient (server) baseline ready
 
 ## Current Task Status
-- TASK-008: DONE
+- TASK-009: DONE
 
 ## In Progress
 - None
@@ -37,7 +38,7 @@ TASK-008 complete. Language toggle added to AppShell (desktop sidebar + mobile h
 - None confirmed
 
 ## Next Task
-TASK-009
+TASK-010
 
 ## TASK-001 Result
 - Status: DONE
@@ -165,6 +166,18 @@ When stopping, append a short note with:
   - Mobile: toggle in sticky top header alongside brand name
   - Shows target locale (e.g. if current is TH, shows "EN" to switch to)
 - Next Safe Step: TASK-009 — verify/baseline Supabase client without forcing unready logic
+
+## TASK-009 Result
+- Status: DONE
+- Changed Files: src/lib/supabase.ts
+- Validation: `npm run build` — TypeScript clean, build passes
+- Commit: feat(task-009): add Supabase server client baseline
+- Changes:
+  - Kept existing createClient() (browser, for Client Components)
+  - Added createSupabaseServerClient() (server, async, uses cookies() from next/headers)
+  - No routes or components wired to these clients yet — auth binding comes in TASK-015+
+  - Both clients require NEXT_PUBLIC_SUPABASE_URL + NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local
+- Next Safe Step: TASK-010 — check env wiring, document what's missing
 
 ## Last Updated
 2026-04-06
