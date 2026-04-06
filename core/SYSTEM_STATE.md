@@ -56,7 +56,8 @@ Only after that should Real Integration UAT begin.
 ## Current Task Status
 - TASK-019: DONE
 - TASK-020: DONE
-- TASK-020-routing: DONE — generateStaticParams added to app/[locale]/layout.tsx; /th no longer 404
+- TASK-020-routing: DONE — generateStaticParams added to app/[locale]/layout.tsx
+- TASK-020-middleware: DONE — src/middleware.ts simplified to direct export; removed wrapper fn + catch-all matcher that blocked requestLocale resolution for /th
 
 ## In Progress
 - None

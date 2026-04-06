@@ -36,6 +36,7 @@
 - [DONE] TASK-019: แก้ root route ให้ `localhost:3000` ไม่ 404 โดยไม่รื้อ locale/layout architecture
 - [DONE] TASK-020: เพิ่ม mock Home UI ขั้นต่ำบน layout shell เดิม เพื่อให้มีจุดเข้าแอปสำหรับ UAT
 - [DONE] TASK-020-routing: แก้ /th 404 โดยเพิ่ม generateStaticParams() ใน app/[locale]/layout.tsx
+- [DONE] TASK-020-middleware: แก้ src/middleware.ts ให้ export createMiddleware โดยตรง (ไม่ผ่าน wrapper fn) และ matcher ให้ตรงกับ next-intl v4
 - [TODO] TASK-021: ทบทวน auth entry points และ route callback/login/logout ให้พร้อมสำหรับ UAT Phase 1
 - [TODO] TASK-022: เชื่อม Real LINE Auth + Supabase session แบบ safe mode
 - [TODO] TASK-023: bind real session เข้ากับ TenantContext ฝั่ง server โดยไม่เชื่อ client `store_id`
