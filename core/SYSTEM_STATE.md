@@ -66,6 +66,7 @@ Begin TASK-021: review and align auth entry points for Phase 1 UAT.
 - TASK-021-ui: DONE — Force home page single column layout at all breakpoints; removed all grid-cols-2/3, md:grid, xl:grid patterns; replaced with flex flex-col; removed stale col-span classes
 - TASK-021-ui2: DONE — Center layout (max-w-4xl mx-auto px-4 md:px-6); merge 3 hero stat cards into single "📊 ภาพรวมวันนี้" card with flex rows
 - TASK-022-home-layout: DONE — Remove AppShell from [locale]/layout.tsx (sidebar gone on Home); remove 3 info panel sections from page.tsx; Home is now standalone centered layout (3 sections only: hero + stats + menu)
+- TASK-023-layout: DONE — Remove <aside> sidebar from AppShell globally; update main container to w-full max-w-4xl mx-auto px-4 md:px-6 py-4; mobile header and bottom nav preserved
 
 ## In Progress
 - None
