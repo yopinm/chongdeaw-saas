@@ -14,7 +14,7 @@ export default function Index() {
   const t = useTranslations("Home");
 
   return (
-    <div className="space-y-5 pt-2">
+    <div className="w-full max-w-4xl mx-auto px-4 md:px-6 flex flex-col gap-4 pt-2">
       {/* Hero */}
       <section className="rounded-3xl bg-gradient-to-br from-orange-500 to-amber-400 p-6 text-white shadow-sm">
         <div className="flex items-center gap-2">
@@ -30,25 +30,24 @@ export default function Index() {
           {t("subtitle")}
         </p>
 
-        {/* Stats */}
-        <div className="mt-5 flex flex-col gap-3">
-          <div className="rounded-2xl bg-white/15 px-3 py-3 backdrop-blur-sm">
-            <div className="text-[11px] font-medium text-orange-100 leading-snug">
-              {t("summary.todayOrders")}
-            </div>
-            <div className="mt-1.5 text-2xl font-bold leading-none">18</div>
+        {/* Merged stats card */}
+        <div className="mt-5 rounded-2xl bg-white/15 px-4 py-4 backdrop-blur-sm">
+          <div className="mb-3 text-xs font-semibold text-orange-100">
+            📊 ภาพรวมวันนี้
           </div>
-          <div className="rounded-2xl bg-white/15 px-3 py-3 backdrop-blur-sm">
-            <div className="text-[11px] font-medium text-orange-100 leading-snug">
-              {t("summary.queueNow")}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-orange-100">{t("summary.todayOrders")}</span>
+              <span className="text-xl font-bold">18</span>
             </div>
-            <div className="mt-1.5 text-2xl font-bold leading-none">5</div>
-          </div>
-          <div className="rounded-2xl bg-white/15 px-3 py-3 backdrop-blur-sm">
-            <div className="text-[11px] font-medium text-orange-100 leading-snug">
-              {t("summary.salesToday")}
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-orange-100">{t("summary.queueNow")}</span>
+              <span className="text-xl font-bold">5</span>
             </div>
-            <div className="mt-1.5 text-xl font-bold leading-none">฿2,480</div>
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-orange-100">{t("summary.salesToday")}</span>
+              <span className="text-xl font-bold">฿2,480</span>
+            </div>
           </div>
         </div>
       </section>
