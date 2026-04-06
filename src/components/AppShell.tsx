@@ -47,15 +47,15 @@ export default function AppShell({ children }: { children: ReactNode }) {
       </div>
 
       {/* Mobile bottom nav */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t bg-white px-2 py-2 md:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t border-gray-100 bg-white/95 px-2 py-1.5 backdrop-blur-sm md:hidden">
         {navItems.map((item) => (
           <Link
             key={item.key}
             href={item.href}
-            className="flex flex-col items-center gap-1 text-gray-400 hover:text-orange-600"
+            className="flex flex-col items-center gap-0.5 text-gray-400/80 transition-colors hover:text-orange-500 active:text-orange-600"
           >
-            <span className="text-xl">{item.emoji}</span>
-            <span className="text-[10px] font-medium">{item.labelTh}</span>
+            <span className="text-lg">{item.emoji}</span>
+            <span className="text-[9px] font-medium tracking-wide">{item.labelTh}</span>
           </Link>
         ))}
       </nav>

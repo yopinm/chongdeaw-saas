@@ -14,7 +14,7 @@ export default function Index() {
   const t = useTranslations("Home");
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 pt-2">
       {/* Hero */}
       <section className="rounded-3xl bg-gradient-to-br from-orange-500 to-amber-400 p-6 text-white shadow-sm">
         <div className="flex items-center gap-2">
@@ -63,30 +63,53 @@ export default function Index() {
         </div>
 
         <div className="flex flex-col gap-3 md:grid md:grid-cols-2 xl:grid-cols-3">
-          {homeMenus.map((menu) => (
-            <Link
-              key={menu.key}
-              href={menu.href}
-              className="group flex items-center gap-4 rounded-2xl border border-gray-200 bg-white px-4 py-4 shadow-sm transition hover:shadow-md active:scale-[0.98]"
-            >
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-3xl">
-                {menu.emoji}
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center justify-between gap-2">
-                  <h3 className="text-base font-bold text-gray-900 group-hover:text-orange-600">
-                    {t(`menu.${menu.key}.title`)}
-                  </h3>
-                  <span className="shrink-0 rounded-full bg-gray-100 px-2.5 py-1 text-[11px] font-semibold text-gray-500">
-                    {menu.badge}
-                  </span>
+          {homeMenus.map((menu, i) => {
+            const isPrimary = i === 0;
+            return (
+              <Link
+                key={menu.key}
+                href={menu.href}
+                className={`group flex items-center gap-4 rounded-2xl px-4 py-4 shadow-sm transition-all duration-150 active:scale-[0.97] active:shadow-inner ${
+                  isPrimary
+                    ? "border-2 border-orange-400 bg-orange-50 hover:bg-orange-100 hover:shadow-md"
+                    : "border border-gray-200 bg-white hover:border-orange-200 hover:bg-orange-50/40 hover:shadow-md"
+                }`}
+              >
+                <div
+                  className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl ${
+                    isPrimary ? "bg-orange-500/15" : "bg-orange-50"
+                  }`}
+                >
+                  {menu.emoji}
                 </div>
-                <p className="mt-0.5 text-sm leading-snug text-gray-500">
-                  {t(`menu.${menu.key}.desc`)}
-                </p>
-              </div>
-            </Link>
-          ))}
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <h3
+                      className={`text-base font-bold ${
+                        isPrimary
+                          ? "text-orange-700"
+                          : "text-gray-900 group-hover:text-orange-600"
+                      }`}
+                    >
+                      {t(`menu.${menu.key}.title`)}
+                    </h3>
+                    <span
+                      className={`shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold ${
+                        isPrimary
+                          ? "bg-orange-500 text-white"
+                          : "bg-gray-100 text-gray-500"
+                      }`}
+                    >
+                      {menu.badge}
+                    </span>
+                  </div>
+                  <p className="mt-0.5 text-sm leading-snug text-gray-500">
+                    {t(`menu.${menu.key}.desc`)}
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </section>
 

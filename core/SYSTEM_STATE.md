@@ -60,6 +60,7 @@ Only after that should Real Integration UAT begin.
 - TASK-020-middleware: DONE — src/middleware.ts simplified to direct export; removed wrapper fn + catch-all matcher that blocked requestLocale resolution for /th
 - TASK-020-i18n: DONE — src/i18n/request.ts: removed notFound(); invalid/missing locale now falls back to "th"
 - TASK-020-ui: DONE — Home page mobile-first UX refine: hero taller, menu cards vertical stack with row layout, better typography, footer nav tightened
+- TASK-020-ui2: DONE — Polish pass: tap feedback on cards, สั่งกาแฟ primary card style, pt-2 header spacing, footer nav lighter (opacity/size/blur)
 
 ## In Progress
 - None
