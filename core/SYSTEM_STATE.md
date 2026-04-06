@@ -55,23 +55,29 @@ Only after that should Real Integration UAT begin.
 
 ## Current Task Status
 - TASK-018: DONE
-- TASK-019: TODO
+- TASK-019: DONE
 
 ## In Progress
 - None
 
 ## Blockers
-- Root route currently returns 404 at `localhost:3000`
-- Safe UAT cannot start while entry route is broken
+- None
 
 ## Active Risk
-- Route architecture may currently depend on locale path only
-- Root redirect may be missing even if locale pages exist
-- Home page may not yet exist as a stable runtime shell
-- Starting LINE/RLS work before fixing entry will increase risk unnecessarily
+- None (root route restored)
 
 ## Next Task
-TASK-019
+TASK-020
+
+## TASK-019 Result
+- Status: DONE
+- Changed Files: app/page.tsx (created)
+- Root cause: app/page.tsx did not exist — App Router had no page to serve at /
+- Fix: added redirect("/th") as a static fallback (next-intl middleware also redirects, page is dual safety)
+- Validation: `npm run build` — `/` now appears as ○ (Static) in route output; TypeScript clean
+- Commit: fix(task-019): add root page redirect to /th, fix localhost:3000 404
+- Before: build output had no `/` route → 404
+- After: `○ /` present, redirects to `/th`
 
 ## TASK-019 Definition
 Restore root route and remove localhost:3000 404 safely.
