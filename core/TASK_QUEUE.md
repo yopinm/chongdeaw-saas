@@ -33,9 +33,22 @@
 - [DONE] TASK-016: วาง request validation layer ที่ไม่เชื่อ frontend `store_id`
 - [DONE] TASK-017: scaffold RLS baseline และบันทึก limitation ที่ยังไม่ bind claim จริง
 - [DONE] TASK-018: ทบทวน security baseline เฉพาะ Phase 1
-- [TODO] TASK-019: ตั้งค่า PWA manifest และ config ขั้นพื้นฐาน
-- [TODO] TASK-020: เพิ่ม offline shell หรือ fallback อย่างปลอดภัย
-- [TODO] TASK-021: สร้าง dashboard placeholder ที่เกาะ layout ใหม่
-- [TODO] TASK-022: ทบทวน integration ระหว่าง layout, i18n, auth scaffold, supabase wiring แบบเบา ๆ
-- [TODO] TASK-023: อัปเดตเอกสาร core ให้ตรงกับสิ่งที่ทำจริง
-- [TODO] TASK-024: เขียน readiness note ก่อนขยับสู่ Phase 2
+- [TODO] TASK-019: แก้ root route ให้ `localhost:3000` ไม่ 404 โดยไม่รื้อ locale/layout architecture
+- [TODO] TASK-020: เพิ่ม mock Home UI ขั้นต่ำบน layout shell เดิม เพื่อให้มีจุดเข้าแอปสำหรับ UAT
+- [TODO] TASK-021: ทบทวน auth entry points และ route callback/login/logout ให้พร้อมสำหรับ UAT Phase 1
+- [TODO] TASK-022: เชื่อม Real LINE Auth + Supabase session แบบ safe mode
+- [TODO] TASK-023: bind real session เข้ากับ TenantContext ฝั่ง server โดยไม่เชื่อ client `store_id`
+- [TODO] TASK-024: inject `store_id` หรือ `active_store_id` เข้า JWT แบบ additive mode
+- [TODO] TASK-025: เปิด RLS ทีละ table จาก low-risk ไป high-risk
+- [TODO] TASK-026: รัน end-to-end tenant isolation UAT
+- [TODO] TASK-027: อัปเดตเอกสาร core ให้ตรงกับสถานะ UAT จริง
+- [TODO] TASK-028: เขียนสรุป readiness / pass-fail note ของ UAT Phase 1
+
+## Execution Intent
+ลำดับงานใหม่เน้น:
+1. restore runtime entry
+2. render mock home shell
+3. align auth routes
+4. start real integration UAT
+5. enable RLS gradually
+6. validate tenant isolation end-to-end

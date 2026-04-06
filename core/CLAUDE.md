@@ -4,6 +4,14 @@
 You are Claude Code working on ChongDeaw SaaS.
 Your job is to complete Phase 1 safely, with minimal changes, strict scope control, and immediate recovery points.
 
+## Current Mission Override
+Do not continue old foundation queue items such as PWA/offline/dashboard placeholder first.
+Priority has changed.
+The immediate job is:
+1. fix runtime entry (`localhost:3000` should not 404)
+2. expose a minimal mock Home UI
+3. then begin Phase 1 UAT real integration work
+
 ## Safe Mode Priority
 Always prefer:
 1. Safety
@@ -45,6 +53,7 @@ Do not chain many risky edits in one go.
 - Do NOT touch Phase 2+ business features
 - Do NOT “clean up” code outside current task
 - Do NOT change env files unless the task explicitly needs env wiring
+- Do NOT start LINE/RLS work before runtime entry is restored
 
 ## File Path Rules
 All control documents are inside `core/`:
@@ -80,8 +89,9 @@ If any item above is false, the task is not done.
 ## Validation Rule
 After each task, run the smallest relevant validation.
 Examples:
-- config task → type/lint/build check if lightweight
+- route fix → route/file import/build check
 - UI shell task → ensure file structure and imports are valid
+- auth alignment → verify paths and assumptions, avoid broad refactors
 - docs/state task → verify links/paths/names are accurate
 
 Do not run heavy repo-wide checks unless required.
@@ -123,6 +133,31 @@ When resuming after interruption, always:
 2. trust the latest committed state more than memory
 3. continue from `Next Task`
 4. if last task was PARTIAL, complete or revert it safely before moving on
+
+## Specific Instruction for TASK-019
+Goal: restore runtime entry and remove 404 safely.
+
+Preferred order:
+1. inspect current route structure only as needed
+2. if locale routing exists, make `/` safely redirect to default locale such as `/th`
+3. if redirect is risky, render a minimal safe placeholder at `/`
+4. keep changes minimal and reversible
+5. validate that `/` no longer returns 404
+
+Do not start mock Home UI until TASK-019 is complete.
+
+## Specific Instruction for TASK-020
+Only after TASK-019 is done.
+
+Create a minimal mock Home UI using existing layout shell.
+The page should remain placeholder-only and must not start business feature implementation.
+Expected placeholder navigation cards:
+- สั่งกาแฟ
+- รายการคิว
+- รายได้ร้าน
+- ดูสต๊อก-สั่งของ
+- ติดตามลูกค้า
+- ตั้งค่าระบบ
 
 ## Output Style
 Be concise.
