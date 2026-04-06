@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-005 complete. AppShell component extracted, layout.tsx thinned.
+TASK-006 complete. Nav shell (Home, Queue, Revenue, CRM, Settings) added to AppShell.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -23,9 +23,10 @@ TASK-005 complete. AppShell component extracted, layout.tsx thinned.
 - TASK-003: DONE — app/ vs src/ structure confirmed, route tree documented
 - TASK-004: DONE — src/components/ created; src/lib/ already present; src/services/ deferred
 - TASK-005: DONE — AppShell component created; layout.tsx delegates to it
+- TASK-006: DONE — nav items (Home, Queue, Revenue, CRM, Settings) in AppShell; all href="#" placeholder
 
 ## Current Task Status
-- TASK-005: DONE
+- TASK-006: DONE
 
 ## In Progress
 - None
@@ -34,7 +35,7 @@ TASK-005 complete. AppShell component extracted, layout.tsx thinned.
 - None confirmed
 
 ## Next Task
-TASK-006
+TASK-007
 
 ## TASK-001 Result
 - Status: DONE
@@ -126,6 +127,18 @@ When stopping, append a short note with:
   - layout.tsx now only handles i18n provider + AppShell — no inline HTML
   - Nav containers are empty placeholders — TASK-006 fills them in
 - Next Safe Step: TASK-006 — add Home, Queue, Revenue, CRM, Settings nav items
+
+## TASK-006 Result
+- Status: DONE
+- Changed Files: src/components/AppShell.tsx (nav items added)
+- Validation: `npm run build` — TypeScript clean, build passes
+- Commit: feat(task-006): add Home/Queue/Revenue/CRM/Settings nav to AppShell
+- Decisions:
+  - navItems array drives both desktop sidebar and mobile bottom nav (single source of truth)
+  - Labels: English for desktop, Thai for mobile bottom nav
+  - All href="#" — real routes wired when pages are scaffolded (TASK-011+)
+  - Mobile shows Thai labels; desktop shows English — can be unified with i18n in TASK-008
+- Next Safe Step: TASK-007 — baseline i18n for TH/EN; fix en.json duplicate "settings" key
 
 ## Last Updated
 2026-04-06
