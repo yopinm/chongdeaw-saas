@@ -15,9 +15,15 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-020 and all sub-tasks complete. Runtime entry is restored and mock Home UI is live.
-`/` redirects to `/th`. `/th` renders the mock Home screen without 404.
-Ready to begin Real Integration UAT (LINE Auth, Supabase session, JWT claim, RLS).
+TASK-024 (Home UI finalization) complete. Home page is fully cleaned up:
+- sidebar removed globally (AppShell no longer has aside)
+- single column layout everywhere
+- centered container (max-w-2xl mx-auto), mobile full width
+- stats merged into one "📊 ภาพรวมวันนี้" card
+- lower sections (queue/revenue/stock panels) removed
+- [locale]/layout.tsx bypasses AppShell for Home (standalone)
+
+Ready to begin TASK-021: auth entry point alignment for Phase 1 UAT.
 
 ## Current Reality Summary
 - Phase 1 design baseline exists
@@ -28,12 +34,14 @@ Ready to begin Real Integration UAT (LINE Auth, Supabase session, JWT claim, RLS
 - Auth is still mock
 - Supabase env baseline is ready
 - Root route restored: `/` → `/th` redirect works
-- `/th` renders mock Home UI (6 cards, stats panel, i18n TH/EN)
+- `/th` renders finalized mock Home UI (hero + stats card + 6 menu cards)
+- Sidebar removed globally from AppShell
+- Layout is single-column, centered, mobile-first
 - Middleware uses next-intl v4 direct export; matcher correct
 - i18n request.ts: no notFound(); invalid locale falls back to "th"
 
 ## Immediate Goal
-Begin TASK-021: review and align auth entry points for Phase 1 UAT.
+Begin TASK-021: review and align auth entry points (login / callback / session) for Phase 1 UAT.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -79,7 +87,13 @@ Begin TASK-021: review and align auth entry points for Phase 1 UAT.
 - None
 
 ## Next Task
-TASK-021
+TASK-021 — review and align auth entry points (login / callback / session) for Phase 1 UAT
+
+## TASK-024 Result
+- Status: DONE
+- Summary: Home UI finalization — sidebar removed globally, single column, centered (max-w-2xl), merged stats card, removed lower panels
+- Changed Files: src/components/AppShell.tsx, app/[locale]/page.tsx, app/[locale]/layout.tsx (across sub-tasks)
+- Commits: fix(task-021-ui), fix(task-021-ui) center+stats, fix(task-022-home-layout), fix(task-023-layout), fix(task-024-ui)
 
 ## TASK-020 Result
 - Status: DONE
