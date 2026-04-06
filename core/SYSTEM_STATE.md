@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-011 complete. Auth scaffold — /[locale]/login route live, no logic yet.
+TASK-012 complete. LINE login mock flow active; callback stub at /api/auth/callback.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -29,9 +29,10 @@ TASK-011 complete. Auth scaffold — /[locale]/login route live, no logic yet.
 - TASK-009: DONE — createClient (browser) + createSupabaseServerClient (server) baseline ready
 - TASK-010: DONE — env audit complete; keys documented; .env.local gitignored confirmed
 - TASK-011: DONE — auth layout + login page scaffold; /[locale]/login route confirmed in build
+- TASK-012: DONE — mock login flow (no LINE API); callback stub at /api/auth/callback (501, documented)
 
 ## Current Task Status
-- TASK-011: DONE
+- TASK-012: DONE
 
 ## In Progress
 - None
@@ -40,7 +41,7 @@ TASK-011 complete. Auth scaffold — /[locale]/login route live, no logic yet.
 - None confirmed
 
 ## Next Task
-TASK-012
+TASK-013
 
 ## TASK-001 Result
 - Status: DONE
@@ -218,6 +219,24 @@ When stopping, append a short note with:
   - No auth logic, no DB calls, no session handling — scaffold only
   - Callback route deferred to TASK-012 (LINE login integration)
 - Next Safe Step: TASK-012 — LINE login integration point or mock flow
+
+## TASK-012 Result
+- Status: DONE
+- Changed Files:
+  - app/[locale]/(auth)/login/page.tsx (updated) — now "use client", mock login with 800ms delay + redirect
+  - app/api/auth/callback/route.ts (created) — stub GET handler, returns 501 with full comment
+- Validation: `npm run build` — /[locale]/login + /api/auth/callback both in build output, TypeScript clean
+- Commit: feat(task-012): LINE login mock flow + callback stub
+- What is MOCK (not real):
+  - No LINE OAuth URL is built — button just redirects to /{locale} after delay
+  - No code/token exchange — no LINE API calls
+  - No session is created — redirect has no cookie/auth state
+  - Callback route returns 501 — no real logic
+- What is REAL (structure ready):
+  - Callback path /api/auth/callback is registered (correct location for LINE redirect URL)
+  - Comment in route.ts describes full real flow step-by-step
+  - Required env vars listed in comment (LINE_CHANNEL_ID, LINE_CHANNEL_SECRET)
+- Next Safe Step: TASK-013 — tenant/profile/store contracts in code
 
 ## Last Updated
 2026-04-06
