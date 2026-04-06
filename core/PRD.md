@@ -1,125 +1,71 @@
-# PRD - ChongDeaw
+# PRD.md — ChongDeaw Phase 1 (SaaS Foundation)
 
-## 1. PRODUCT SUMMARY
-ChongDeaw คือระบบ SaaS สำหรับร้านกาแฟ / ร้านเครื่องดื่ม
-จุดเด่นคือให้ร้านรับออเดอร์จากลูกค้าผ่าน QR, แสดงสถานะคิวร่วมกัน, ตัดสต๊อกอัตโนมัติ, มีระบบสมาชิก, รายงานรายรับรายจ่าย และรองรับการใช้งานแบบ SaaS หลายร้าน
+## 1) Purpose
+สร้างฐานระบบ SaaS สำหรับร้านกาแฟแบบ multi-tenant ให้พร้อมต่อยอดไปยังฟีเจอร์ธุรกิจใน Phase ถัดไป โดยเน้นความถูกต้องของ tenant isolation, authentication, layout, i18n, PWA และความปลอดภัยเป็นหลัก
 
----
+## 2) Phase Scope
+Phase 1 ทำเฉพาะโครงสร้างพื้นฐานของแพลตฟอร์ม
 
-## 2. PRIMARY USERS
-### 2.1 เจ้าของร้าน / พนักงาน
-- จัดการเมนู
-- รับออเดอร์
-- อัปเดตสถานะคิว
-- เช็คสต๊อก
-- ดูรายงาน
-- ดูข้อมูลสมาชิก
+### In Scope
+- Next.js 14 App Router + TypeScript + Tailwind CSS
+- โครงสร้างโฟลเดอร์ที่ชัดเจนสำหรับ SaaS
+- Supabase client + environment wiring
+- Authentication flow สำหรับ LINE login (mock flow ได้ก่อน ถ้ายังไม่ได้เชื่อมจริง)
+- โครงสร้าง multi-tenant ด้วย `store_id`
+- ฐานตารางหลัก `stores`, `profiles`
+- RLS enable + baseline policies
+- Global SaaS layout แบบ mobile-first
+- Navigation shell สำหรับหน้า Home / Queue / Revenue / CRM / Settings
+- i18n TH/EN พร้อม toggle
+- PWA shell ขั้นพื้นฐาน
+- Security baseline ที่จำเป็นสำหรับการเริ่มระบบ
+- Git control version ที่ทำงานร่วมกับ Claude Code
 
-### 2.2 ลูกค้า
-- สแกน QR เพื่อสั่งเมนู
-- เห็นสถานะคิวของตัวเอง
-- เลือกวิธีจ่ายเงิน
-- จบออเดอร์ผ่านมือถือได้
+### Out of Scope
+- Booking system
+- Queue rotation logic
+- CRM logic
+- Stock logic
+- Billing / Omise production flow
+- Reporting business metrics จริง
 
----
+## 3) Business Goal
+- ให้ระบบเริ่มใช้งานเป็น SaaS foundation ได้อย่างปลอดภัย
+- ลดความเสี่ยงข้อมูลข้ามร้าน
+- เตรียมโครงสร้างให้ Phase 2+ ต่อได้โดยไม่ต้องรื้อฐาน
 
-## 3. CORE FEATURES
+## 4) Success Criteria
+- ผู้ใช้สามารถเข้า flow auth ได้
+- ระบบมี tenant context ชัดเจนผ่าน `store_id`
+- table หลักรองรับ RLS
+- UI shell ใช้งานได้ทั้งมือถือและ desktop
+- ภาษา TH/EN สลับได้
+- โปรเจกต์มี commit history ที่ย้อนได้ทุก task
+- Claude Code ทำงานต่อเนื่องตาม task queue ได้โดยไม่ต้อง scan ทั้งโปรเจกต์
 
-### 3.1 Menu Management
-- แสดงเมนูหน้าร้าน
-- สถานะเมนู: พร้อมขาย / หมด
-- จัดการข้อมูลเมนูและราคา
+## 5) Product Rules
+- ทุก request เชื่อถือ frontend ไม่ได้ในเรื่อง `store_id`
+- ทุก task ต้องเล็กพอให้ทำจบใน 1 commit
+- ห้ามข้าม task queue เอง
+- ห้ามแก้ business feature นอก scope ของ Phase 1
+- ห้าม refactor ทั้ง repo โดยไม่มีเหตุผลจำเป็น
 
-### 3.2 Customer Self-Order
-- ลูกค้าสแกน QR ที่หน้าเคาน์เตอร์เพื่อเข้าเพจสั่งเมนู
-- เลือกเมนูและส่งคำสั่งซื้อได้เอง
-- ระบบสร้างคำสั่งซื้อและส่งเข้าคิวอัตโนมัติ
+## 6) Deliverables
+- Project structure พร้อมรัน
+- `core/PRD.md`
+- `core/RRD.md`
+- `core/SYSTEM_STATE.md`
+- `core/TASK_QUEUE.md`
+- `core/CLAUDE.md`
+- baseline commit ก่อนเริ่ม auto loop
 
-### 3.3 Shared Queue Screen
-- ร้านและลูกค้าเห็นสถานะคิวเดียวกัน
-- แสดงสถานะออเดอร์แบบ real-time หรือใกล้เคียง real-time
-- ร้านสามารถกดเปลี่ยนสถานะเมื่อทำงานเสร็จ
-
-### 3.4 Payment
-- ลูกค้าเลือกจ่ายผ่าน QR code หรือเงินสด
-- เมื่อร้านกดเสร็จ ระบบต้องสอดคล้องกับ flow การจ่ายเงิน
-- รองรับ Omise สำหรับ subscription package ของ SaaS
-
-### 3.5 Stock
-- ระบบออเดอร์ต้องตัดสต๊อกอัตโนมัติ
-- ดูสต๊อกรายวัน
-- ใช้วางแผนซื้อรายวัน / รายสัปดาห์ / รายเดือน
-
-### 3.6 Report
-- รายงานรายรับรายจ่าย
-- ใช้ดูภาพรวมธุรกิจร้าน
-
-### 3.7 Member System
-- มีระบบสมาชิกร้านแบบอัตโนมัติ
-- เก็บประวัติการใช้งานลูกค้าได้ตามที่ระบบรองรับ
-
-### 3.8 BOM / Recipe Preset
-- เมนูมี BOM หรือสูตรตั้งต้น
-- มี preset ให้เลือก
-- ร้านแก้ไขสูตรได้
-
-### 3.9 Conversion / Queue Voice Style
-- รองรับ preset สำหรับเสียงเรียกคิวอัตโนมัติ
-- เลือกสไตล์คำพูดได้หลายแบบ
-
----
-
-## 4. OWNER / STAFF FLOW
-1. รอรับออเดอร์จากหน้าจอลูกค้า
-2. เห็นคำสั่งซื้อเข้า queue
-3. อัปเดตสถานะออเดอร์
-4. เมื่อทำเสร็จ กดเสร็จ
-5. ระบบแสดง QR code จ่ายเงินหรือรองรับเงินสดตาม flow
-6. ระบบอัปเดตสถานะให้สอดคล้องกับหน้าลูกค้า
-7. ระบบตัดสต๊อกอัตโนมัติ
-
----
-
-## 5. CUSTOMER FLOW
-1. ลูกค้าสแกน QR code หน้าเคาน์เตอร์
-2. เข้าเพจสั่งเมนู
-3. เลือกสินค้าและยืนยันคำสั่งซื้อ
-4. ระบบสร้างออเดอร์และแจ้งสถานะเข้าคิว
-5. ลูกค้าเห็นสถานะเดียวกับร้าน
-6. ระบบแสดงทางเลือกการจ่ายเงิน: QR หรือเงินสด
-7. ลูกค้าจ่ายเงิน
-8. จบ process
-
----
-
-## 6. NON-FUNCTIONAL REQUIREMENTS
-- รองรับ SaaS multi-tenant ระดับประมาณ 1000 ร้าน
-- รองรับ Line Authentication แบบ Deep Link
-- รองรับภาษาไทย / อังกฤษทั้งระบบ
-- รองรับ PWA หรือ local cache
-- เน็ตหลุดแล้วยังทำงานได้บางส่วน
-- sync ข้อมูลขึ้น cloud อัตโนมัติเมื่อเน็ตกลับมา
-- รองรับ optimistic UI เพื่อลดปัญหาเน็ตช้า / กันกดซ้ำ
-- ใช้ global layout แบบ pure SaaS webapp
-- รองรับ iPad, Android, PC
-- มี security, DDoS protection และแนวทางปกป้องข้อมูลลูกค้า
-- DNS / Security ผ่าน Cloudflare
-- Frontend / Logic ใช้ Next.js บน Vercel
-- Database / Auth ใช้ Supabase และต้องเปิด RLS
-- Payment subscription ใช้ Omise แพ็กเกจเริ่มต้น 149-
-
----
-
-## 7. OUT OF SCOPE FOR NOW
-- ห้ามเพิ่ม feature ที่ไม่ได้ระบุในเอกสารนี้จนกว่าจะมี requirement ใหม่
-- ห้ามแตก workflow พิเศษเฉพาะบางร้านโดยไม่มี config รองรับ
-
----
-
-## 8. SUCCESS CONDITIONS
-- ร้านรับออเดอร์จาก QR ได้จริง
-- ลูกค้าและร้านเห็นสถานะคิวสอดคล้องกัน
-- สต๊อกถูกตัดอัตโนมัติถูกต้อง
-- รายรับรายจ่ายดูได้จริง
-- ระบบรองรับหลายร้านโดยข้อมูลไม่ปนกัน
-- ใช้งานบนมือถือได้ลื่นและไม่สับสน
+## 7) Definition of Done (Phase 1)
+- App รันได้
+- มี layout shell
+- i18n toggle ทำงาน
+- Supabase client พร้อม
+- auth scaffold พร้อม
+- `stores` และ `profiles` schema พร้อม
+- RLS baseline พร้อม
+- PWA shell พร้อม
+- Git workflow ใช้งานได้จริงกับ Claude Code

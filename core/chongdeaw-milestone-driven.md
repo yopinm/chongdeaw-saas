@@ -1,32 +1,6 @@
-
 All projects
 ChongDeaw
 SaaS system for coffee shot
-
-
-
-How can I help you today?
-
-สร้างไฟล์ markdown สำหรับโปรเจค
-Last message 13 minutes ago
-Merging SaaS architecture best practices into pillar framework
-Last message 17 hours ago
-Opus vs Claude 3.5 Sonnet comparison
-Last message 17 hours ago
-ถามเรื่อง SaaS
-Last message 3 days ago
-Instructions
-Add instructions to tailor Claude’s responses
-
-Files
-1% of project capacity used
-
-CHONGDEAW_PROJECT.md
-474 lines
-
-md
-
-
 
 CHONGDEAW_PROJECT.md
 21.84 KB •474 lines
@@ -34,6 +8,7 @@ CHONGDEAW_PROJECT.md
 Formatting may be inconsistent from source
 
 # ChongDeaw · ชงเดี่ยว — SaaS Single Source of Truth
+
 > **Milestone Edition v4.0** · อัปเดตล่าสุด: 2026-04-05  
 > ใช้เป็น Single Source of Truth สำหรับ Claude Code + VS Code
 
@@ -46,20 +21,21 @@ Stack: `Next.js 14` · `TypeScript` · `Tailwind CSS` · `Supabase (RLS)` · `Om
 
 ### Stage Progress
 
-| Stage | ชื่อ | สถานะ | % |
-|-------|------|--------|---|
-| Stage 1 | SaaS Foundation & Architecture | ✅ Complete | 100% |
-| Stage 2 | Billing + Infrastructure | 🔄 In Progress | 90% |
-| Stage 3 | MVP Application Features | ⏳ Planned | 0% |
-| Stage 4 | Pre-Launch Hardening | ⏳ Planned | 0% |
-| Stage 5 | Launch & Go-to-Market | ⏳ Planned | 0% |
-| Stage 6 | Scale & Growth | ⏳ Planned | 0% |
+| Stage   | ชื่อ                           | สถานะ      | %   |
+| ------- | ------------------------------ | ---------- | --- |
+| Stage 1 | SaaS Foundation & Architecture | ⏳ Planned | 0%  |
+| Stage 2 | Billing + Infrastructure       | ⏳ Planned | 0%  |
+| Stage 3 | MVP Application Features       | ⏳ Planned | 0%  |
+| Stage 4 | Pre-Launch Hardening           | ⏳ Planned | 0%  |
+| Stage 5 | Launch & Go-to-Market          | ⏳ Planned | 0%  |
+| Stage 6 | Scale & Growth                 | ⏳ Planned | 0%  |
 
 ---
 
 ## ⚙️ Tech Stack & Architecture Decisions
 
 ```
+Dev            : Control version and Git Ignore important files
 Frontend       : Next.js 14 App Router + TypeScript + Tailwind CSS
 Auth           : LINE OAuth Deep Link → Supabase Auth (JWT มี store_id ทุกใบ)
 Database       : Supabase (PostgreSQL) · Pool Model + RLS · Soft Delete ทุก Table
@@ -181,18 +157,18 @@ CREATE POLICY tenant_isolation ON products
 
 ---
 
-### Stage 1 — SaaS Foundation ✅ 100%
+### Stage 1 — SaaS Foundation Planned | 0%
 
 **เป้าหมาย**: วางโครงสร้าง Platform ทั้งหมด — Multi-tenant, Auth, i18n, PWA, Security, Layout
 
 #### Deliverables
 
-- [x] Next.js 14 App Router + TypeScript + Tailwind CSS
-- [x] Multi-tenant DB Schema + RLS (Supabase Pool Model)
-- [x] LINE Auth Deep Link + Tenant Auto-Onboarding (DB Trigger: Atomic)
-- [x] i18n TH/EN ทั้งระบบ (next-intl + Dynamic Routing)
-- [x] Global SaaS Layout — iPad Sidebar / Mobile Bottom Nav / PC
-- [x] Control Plane แยกจาก Application Plane อย่างชัดเจน
+- [ ] Next.js 14 App Router + TypeScript + Tailwind CSS
+- [ ] Multi-tenant DB Schema + RLS (Supabase Pool Model)
+- [ ] LINE Auth Deep Link + Tenant Auto-Onboarding (DB Trigger: Atomic)
+- [ ] i18n TH/EN ทั้งระบบ (next-intl + Dynamic Routing)
+- [ ] Global SaaS Layout — iPad Sidebar / Mobile Bottom Nav / PC
+- [ ] Control Plane แยกจาก Application Plane อย่างชัดเจน
 - [ ] PWA + Offline Cache (next-pwa, IndexedDB) + Background Sync
 - [ ] Optimistic UI — TanStack Query + Idempotency Key per Session
 - [ ] Security Headers A+: HSTS, CSP, X-Frame, Cloudflare WAF
@@ -201,28 +177,28 @@ CREATE POLICY tenant_isolation ON products
 
 #### Hard Gate ✅ (ต้องผ่านก่อนไป Stage 2)
 
-- [x] RLS เปิดครบทุกตารางหลัก + Policy กัน store_id ผ่าน Security Review
-- [x] JWT ทุก Request มี store_id ที่ถูกต้อง ผ่าน Test
-- [x] LINE Auth Deep Link ทำงาน Flow จริง (ไม่ใช่แค่โครง)
-- [x] Rule Compliance Audit: ทุกหน้าผ่าน Multi-tenant + i18n อย่างน้อย
-- [x] UAT Checklist Stage 1 ผ่านทุกข้อ
+- [ ] RLS เปิดครบทุกตารางหลัก + Policy กัน store_id ผ่าน Security Review
+- [ ] JWT ทุก Request มี store_id ที่ถูกต้อง ผ่าน Test
+- [ ] LINE Auth Deep Link ทำงาน Flow จริง (ไม่ใช่แค่โครง)
+- [ ] Rule Compliance Audit: ทุกหน้าผ่าน Multi-tenant + i18n อย่างน้อย
+- [ ] UAT Checklist Stage 1 ผ่านทุกข้อ
 
 ---
 
-### Stage 2 — Billing + Infrastructure 🔄 90%
+### Stage 2 — Billing + Infrastructure Planned | 0%
 
 **เป้าหมาย**: Subscription 149.-/เดือน + CI/CD Pipeline Production-grade
 
 #### Deliverables
 
-- [x] Omise PromptPay 149.-/เดือน — Gen QR ผ่าน Omise Source API
-- [x] Subscription Lifecycle Auto (Active → Grace 3 วัน → Suspended → Locked)
-- [x] Idempotent Webhook + HMAC Signature Verification + Dead Letter Queue
-- [x] Dunning: LINE Notify + Email แจ้งเตือน 7/3/0 วันก่อนหมดอายุ
-- [x] Cloudflare WAF + Rate Limit per store_id
-- [x] Vercel CI/CD: GitHub → Auto-deploy, Branch Strategy (main/develop/feature/*)
-- [x] Dynamic QR Code per Store & Table (domain.com/[slug]/table/[n])
-- [x] Billing Dashboard: Invoice PDF, ประวัติการชำระ, ปุ่มต่ออายุล่วงหน้า
+- [ ] Omise PromptPay 149.-/เดือน — Gen QR ผ่าน Omise Source API
+- [ ] Subscription Lifecycle Auto (Active → Grace 3 วัน → Suspended → Locked)
+- [ ] Idempotent Webhook + HMAC Signature Verification + Dead Letter Queue
+- [ ] Dunning: LINE Notify + Email แจ้งเตือน 7/3/0 วันก่อนหมดอายุ
+- [ ] Cloudflare WAF + Rate Limit per store_id
+- [ ] Vercel CI/CD: GitHub → Auto-deploy, Branch Strategy (main/develop/feature/\*)
+- [ ] Dynamic QR Code per Store & Table (domain.com/[slug]/table/[n])
+- [ ] Billing Dashboard: Invoice PDF, ประวัติการชำระ, ปุ่มต่ออายุล่วงหน้า
 - [ ] Tenant-aware Monitoring: Sentry/Datadog + store_id context + Alert
 - [ ] PITR Backup ทดสอบ Restore จริง (RTO < 1 ชั่วโมง, RPO < 15 นาที)
 - [ ] Rollback: เก็บ 3 previous deployments, กลับ Version ได้ < 5 นาที
@@ -240,11 +216,11 @@ CREATE POLICY tenant_isolation ON products
 
 #### ⚠️ Known Risks (Stage 2)
 
-| ความเสี่ยง | ระดับ | Action |
-|------------|-------|--------|
-| Omise Production key ต้องรอโดเมนจริง | กลาง | ทดสอบ test mode ได้ก่อน |
-| PITR Restore ยังไม่ได้ทดสอบจริง | **สูง** | ต้องทดสอบก่อนผ่าน Gate |
-| LINE Auth ยังเป็น Deep Link โครง | กลาง | ต้องทำ Flow จริงก่อน |
+| ความเสี่ยง                           | ระดับ   | Action                  |
+| ------------------------------------ | ------- | ----------------------- |
+| Omise Production key ต้องรอโดเมนจริง | กลาง    | ทดสอบ test mode ได้ก่อน |
+| PITR Restore ยังไม่ได้ทดสอบจริง      | **สูง** | ต้องทดสอบก่อนผ่าน Gate  |
+| LINE Auth ยังเป็น Deep Link โครง     | กลาง    | ต้องทำ Flow จริงก่อน    |
 
 ---
 
@@ -253,12 +229,14 @@ CREATE POLICY tenant_isolation ON products
 **เป้าหมาย**: ฟีเจอร์แอปจริงของร้านกาแฟ — Order, Queue, Stock, BOM, Report
 
 #### Customer Flow
+
 ```
 สแกน QR → เลือกเมนู (พร้อมขาย/หมด) → กดสั่ง
 → ดูสถานะคิว Realtime → QR จ่าย หรือ เงินสด → จบ
 ```
 
 #### Owner/Staff Flow
+
 ```
 รับออเดอร์ → กดรับ → คิวบอกสถานะ Realtime
 → ทำเสร็จ กดเสร็จ → ระบบตัดสต็อก Auto → จบ
@@ -267,6 +245,7 @@ CREATE POLICY tenant_isolation ON products
 #### Deliverables
 
 **Menu & Order Portal**
+
 - [ ] เมนูหน้าร้าน + Availability Toggle Realtime (is_available)
   - ISR Cache 60s + Edge Caching, Cache Key ต้องรวม store_id
   - LCP < 1.5s, FID < 100ms, CLS < 0.1
@@ -280,6 +259,7 @@ CREATE POLICY tenant_isolation ON products
 - [ ] ระบบสมาชิกอัตโนมัติ: สแกน QR ครั้งแรก → Auto-register (ไม่ต้องกรอกฟอร์ม)
 
 **Operations & Staff Dashboard**
+
 - [ ] Staff Order Management: Order Card Status (iPad/Mobile)
 - [ ] LINE Notify แยก Token ต่อ store_id + pg_notify Message Queue
 - [ ] Bluetooth 58mm Thermal Printing (Web Bluetooth API, ไม่ต้อง Driver)
@@ -288,6 +268,7 @@ CREATE POLICY tenant_isolation ON products
 - [ ] Audit Log Retention: 90 วัน Online → Archive Cold Storage
 
 **Inventory & BOM**
+
 - [ ] Stock Schema: stock_items, stock_movements (ผูก order_id ทุกครั้ง), purchase_plans
 - [ ] BOM per Menu: Fork จาก Preset, แก้สูตรได้เอง, Cost per Cup
 - [ ] Auto Stock Deduction (Atomic Transaction):
@@ -296,6 +277,7 @@ CREATE POLICY tenant_isolation ON products
 - [ ] Low Stock Alert: current_qty < min_qty → แจ้งเจ้าของ
 
 **Reporting & Analytics**
+
 - [ ] P&L Dashboard: รายรับ/รายจ่าย/กำไรขั้นต้น แยก วัน/สัปดาห์/เดือน
 - [ ] Best Seller + Peak Hour Graph + Member Analytics
 - [ ] Export CSV + Export PDF Summary (แชร์ LINE ได้ 1 คลิก)
@@ -312,10 +294,10 @@ CREATE POLICY tenant_isolation ON products
 
 #### ⚠️ Known Risks (Stage 3)
 
-| ความเสี่ยง | ระดับ | Action |
-|------------|-------|--------|
-| Race Condition Multi-staff Queue | กลาง | ทดสอบ 2 คนกด Status พร้อมกัน |
-| P&L Price Fallback (price=null) | กลาง | Backfill price จาก final_price ก่อน |
+| ความเสี่ยง                       | ระดับ | Action                              |
+| -------------------------------- | ----- | ----------------------------------- |
+| Race Condition Multi-staff Queue | กลาง  | ทดสอบ 2 คนกด Status พร้อมกัน        |
+| P&L Price Fallback (price=null)  | กลาง  | Backfill price จาก final_price ก่อน |
 
 ---
 
@@ -395,41 +377,44 @@ CREATE POLICY tenant_isolation ON products
 
 ## 🚨 Open Risks — ทั้งโปรเจกต์
 
-| ความเสี่ยง | ระดับ | Stage | Action Required |
-|------------|-------|-------|-----------------|
-| RLS ยังไม่เปิดเต็มรูป | **สูง** | 1 | ห้ามเปิดรับร้านจริงหลายร้านจนกว่า Stage 1 Gate ผ่าน |
-| PITR Restore ยังไม่ได้ทดสอบจริง | **สูง** | 2 | ต้องทดสอบก่อนผ่าน Stage 2 Gate |
-| LINE Auth ยังเป็น Deep Link โครง | กลาง | 1 | ต้องทำ Flow จริงก่อนเปิด Stage 2 |
-| Omise Production ต้องรอโดเมนจริง | กลาง | 2 | ทดสอบ test mode ได้ก่อน |
-| Race Condition Multi-staff Queue | กลาง | 3 | ต้องทดสอบ 2 คนกด Status พร้อมกัน |
-| P&L Price Fallback (price=null) | กลาง | 3 | Backfill price จาก final_price ก่อน Report |
+| ความเสี่ยง                       | ระดับ   | Stage | Action Required                                     |
+| -------------------------------- | ------- | ----- | --------------------------------------------------- |
+| RLS ยังไม่เปิดเต็มรูป            | **สูง** | 1     | ห้ามเปิดรับร้านจริงหลายร้านจนกว่า Stage 1 Gate ผ่าน |
+| PITR Restore ยังไม่ได้ทดสอบจริง  | **สูง** | 2     | ต้องทดสอบก่อนผ่าน Stage 2 Gate                      |
+| LINE Auth ยังเป็น Deep Link โครง | กลาง    | 1     | ต้องทำ Flow จริงก่อนเปิด Stage 2                    |
+| Omise Production ต้องรอโดเมนจริง | กลาง    | 2     | ทดสอบ test mode ได้ก่อน                             |
+| Race Condition Multi-staff Queue | กลาง    | 3     | ต้องทดสอบ 2 คนกด Status พร้อมกัน                    |
+| P&L Price Fallback (price=null)  | กลาง    | 3     | Backfill price จาก final_price ก่อน Report          |
 
 ---
 
 ## ✅ Master Checklist
 
 ### Stage 1 — Foundation
-- [x] RLS: ร้าน A เข้าข้อมูลร้าน B ไม่ได้
-- [x] LINE Deep Link: Login → เด้งเข้าแอป LINE
-- [x] i18n: TH/EN 100% ทุกหน้า
-- [x] Global Layout iPad/Mobile/PC
-- [x] JWT มี store_id ทุก Request
-- [x] Onboarding Atomic < 30 วินาที
+
+- [ ] RLS: ร้าน A เข้าข้อมูลร้าน B ไม่ได้
+- [ ] LINE Deep Link: Login → เด้งเข้าแอป LINE
+- [ ] i18n: TH/EN 100% ทุกหน้า
+- [ ] Global Layout iPad/Mobile/PC
+- [ ] JWT มี store_id ทุก Request
+- [ ] Onboarding Atomic < 30 วินาที
 - [ ] PWA + Offline + Auto Sync
 - [ ] Optimistic UI: กดซ้ำ 5 ครั้ง → Order เดียว
 - [ ] Security A+: HSTS, CSP, SSL ครบ
 - [ ] Audit Log Immutable: ไม่มีใครลบได้
 
 ### Stage 2 — Billing + Infrastructure
+
 - [ ] 149.- PromptPay → Active Auto
 - [ ] Dunning: แจ้งเตือน 7/3/0 วัน
 - [ ] Webhook Idempotency: ซ้ำ → Extend แค่ 1 ครั้ง
-- [x] CI/CD: Push → Auto-deploy
+- [ ] CI/CD: Push → Auto-deploy
 - [ ] Rollback < 5 นาที
 - [ ] PITR Restore Test ผ่าน
 - [ ] Monitoring: Error → Alert On-call
 
 ### Stage 3 — MVP App
+
 - [ ] Toggle พร้อมขาย/หมด Realtime
 - [ ] Queue Display: เจ้าของ+ลูกค้า Sync
 - [ ] QR Pay + เงินสด ทำงานถูกต้อง
@@ -441,17 +426,20 @@ CREATE POLICY tenant_isolation ON products
 - [ ] LCP < 1.5s บน 3G
 
 ### Stage 4 — Hardening
+
 - [ ] Cross-tenant Test: ผ่านทุกกรณี
 - [ ] Security A+ (securityheaders.com)
 - [ ] UAT ร้านจริง 2 ร้าน ผ่านทุกข้อ
 - [ ] Critical Bug = 0
 
 ### Stage 5 — Launch
+
 - [ ] Onboarding < 10 นาที จริง
 - [ ] Smoke บน Production ผ่าน
 - [ ] Support Channel พร้อม
 
 ### Stage 6 — Scale
+
 - [ ] MRR + Churn Dashboard ถูกต้อง
 - [ ] Feature Flag ไม่ต้อง Redeploy
 - [ ] Silo Migration ไม่มี Downtime
@@ -504,5 +492,5 @@ NEXT_PUBLIC_APP_DOMAIN=
 
 ---
 
-*ChongDeaw SaaS v4.0 · Milestone Edition · Single Source of Truth*  
-*AWS SaaS Architecture Fundamentals Integrated · อัปเดตล่าสุด: 2026-04-05*
+_ChongDeaw SaaS v4.0 · Milestone Edition · Single Source of Truth_  
+_AWS SaaS Architecture Fundamentals Integrated · อัปเดตล่าสุด: 2026-04-05_

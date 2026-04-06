@@ -2,5 +2,62 @@
   "Common": {
     "title": "ChongDeaw",
     "welcome": "Welcome to your coffee shop"
+  },
+  "Home": {
+    "greeting": "Store dashboard",
+    "title": "ChongDeaw Home",
+    "subtitle": "A single overview screen for owners and staff to access the shop's main workflows quickly.",
+    "quickMenuTitle": "Main menu",
+    "quickMenuSubtitle": "Start with UI first, then connect real logic page by page.",
+    "summary": {
+      "todayOrders": "Today's orders",
+      "queueNow": "Queue now",
+      "salesToday": "Today's sales"
+    },
+    "menu": {
+      "order": {
+        "title": "Order Coffee",
+        "desc": "Open POS for walk-in and delivery orders"
+      },
+      "queue": {
+        "title": "Queue List",
+        "desc": "See waiting, brewing, pickup and delayed orders"
+      },
+      "revenue": {
+        "title": "Store Revenue",
+        "desc": "Check daily sales, product sales and trends"
+      },
+      "stock": {
+        "title": "Stock & Purchase",
+        "desc": "Track inventory, low stock items and purchasing"
+      },
+      "customers": {
+        "title": "Customer Follow-up",
+        "desc": "See loyal, lost and repeat customers"
+      },
+      "settings": {
+        "title": "System Settings",
+        "desc": "Manage store, language, users and system options"
+      },
+      "settings": {
+        "title": "System Settings",
+        "desc": "Manage store, language, users and system options"
+      }
+    },
+    "panels": {
+      "queue": {
+        "title": "Queue Overview",
+        "waiting": "Waiting",
+        "brewing": "Brewing"
+      },
+      "revenue": {
+        "title": "Revenue Summary",
+        "total": "Total sales today",
+        "note": "This is mock data for the first home UI draft"
+      },
+      "stock": {
+        "title": "Stock Alerts"
+      }
+    }
   }
 }

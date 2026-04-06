@@ -1,16 +1,182 @@
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-export default function Index() {
-  const t = useTranslations("Common");
-  return (
-    <div className="flex flex-col items-center justify-center min-h-[50vh]">
-      <h1 className="text-3xl font-bold text-orange-600">{t("title")}</h1>
-      <p className="mt-2 text-gray-500">{t("welcome")}</p>
+const homeMenus = [
+  {
+    key: "order",
+    emoji: "☕",
+    href: "#",
+    badge: "เริ่มขาย",
+  },
+  {
+    key: "queue",
+    emoji: "📋",
+    href: "#",
+    badge: "ดูคิว",
+  },
+  {
+    key: "revenue",
+    emoji: "💰",
+    href: "#",
+    badge: "สรุปวันนี้",
+  },
+  {
+    key: "stock",
+    emoji: "📦",
+    href: "#",
+    badge: "สต๊อก",
+  },
+  {
+    key: "customers",
+    emoji: "👥",
+    href: "#",
+    badge: "CRM",
+  },
+  {
+    key: "settings",
+    emoji: "⚙️",
+    href: "#",
+    badge: "ระบบ",
+  },
+];
 
-      {/* ทดสอบ Responsive Shell */}
-      <div className="mt-8 p-4 bg-white shadow rounded-lg md:block hidden">
-        เห็นข้อความนี้เฉพาะบน iPad/Desktop (Sidebar Active)
-      </div>
+export default function Index() {
+  const t = useTranslations("Home");
+
+  return (
+    <div className="space-y-6">
+      <section className="rounded-3xl bg-gradient-to-r from-orange-500 to-amber-400 p-6 text-white shadow-sm">
+        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-sm font-medium text-orange-50">
+              {t("greeting")}
+            </p>
+            <h1 className="mt-1 text-3xl font-bold">{t("title")}</h1>
+            <p className="mt-2 max-w-2xl text-sm text-orange-50 md:text-base">
+              {t("subtitle")}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3 md:min-w-[320px]">
+            <div className="rounded-2xl bg-white/15 p-3 backdrop-blur-sm">
+              <div className="text-xs text-orange-50">
+                {t("summary.todayOrders")}
+              </div>
+              <div className="mt-1 text-xl font-bold">18</div>
+            </div>
+            <div className="rounded-2xl bg-white/15 p-3 backdrop-blur-sm">
+              <div className="text-xs text-orange-50">
+                {t("summary.queueNow")}
+              </div>
+              <div className="mt-1 text-xl font-bold">5</div>
+            </div>
+            <div className="rounded-2xl bg-white/15 p-3 backdrop-blur-sm">
+              <div className="text-xs text-orange-50">
+                {t("summary.salesToday")}
+              </div>
+              <div className="mt-1 text-xl font-bold">฿2,480</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="mb-3 flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-bold text-gray-900">
+              {t("quickMenuTitle")}
+            </h2>
+            <p className="text-sm text-gray-500">{t("quickMenuSubtitle")}</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
+          {homeMenus.map((menu) => (
+            <Link
+              key={menu.key}
+              href={menu.href}
+              className="group rounded-3xl border border-gray-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-2xl">
+                  {menu.emoji}
+                </div>
+                <span className="rounded-full bg-gray-100 px-2 py-1 text-[10px] font-semibold text-gray-500">
+                  {menu.badge}
+                </span>
+              </div>
+
+              <div className="mt-4">
+                <h3 className="text-base font-bold text-gray-900 group-hover:text-orange-600">
+                  {t(`menu.${menu.key}.title`)}
+                </h3>
+                <p className="mt-1 text-sm leading-5 text-gray-500">
+                  {t(`menu.${menu.key}.desc`)}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
+          <div className="text-sm font-semibold text-gray-500">
+            {t("panels.queue.title")}
+          </div>
+          <div className="mt-3 space-y-3">
+            <div className="flex items-center justify-between rounded-2xl bg-gray-50 px-4 py-3">
+              <span className="text-sm text-gray-600">
+                {t("panels.queue.waiting")}
+              </span>
+              <span className="text-lg font-bold text-gray-900">5</span>
+            </div>
+            <div className="flex items-center justify-between rounded-2xl bg-gray-50 px-4 py-3">
+              <span className="text-sm text-gray-600">
+                {t("panels.queue.brewing")}
+              </span>
+              <span className="text-lg font-bold text-gray-900">2</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
+          <div className="text-sm font-semibold text-gray-500">
+            {t("panels.revenue.title")}
+          </div>
+          <div className="mt-3 space-y-3">
+            <div className="rounded-2xl bg-emerald-50 px-4 py-3">
+              <div className="text-sm text-emerald-700">
+                {t("panels.revenue.total")}
+              </div>
+              <div className="mt-1 text-2xl font-bold text-emerald-900">
+                ฿2,480
+              </div>
+            </div>
+            <div className="text-sm text-gray-500">
+              {t("panels.revenue.note")}
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm md:col-span-2 xl:col-span-1">
+          <div className="text-sm font-semibold text-gray-500">
+            {t("panels.stock.title")}
+          </div>
+          <div className="mt-3 space-y-3">
+            <div className="flex items-center justify-between rounded-2xl bg-red-50 px-4 py-3">
+              <span className="text-sm text-red-700">
+                เมล็ดกาแฟ House Blend
+              </span>
+              <span className="text-sm font-bold text-red-900">ต่ำ</span>
+            </div>
+            <div className="flex items-center justify-between rounded-2xl bg-amber-50 px-4 py-3">
+              <span className="text-sm text-amber-700">นมสด</span>
+              <span className="text-sm font-bold text-amber-900">ใกล้หมด</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

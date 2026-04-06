@@ -1,49 +1,46 @@
-# SYSTEM STATE - ChongDeaw
+# SYSTEM_STATE.md
 
-## CURRENT DOCUMENT STATUS
-- CLAUDE.md = ใช้เป็น rule กลางของ AI
-- PRD.md = สรุป requirement ให้สั้นและอ่านง่าย
-- RRD.md = ล็อก flow และ logic สำคัญ
-- SYSTEM_STATE.md = ใช้บันทึกสถานะล่าสุดของระบบ
+## Current Phase
+Phase 1 — SaaS Foundation
 
----
+## Execution Mode
+Manual start, then continuous task loop by Claude Code
 
-## CURRENT ASSUMPTIONS
-- โปรเจคนี้เป็น SaaS ร้านกาแฟ / เครื่องดื่ม
-- มีทั้งฝั่งร้านและฝั่งลูกค้า
-- ลูกค้าสั่งผ่าน QR ได้
-- ระบบต้องมี queue, payment, stock, report, member
-- สถาปัตยกรรมหลักคือ Next.js + Supabase + Vercel + Cloudflare + Omise
+## Source of Truth Paths
+- core/PRD.md
+- core/RRD.md
+- core/SYSTEM_STATE.md
+- core/TASK_QUEUE.md
+- core/CLAUDE.md
+- core/chongdeaw-milestone-driven.md
 
----
+## Current Status
+Ready to start
 
-## WHAT TO UPDATE IN THIS FILE LATER
-ให้อัปเดตไฟล์นี้เมื่อมีการเปลี่ยนแปลงสำคัญ เช่น:
-- feature ไหน done แล้ว
-- feature ไหนยังพัง
-- logic ไหนเปลี่ยน
-- bug สำคัญที่ยังค้าง
-- schema ไหนเพิ่งเปลี่ยน
-- route หรือ status ไหนเปลี่ยน
+## Completed Tasks
+- None
 
-ตัวอย่าง format:
-- Order flow: working
-- Queue sync: bug on customer screen
-- Stock deduction: need verify duplicate cut
-- Report revenue: counting done instead of paid
+## In Progress
+- None
 
----
+## Blockers
+- None confirmed
 
-## CURRENT OPEN QUESTIONS
-- จุดที่ตัดสต๊อกจริงควรเป็น create, done หรือ paid
-- order final state ในระบบจริงใช้ done แทน paid หรือแยกกัน
-- ระบบสมาชิก auto ใช้ key อะไรเป็นตัวรวมลูกค้า
-- queue voice preset จะเก็บเป็น config ระดับ tenant หรือ global preset
+## Next Task
+TASK-001
 
----
+## Last Safe Baseline
+Create a git baseline commit before running Claude continuous loop:
+`git add . && git commit -m "baseline: before claude auto run"`
 
-## CHANGE LOG TEMPLATE
-### YYYY-MM-DD
-- Changed:
-- Impact:
-- Need test:
+## Working Rules
+- Execute only one task at a time
+- Update this file after each completed task
+- Do not mark task done unless code/files are actually updated
+- If stopped due to token or unresolved error, leave continuation notes here
+
+## Continuation Note
+When resuming, Claude must read this file first and continue from `Next Task`
+
+## Last Updated
+2026-04-06

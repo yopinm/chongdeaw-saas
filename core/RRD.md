@@ -1,185 +1,92 @@
-# RRD - ChongDeaw
+# RRD.md — ChongDeaw Phase 1 Runtime & Rules Detail
 
-## 1. CORE DOMAIN
-ระบบนี้มี domain หลัก 6 ส่วน:
-1. tenant
-2. menu
-3. order
-4. payment
-5. stock
-6. customer/member
+## 1) Execution Intent
+ไฟล์นี้ใช้กำหนดกติกาเชิง logic สำหรับการทำงาน Phase 1 เพื่อให้ Claude Code ไม่ตีความกว้างเกินไป
 
-ทุก record ระดับธุรกิจต้องผูกกับ tenant/shop เสมอ
+## 2) Runtime Boundaries
+- ทำเฉพาะสิ่งที่อยู่ใน Phase 1
+- ใช้ไฟล์ใน `core/` เป็น source of truth
+- ห้าม scan ทั้ง repo ถ้า task ไม่จำเป็น
+- หากต้องอ่านไฟล์โค้ด ให้เปิดเฉพาะไฟล์ที่เกี่ยวข้องกับ task ปัจจุบัน
 
----
+## 3) Multi-Tenant Logic
+- ทุก entity ฝั่ง application plane ต้องมี `store_id`
+- `store_id` มาจาก authenticated context ไม่ใช่จาก input ที่ผู้ใช้ส่งมา
+- request ที่ไม่มี `store_id` context ถือว่า invalid
+- ห้าม fallback ไปใช้ค่า default store แบบเงียบ ๆ
 
-## 2. TENANT RULE
-- ข้อมูลของแต่ละร้านต้องแยกกันชัดเจน
-- query, mutation, report, stock, member ต้อง filter ตาม tenant/shop
-- ห้ามมี flow ไหนดึงข้อมูลข้ามร้านโดยไม่ตั้งใจ
+## 4) Auth Flow
+Target flow:
+1. ผู้ใช้กด login
+2. LINE auth flow เริ่มต้น
+3. ระบบรับ callback / session
+4. user profile ถูกผูกกับ store
+5. runtime มี tenant context ผ่าน JWT/session
 
----
+ข้อกำหนด:
+- ถ้า LINE auth จริงยังไม่พร้อม สามารถ scaffold หรือ mock flow ได้ แต่ต้องแยกชัดเจนว่าเป็น mock
+- session handling ต้องเตรียมพร้อมให้ต่อยอด JWT ที่มี `store_id`
 
-## 3. MENU LOGIC
-### status ของเมนู
-- available = พร้อมขาย
-- sold_out = หมด
+## 5) RLS Logic
+- ตารางที่มีข้อมูล tenant ต้องเปิด RLS
+- Policy baseline ต้องยึด `store_id` ของ authenticated context
+- ถ้ายังไม่สามารถ bind JWT claim จริงได้ใน task นั้น ให้ scaffold policy และ note limitation ใน SYSTEM_STATE
 
-### rule
-- ถ้าเมนูเป็น sold_out ลูกค้าห้ามสั่งได้
-- ฝั่งร้านยังเห็นเมนูได้เพื่อกลับมาเปิดขายภายหลัง
-- ราคาและสูตรต้องผูกกับเมนูนั้น
+## 6) Request Validation Logic
+- frontend ส่ง request
+- backend/server action/api route ต้อง validate session/context
+- backend เป็นชั้นตัดสิน tenant context เสมอ
+- ห้ามใช้ `store_id` จาก query/body โดยตรงเป็น source of truth
 
----
+## 7) i18n Logic
+- default locale = `th`
+- รองรับ `th` และ `en`
+- มี toggle ให้เปลี่ยนภาษาได้จาก UI shell
+- คำหลักของ navigation ต้องมีทั้งสองภาษา
 
-## 4. BOM / RECIPE LOGIC
-- เมนูแต่ละรายการมี preset สูตรเริ่มต้นได้
-- ร้านเลือก preset แล้วปรับแก้ได้
-- สูตรที่ใช้จริงต้องเป็นสูตรล่าสุดของเมนู ณ เวลาที่สั่ง
-- เมื่อสร้าง order item ต้องมีข้อมูลพอให้ใช้คำนวณสต๊อก
+## 8) Layout Logic
+ต้องมี shell อย่างน้อย:
+- Header / Top bar
+- Main content area
+- Mobile navigation หรือ bottom nav
+- Desktop / tablet friendly navigation
 
-หมายเหตุ:
-ถ้าจะรองรับ historical recipe accuracy ภายหลัง อาจต้อง snapshot recipe ตอนสร้าง order
+เป้าหมายของ Phase 1 คือ “layout shell ใช้งานได้” ไม่ใช่ “ทุกหน้ามีข้อมูลจริง”
 
----
+## 9) PWA Logic
+- ติดตั้ง PWA baseline
+- มี app manifest
+- มี basic offline shell หรือ fallback หน้าอ่านได้
+- ถ้ายังไม่ได้ sync จริง ให้ scaffold ไว้ก่อนและระบุใน state
 
-## 5. CUSTOMER / MEMBER LOGIC
-- ลูกค้าสามารถสั่งแบบไม่ต้องกรอกข้อมูลเต็มได้
-- ระบบสมาชิกเป็นแบบอัตโนมัติ
-- ถ้ามีตัวระบุลูกค้า ให้พยายามผูก order เข้ากับ member เดิม
-- ถ้าไม่มีข้อมูลพอ ให้ระบบสร้าง customer/member identity แบบ auto
+## 10) Optimistic / Idempotency Principle
+Phase 1 ยังไม่ต้องลงลึก business mutation แต่ต้องเตรียมแนวทาง:
+- mutation สำคัญในอนาคตต้องรองรับ idempotency
+- optimistic UI ให้เป็นแนวทาง ไม่ต้อง implement ทุกจุดใน Phase 1
 
-หลักการ:
-- อย่า block การสั่งเพราะไม่มีชื่อหรือเบอร์
-- แต่ต้องเก็บ key ที่ใช้ตามลูกค้าได้เท่าที่เป็นไปได้
+## 11) Git Control Version Rules
+- 1 task = 1 commit
+- commit message format:
+  - `feat(task-XXX): <short task name>`
+  - `fix(task-XXX): <short task name>`
+  - `chore(state): update system state`
+- ก่อนเริ่ม auto run ต้องมี baseline commit
+- หาก task ยังไม่เสร็จ ห้าม commit แบบหลอกว่าเสร็จ
 
----
+## 12) Stop Conditions
+Claude ต้องหยุดเมื่อ:
+- เจอ critical error ที่แก้ไม่ได้ใน scope ปัจจุบัน
+- token/context ใกล้เต็ม
+- task ปัจจุบันต้อง scan repo กว้างเกินข้อกำหนด
 
-## 6. ORDER FLOW
-### create order
-1. ลูกค้าเปิดหน้า order จาก QR
-2. ระบบโหลดเมนูของ tenant นั้น
-3. ลูกค้าเลือกเมนู
-4. ระบบคำนวณยอดรวม
-5. ลูกค้ายืนยัน order
-6. ระบบ create order + order items
-7. ระบบกำหนดสถานะเริ่มต้น
-8. ระบบส่ง order เข้า queue
-9. ระบบแสดงสถานะให้ทั้งฝั่งร้านและลูกค้า
+เมื่อหยุด ต้อง:
+- update `core/SYSTEM_STATE.md`
+- ระบุ task ล่าสุด
+- ระบุสิ่งที่เสร็จแล้ว
+- ระบุสิ่งที่ค้าง
+- ระบุ next safe step
 
-### order status ที่แนะนำ
-- pending = รับออเดอร์แล้ว รอทำ
-- making = กำลังทำ
-- done = ทำเสร็จแล้ว
-- paid = จ่ายเงินแล้ว
-- cancelled = ยกเลิก
-
-ถ้าระบบปัจจุบันยังไม่มี paid แยก:
-- อย่างน้อยต้องรู้ให้ได้ว่า done กับ paid ต่างกันหรือไม่
-- ห้ามเอา report รายได้ไปนับสถานะผิด
-
----
-
-## 7. QUEUE LOGIC
-- คิวเรียงตามเวลา create order เป็นหลัก
-- ร้านกับลูกค้าต้องเห็นสถานะเดียวกันของ order เดียวกัน
-- การเปลี่ยนสถานะต้องสะท้อนไปทุกหน้าที่เกี่ยวข้อง
-- ต้องป้องกันการกดซ้ำหรือ state กระโดดจาก optimistic UI
-
-### queue transition
-- pending -> making
-- making -> done
-- done -> paid หรือจบ flow ตาม implementation
-- ทุก transition ต้อง validate สถานะก่อนหน้า
-
----
-
-## 8. PAYMENT LOGIC
-### payment methods
-- qr
-- cash
-
-### flow
-1. order ถูกสร้าง
-2. ลูกค้าเลือกวิธีจ่าย
-3. ระบบแสดง QR หรือบันทึกว่าเป็นเงินสด
-4. เมื่อชำระสำเร็จ ให้ update payment state
-5. order final state ต้องสอดคล้องกับ payment state
-
-### rule สำคัญ
-- ห้ามถือว่า done = paid เสมอ เว้นแต่ระบบกำหนดแบบนั้นชัดเจน
-- report รายได้ควรนับจาก order/payment ที่ชำระสำเร็จแล้ว
-- ถ้า QR ยังไม่จ่ายสำเร็จ ต้องมีสถานะค้างที่ตรวจสอบได้
-
----
-
-## 9. STOCK LOGIC
-### trigger
-- เมื่อ order ได้รับการยืนยันแล้ว ระบบต้องเตรียมตัดสต๊อก
-- จุดที่ตัดจริงต้องกำหนดให้ชัดใน implementation ว่าตัดตอน create, done หรือ paid
-
-### recommended rule
-- ถ้าต้องการกัน oversell ให้ reserve ตอน create/pending
-- ถ้าต้องการง่ายและตรงบัญชี ให้ตัดจริงตอน paid หรือ done ตาม policy
-- แต่ทั้งระบบต้องใช้ policy เดียวกัน
-
-### stock requirements
-- ดูยอดใช้รายวัน
-- สรุปเพื่อวางแผนซื้อรายวัน / รายสัปดาห์ / รายเดือน
-- สูตรเมนูต้องเชื่อมกับการใช้วัตถุดิบ
-
----
-
-## 10. REPORT LOGIC
-### revenue
-- ควรนับเฉพาะ order ที่จ่ายสำเร็จ
-
-### expense
-- มาจากข้อมูลรายจ่ายที่ระบบรองรับ
-
-### stock planning
-- อิงจาก usage history และ current stock
-
-### top menu
-- นับจากจำนวนขายหรือยอดขาย ตาม metric ที่เลือก
-
----
-
-## 11. OFFLINE / SYNC LOGIC
-- เมื่อ offline ให้เก็บ action ลง local queue
-- เมื่อ online ให้ sync ขึ้น cloud ตามลำดับ
-- ทุก action ต้องมี idempotency หรือวิธีกันกดซ้ำ
-- optimistic UI ต้อง rollback ได้เมื่อ sync fail
-
----
-
-## 12. AUTH LOGIC
-- ใช้ Line Authentication แบบ Deep Link
-- หลัง login ต้อง resolve tenant/shop ให้ถูกต้อง
-- session และ role ต้องผูกกับ tenant
-
----
-
-## 13. LANGUAGE LOGIC
-- รองรับ TH/EN ทั้งระบบ
-- key UI ต้องไม่ hardcode ถ้าระบบมี i18n structure แล้ว
-- status ที่เก็บใน database ควรเก็บเป็นค่าคงที่ภาษาเดียว แล้วค่อย map ไปแสดงผล
-
----
-
-## 14. PLATFORM LOGIC
-- หน้าจอหน้าร้านต้องใช้บนมือถือ/แท็บเล็ตได้ง่าย
-- queue screen ต้องอ่านง่ายจากระยะไกล
-- dashboard/backoffice ต้องใช้บน PC ได้ดี
-
----
-
-## 15. VALIDATION CHECKLIST BEFORE MERGE
-ถ้าแก้งานเกี่ยวกับ order/queue/payment/stock/report ต้องเช็คอย่างน้อย:
-1. tenant isolation ยังอยู่ไหม
-2. เมนูหมดแล้วยังสั่งได้ไหม
-3. order สร้างซ้ำจากการกดซ้ำหรือไม่
-4. queue status ตรงทั้งฝั่งร้านและลูกค้าไหม
-5. payment state กับ order state ตรงกันไหม
-6. stock ถูกตัดซ้ำหรือไม่
-7. report นับยอดจากสถานะถูกหรือไม่
+## 13) Non-Goals
+- ห้ามออกแบบ feature Phase 2+
+- ห้ามแก้ naming หรือ refactor ใหญ่ถ้าไม่จำเป็นต่อ task
+- ห้ามเปลี่ยน architecture หลักเอง
