@@ -19,7 +19,7 @@
 - [DONE] TASK-002: ตรวจสอบว่า Next.js + TypeScript + Tailwind setup ยังอยู่ในสภาพพร้อมใช้งาน
 - [DONE] TASK-003: ยืนยันโครงสร้างเส้นทางหลักของ app และลดความสับสนระหว่าง `app/` กับ `src/` ตามของจริงในโปรเจกต์
 - [DONE] TASK-004: จัดระเบียบ foundation folders ที่จำเป็น เช่น components, lib, services เฉพาะเท่าที่ Phase 1 ต้องใช้
-- [TODO] TASK-005: สร้างหรือปรับ global layout shell แบบ mobile-first โดยไม่แตะ business UI เกินจำเป็น
+- [DONE] TASK-005: สร้างหรือปรับ global layout shell แบบ mobile-first โดยไม่แตะ business UI เกินจำเป็น
 - [TODO] TASK-006: เพิ่ม navigation shell สำหรับ Home, Queue, Revenue, CRM, Settings แบบ placeholder ก่อน
 - [TODO] TASK-007: วาง baseline i18n สำหรับ TH/EN ให้สอดคล้องกับโครง route ปัจจุบัน
 - [TODO] TASK-008: เพิ่ม language toggle ใน layout shell

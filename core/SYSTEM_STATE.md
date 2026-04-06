@@ -15,16 +15,17 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-004 complete. Foundation folders organised for Phase 1.
+TASK-005 complete. AppShell component extracted, layout.tsx thinned.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
 - TASK-002: DONE — Next.js + TypeScript + Tailwind build passes
 - TASK-003: DONE — app/ vs src/ structure confirmed, route tree documented
 - TASK-004: DONE — src/components/ created; src/lib/ already present; src/services/ deferred
+- TASK-005: DONE — AppShell component created; layout.tsx delegates to it
 
 ## Current Task Status
-- TASK-004: DONE
+- TASK-005: DONE
 
 ## In Progress
 - None
@@ -33,7 +34,7 @@ TASK-004 complete. Foundation folders organised for Phase 1.
 - None confirmed
 
 ## Next Task
-TASK-005
+TASK-006
 
 ## TASK-001 Result
 - Status: DONE
@@ -114,6 +115,17 @@ When stopping, append a short note with:
   - src/lib/ already exists — no action needed
   - src/services/ deferred — no Phase 1 task needs it before TASK-013+
 - Next Safe Step: TASK-005 — create/adjust global layout shell (mobile-first)
+
+## TASK-005 Result
+- Status: DONE
+- Changed Files: src/components/AppShell.tsx (created), app/[locale]/layout.tsx (thinned)
+- Validation: `npm run build` — TypeScript clean, build passes
+- Commit: feat(task-005): extract AppShell component, thin locale layout
+- Decisions:
+  - AppShell owns the layout structure (sidebar + main + mobile bottom nav)
+  - layout.tsx now only handles i18n provider + AppShell — no inline HTML
+  - Nav containers are empty placeholders — TASK-006 fills them in
+- Next Safe Step: TASK-006 — add Home, Queue, Revenue, CRM, Settings nav items
 
 ## Last Updated
 2026-04-06
