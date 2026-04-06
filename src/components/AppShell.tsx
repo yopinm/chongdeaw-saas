@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import LanguageToggle from "@/src/components/LanguageToggle";
 
 const navItems = [
   { key: "home", label: "Home", labelTh: "หน้าหลัก", emoji: "🏠", href: "#" },
@@ -27,12 +28,23 @@ export default function AppShell({ children }: { children: ReactNode }) {
             </Link>
           ))}
         </nav>
+        <div className="border-t pt-3">
+          <LanguageToggle />
+        </div>
       </aside>
 
       {/* Main content */}
-      <main className="min-w-0 flex-1 overflow-auto pb-24 md:pb-0">
-        <div className="mx-auto max-w-7xl p-4">{children}</div>
-      </main>
+      <div className="flex min-w-0 flex-1 flex-col">
+        {/* Mobile top header */}
+        <header className="sticky top-0 z-40 flex items-center justify-between border-b bg-white px-4 py-3 md:hidden">
+          <span className="text-lg font-bold text-orange-600">ChongDeaw</span>
+          <LanguageToggle />
+        </header>
+
+        <main className="min-w-0 flex-1 overflow-auto pb-24 md:pb-0">
+          <div className="mx-auto max-w-7xl p-4">{children}</div>
+        </main>
+      </div>
 
       {/* Mobile bottom nav */}
       <nav className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around border-t bg-white px-2 py-3 md:hidden">

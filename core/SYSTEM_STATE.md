@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-007 complete. i18n baseline fixed — duplicate key removed, Nav section added.
+TASK-008 complete. Language toggle added to AppShell (desktop sidebar + mobile header).
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -25,9 +25,10 @@ TASK-007 complete. i18n baseline fixed — duplicate key removed, Nav section ad
 - TASK-005: DONE — AppShell component created; layout.tsx delegates to it
 - TASK-006: DONE — nav items (Home, Queue, Revenue, CRM, Settings) in AppShell; all href="#" placeholder
 - TASK-007: DONE — en.json duplicate key fixed; Nav section added to both en.json and th.json
+- TASK-008: DONE — LanguageToggle component created; wired in desktop sidebar + mobile top header
 
 ## Current Task Status
-- TASK-007: DONE
+- TASK-008: DONE
 
 ## In Progress
 - None
@@ -36,7 +37,7 @@ TASK-007 complete. i18n baseline fixed — duplicate key removed, Nav section ad
 - None confirmed
 
 ## Next Task
-TASK-008
+TASK-009
 
 ## TASK-001 Result
 - Status: DONE
@@ -152,6 +153,18 @@ When stopping, append a short note with:
   - en.json Nav: Home, Queue, Revenue, CRM, Settings
   - th.json Nav: หน้าหลัก, คิว, รายได้, ลูกค้า, ตั้งค่า
 - Next Safe Step: TASK-008 — add language toggle to layout shell
+
+## TASK-008 Result
+- Status: DONE
+- Changed Files: src/components/LanguageToggle.tsx (created), src/components/AppShell.tsx (toggle added)
+- Validation: `npm run build` — TypeScript clean, build passes
+- Commit: feat(task-008): add LanguageToggle to AppShell
+- Decisions:
+  - LanguageToggle is "use client" — uses useParams + usePathname to swap locale prefix in path
+  - Desktop: toggle at bottom of sidebar (below nav items)
+  - Mobile: toggle in sticky top header alongside brand name
+  - Shows target locale (e.g. if current is TH, shows "EN" to switch to)
+- Next Safe Step: TASK-009 — verify/baseline Supabase client without forcing unready logic
 
 ## Last Updated
 2026-04-06
