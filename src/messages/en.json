@@ -3,6 +3,13 @@
     "title": "ChongDeaw",
     "welcome": "Welcome to your coffee shop"
   },
+  "Nav": {
+    "home": "Home",
+    "queue": "Queue",
+    "revenue": "Revenue",
+    "crm": "CRM",
+    "settings": "Settings"
+  },
   "Home": {
     "greeting": "Store dashboard",
     "title": "ChongDeaw Home",
@@ -34,10 +41,6 @@
       "customers": {
         "title": "Customer Follow-up",
         "desc": "See loyal, lost and repeat customers"
-      },
-      "settings": {
-        "title": "System Settings",
-        "desc": "Manage store, language, users and system options"
       },
       "settings": {
         "title": "System Settings",

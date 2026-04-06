@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-006 complete. Nav shell (Home, Queue, Revenue, CRM, Settings) added to AppShell.
+TASK-007 complete. i18n baseline fixed — duplicate key removed, Nav section added.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -24,9 +24,10 @@ TASK-006 complete. Nav shell (Home, Queue, Revenue, CRM, Settings) added to AppS
 - TASK-004: DONE — src/components/ created; src/lib/ already present; src/services/ deferred
 - TASK-005: DONE — AppShell component created; layout.tsx delegates to it
 - TASK-006: DONE — nav items (Home, Queue, Revenue, CRM, Settings) in AppShell; all href="#" placeholder
+- TASK-007: DONE — en.json duplicate key fixed; Nav section added to both en.json and th.json
 
 ## Current Task Status
-- TASK-006: DONE
+- TASK-007: DONE
 
 ## In Progress
 - None
@@ -35,7 +36,7 @@ TASK-006 complete. Nav shell (Home, Queue, Revenue, CRM, Settings) added to AppS
 - None confirmed
 
 ## Next Task
-TASK-007
+TASK-008
 
 ## TASK-001 Result
 - Status: DONE
@@ -139,6 +140,18 @@ When stopping, append a short note with:
   - All href="#" — real routes wired when pages are scaffolded (TASK-011+)
   - Mobile shows Thai labels; desktop shows English — can be unified with i18n in TASK-008
 - Next Safe Step: TASK-007 — baseline i18n for TH/EN; fix en.json duplicate "settings" key
+
+## TASK-007 Result
+- Status: DONE
+- Changed Files: src/messages/en.json, src/messages/th.json
+- Validation: `npm run build` — passes, TypeScript clean
+- Commit: fix(task-007): fix en.json duplicate key, add Nav i18n section
+- Changes:
+  - en.json: removed duplicate "settings" key under Home.menu
+  - Both files: added "Nav" section with keys home/queue/revenue/crm/settings
+  - en.json Nav: Home, Queue, Revenue, CRM, Settings
+  - th.json Nav: หน้าหลัก, คิว, รายได้, ลูกค้า, ตั้งค่า
+- Next Safe Step: TASK-008 — add language toggle to layout shell
 
 ## Last Updated
 2026-04-06
