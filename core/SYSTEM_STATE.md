@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-013 complete. Tenant/profile/store TypeScript contracts defined in src/types/index.ts.
+TASK-014 complete. Schema baseline reconciled in docs/Multi-tenant DB.sql — aligned with TASK-013 types.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -31,9 +31,10 @@ TASK-013 complete. Tenant/profile/store TypeScript contracts defined in src/type
 - TASK-011: DONE — auth layout + login page scaffold; /[locale]/login route confirmed in build
 - TASK-012: DONE — mock login flow (no LINE API); callback stub at /api/auth/callback (501, documented)
 - TASK-013: DONE — Store, Profile, TenantContext, Insert types in src/types/index.ts
+- TASK-014: DONE — docs/Multi-tenant DB.sql reconciled: columns aligned, RLS policies stripped to TASK-017
 
 ## Current Task Status
-- TASK-013: DONE
+- TASK-014: DONE
 
 ## In Progress
 - None
@@ -42,7 +43,7 @@ TASK-013 complete. Tenant/profile/store TypeScript contracts defined in src/type
 - None confirmed
 
 ## Next Task
-TASK-014
+TASK-015
 
 ## TASK-001 Result
 - Status: DONE
@@ -256,6 +257,20 @@ When stopping, append a short note with:
   - No RLS policies — TASK-017
   - No session binding — TASK-015
 - Next Safe Step: TASK-014 — schema baseline summary for stores + profiles
+
+## TASK-014 Result
+- Status: DONE
+- Changed Files: docs/Multi-tenant DB.sql (reconciled — was early draft, now aligned with TASK-013 types)
+- Validation: `npm run build` — still passes (SQL is reference only, not runtime)
+- Commit: chore(task-014): reconcile schema baseline with TASK-013 type contracts
+- Reconciliation summary:
+  - stores: added owner_id, line_channel_id, locale; renamed name_th → name; kept slug/subscription_status/tenant_tier
+  - profiles: added line_user_id, display_name, picture_url; role lowercase (owner/staff); dropped ADMIN
+  - RLS: ENABLE ROW LEVEL SECURITY kept; policies stripped and moved to TASK-017 comment block
+- Delta (DB fields not yet in TypeScript types — add before using in code):
+  - stores: slug, subscription_status, tenant_tier
+  - profiles: is_deleted
+- Next Safe Step: TASK-015 — define how store_id binds to auth/session context
 
 ## Last Updated
 2026-04-06
