@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-016 complete. Validation layer in src/lib/validate.ts — explicitly rejects client store_id.
+TASK-017 complete. RLS baseline in docs/rls-baseline.sql — policies defined, not yet executed, limitations documented.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -34,9 +34,10 @@ TASK-016 complete. Validation layer in src/lib/validate.ts — explicitly reject
 - TASK-014: DONE — docs/Multi-tenant DB.sql reconciled: columns aligned, RLS policies stripped to TASK-017
 - TASK-015: DONE — getTenantContext() + requireTenantContext() in src/lib/tenant.ts; store_id from DB only
 - TASK-016: DONE — assertNoClientStoreId() + stripClientStoreId() + WithoutStoreId<T> in src/lib/validate.ts
+- TASK-017: DONE — docs/rls-baseline.sql created; 3 policies defined; 3 limitations + 5-item checklist documented
 
 ## Current Task Status
-- TASK-016: DONE
+- TASK-017: DONE
 
 ## In Progress
 - None
@@ -45,7 +46,7 @@ TASK-016 complete. Validation layer in src/lib/validate.ts — explicitly reject
 - None confirmed
 
 ## Next Task
-TASK-017
+TASK-018
 
 ## TASK-001 Result
 - Status: DONE
@@ -309,6 +310,23 @@ When stopping, append a short note with:
   - Soft path: stripClientStoreId() for internal data-shaping
   - store_id always from requireTenantContext() — never from the caller
 - Next Safe Step: TASK-017 — RLS baseline scaffold + limitation notes
+
+## TASK-017 Result
+- Status: DONE
+- Changed Files: docs/rls-baseline.sql (created)
+- Validation: `npm run build` — passes, SQL file has no runtime impact
+- Commit: chore(task-017): scaffold RLS policy baseline with limitation checklist
+- Policies defined (NOT YET EXECUTED):
+  - stores_owner_access: FOR ALL USING (owner_id = auth.uid())
+  - profiles_tenant_isolation: FOR ALL USING (store_id = jwt.user_metadata.store_id AND is_deleted = false)
+  - profiles_self_rw: FOR ALL USING (id = auth.uid())
+- 5-item prerequisite checklist in file header (must ALL be met before executing)
+- 3 documented limitations (A/B/C):
+  - A: Mock login creates no session → auth.uid() returns nothing
+  - B: store_id not yet written to JWT user_metadata at login time
+  - C: SUPABASE_SERVICE_ROLE_KEY missing — admin writes not yet possible
+- Phase 2 expansion pattern documented (tenant_isolation + owner_write templates)
+- Next Safe Step: TASK-018 — review Phase 1 security baseline
 
 ## Last Updated
 2026-04-06
