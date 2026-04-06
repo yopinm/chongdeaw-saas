@@ -2,120 +2,86 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 const homeMenus = [
-  {
-    key: "order",
-    emoji: "☕",
-    href: "#",
-    badge: "เริ่มขาย",
-  },
-  {
-    key: "queue",
-    emoji: "📋",
-    href: "#",
-    badge: "ดูคิว",
-  },
-  {
-    key: "revenue",
-    emoji: "💰",
-    href: "#",
-    badge: "สรุปวันนี้",
-  },
-  {
-    key: "stock",
-    emoji: "📦",
-    href: "#",
-    badge: "สต๊อก",
-  },
-  {
-    key: "customers",
-    emoji: "👥",
-    href: "#",
-    badge: "CRM",
-  },
-  {
-    key: "settings",
-    emoji: "⚙️",
-    href: "#",
-    badge: "ระบบ",
-  },
+  { key: "order", emoji: "☕", href: "#", badge: "เริ่มขาย" },
+  { key: "queue", emoji: "📋", href: "#", badge: "ดูคิว" },
+  { key: "revenue", emoji: "💰", href: "#", badge: "สรุปวันนี้" },
+  { key: "stock", emoji: "📦", href: "#", badge: "สต๊อก" },
+  { key: "customers", emoji: "👥", href: "#", badge: "CRM" },
+  { key: "settings", emoji: "⚙️", href: "#", badge: "ระบบ" },
 ];
 
 export default function Index() {
   const t = useTranslations("Home");
 
   return (
-    <div className="space-y-6">
-      <section className="rounded-3xl bg-gradient-to-r from-orange-500 to-amber-400 p-6 text-white shadow-sm">
-        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div>
-            <div className="flex items-center gap-2">
-              <p className="text-sm font-medium text-orange-50">
-                {t("greeting")}
-              </p>
-              <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-semibold text-orange-100">
-                MOCK UI
-              </span>
-            </div>
-            <h1 className="mt-1 text-3xl font-bold">{t("title")}</h1>
-            <p className="mt-2 max-w-2xl text-sm text-orange-50 md:text-base">
-              {t("subtitle")}
-            </p>
-          </div>
+    <div className="space-y-5">
+      {/* Hero */}
+      <section className="rounded-3xl bg-gradient-to-br from-orange-500 to-amber-400 p-6 text-white shadow-sm">
+        <div className="flex items-center gap-2">
+          <p className="text-sm font-medium text-orange-100">{t("greeting")}</p>
+          <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-semibold text-orange-100 uppercase tracking-wide">
+            MOCK UI
+          </span>
+        </div>
+        <h1 className="mt-2 text-4xl font-extrabold leading-tight tracking-tight">
+          {t("title")}
+        </h1>
+        <p className="mt-1.5 text-sm font-medium text-orange-100 leading-relaxed">
+          {t("subtitle")}
+        </p>
 
-          <div className="grid grid-cols-3 gap-3 md:min-w-[320px]">
-            <div className="rounded-2xl bg-white/15 p-3 backdrop-blur-sm">
-              <div className="text-xs text-orange-50">
-                {t("summary.todayOrders")}
-              </div>
-              <div className="mt-1 text-xl font-bold">18</div>
+        {/* Stats */}
+        <div className="mt-5 grid grid-cols-3 gap-3">
+          <div className="rounded-2xl bg-white/15 px-3 py-3 backdrop-blur-sm">
+            <div className="text-[11px] font-medium text-orange-100 leading-snug">
+              {t("summary.todayOrders")}
             </div>
-            <div className="rounded-2xl bg-white/15 p-3 backdrop-blur-sm">
-              <div className="text-xs text-orange-50">
-                {t("summary.queueNow")}
-              </div>
-              <div className="mt-1 text-xl font-bold">5</div>
+            <div className="mt-1.5 text-2xl font-bold leading-none">18</div>
+          </div>
+          <div className="rounded-2xl bg-white/15 px-3 py-3 backdrop-blur-sm">
+            <div className="text-[11px] font-medium text-orange-100 leading-snug">
+              {t("summary.queueNow")}
             </div>
-            <div className="rounded-2xl bg-white/15 p-3 backdrop-blur-sm">
-              <div className="text-xs text-orange-50">
-                {t("summary.salesToday")}
-              </div>
-              <div className="mt-1 text-xl font-bold">฿2,480</div>
+            <div className="mt-1.5 text-2xl font-bold leading-none">5</div>
+          </div>
+          <div className="rounded-2xl bg-white/15 px-3 py-3 backdrop-blur-sm">
+            <div className="text-[11px] font-medium text-orange-100 leading-snug">
+              {t("summary.salesToday")}
             </div>
+            <div className="mt-1.5 text-xl font-bold leading-none">฿2,480</div>
           </div>
         </div>
       </section>
 
+      {/* Quick menu */}
       <section>
-        <div className="mb-3 flex items-center justify-between">
-          <div>
-            <h2 className="text-xl font-bold text-gray-900">
-              {t("quickMenuTitle")}
-            </h2>
-            <p className="text-sm text-gray-500">{t("quickMenuSubtitle")}</p>
-          </div>
+        <div className="mb-3">
+          <h2 className="text-lg font-bold text-gray-900">
+            {t("quickMenuTitle")}
+          </h2>
+          <p className="text-sm text-gray-500">{t("quickMenuSubtitle")}</p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
+        <div className="flex flex-col gap-3 md:grid md:grid-cols-2 xl:grid-cols-3">
           {homeMenus.map((menu) => (
             <Link
               key={menu.key}
               href={menu.href}
-              className="group rounded-3xl border border-gray-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              className="group flex items-center gap-4 rounded-2xl border border-gray-200 bg-white px-4 py-4 shadow-sm transition hover:shadow-md active:scale-[0.98]"
             >
-              <div className="flex items-start justify-between">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-2xl">
-                  {menu.emoji}
-                </div>
-                <span className="rounded-full bg-gray-100 px-2 py-1 text-[10px] font-semibold text-gray-500">
-                  {menu.badge}
-                </span>
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-3xl">
+                {menu.emoji}
               </div>
-
-              <div className="mt-4">
-                <h3 className="text-base font-bold text-gray-900 group-hover:text-orange-600">
-                  {t(`menu.${menu.key}.title`)}
-                </h3>
-                <p className="mt-1 text-sm leading-5 text-gray-500">
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="text-base font-bold text-gray-900 group-hover:text-orange-600">
+                    {t(`menu.${menu.key}.title`)}
+                  </h3>
+                  <span className="shrink-0 rounded-full bg-gray-100 px-2.5 py-1 text-[11px] font-semibold text-gray-500">
+                    {menu.badge}
+                  </span>
+                </div>
+                <p className="mt-0.5 text-sm leading-snug text-gray-500">
                   {t(`menu.${menu.key}.desc`)}
                 </p>
               </div>
@@ -124,58 +90,47 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
-          <div className="text-sm font-semibold text-gray-500">
+      {/* Info panels */}
+      <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+          <div className="text-xs font-semibold uppercase tracking-wide text-gray-400">
             {t("panels.queue.title")}
           </div>
-          <div className="mt-3 space-y-3">
-            <div className="flex items-center justify-between rounded-2xl bg-gray-50 px-4 py-3">
-              <span className="text-sm text-gray-600">
-                {t("panels.queue.waiting")}
-              </span>
+          <div className="mt-3 space-y-2">
+            <div className="flex items-center justify-between rounded-xl bg-gray-50 px-4 py-3">
+              <span className="text-sm text-gray-600">{t("panels.queue.waiting")}</span>
               <span className="text-lg font-bold text-gray-900">5</span>
             </div>
-            <div className="flex items-center justify-between rounded-2xl bg-gray-50 px-4 py-3">
-              <span className="text-sm text-gray-600">
-                {t("panels.queue.brewing")}
-              </span>
+            <div className="flex items-center justify-between rounded-xl bg-gray-50 px-4 py-3">
+              <span className="text-sm text-gray-600">{t("panels.queue.brewing")}</span>
               <span className="text-lg font-bold text-gray-900">2</span>
             </div>
           </div>
         </div>
 
-        <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
-          <div className="text-sm font-semibold text-gray-500">
+        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+          <div className="text-xs font-semibold uppercase tracking-wide text-gray-400">
             {t("panels.revenue.title")}
           </div>
-          <div className="mt-3 space-y-3">
-            <div className="rounded-2xl bg-emerald-50 px-4 py-3">
-              <div className="text-sm text-emerald-700">
-                {t("panels.revenue.total")}
-              </div>
-              <div className="mt-1 text-2xl font-bold text-emerald-900">
-                ฿2,480
-              </div>
+          <div className="mt-3 space-y-2">
+            <div className="rounded-xl bg-emerald-50 px-4 py-3">
+              <div className="text-sm text-emerald-700">{t("panels.revenue.total")}</div>
+              <div className="mt-1 text-2xl font-bold text-emerald-900">฿2,480</div>
             </div>
-            <div className="text-sm text-gray-500">
-              {t("panels.revenue.note")}
-            </div>
+            <div className="text-sm text-gray-400">{t("panels.revenue.note")}</div>
           </div>
         </div>
 
-        <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm md:col-span-2 xl:col-span-1">
-          <div className="text-sm font-semibold text-gray-500">
+        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm md:col-span-2 xl:col-span-1">
+          <div className="text-xs font-semibold uppercase tracking-wide text-gray-400">
             {t("panels.stock.title")}
           </div>
-          <div className="mt-3 space-y-3">
-            <div className="flex items-center justify-between rounded-2xl bg-red-50 px-4 py-3">
-              <span className="text-sm text-red-700">
-                เมล็ดกาแฟ House Blend
-              </span>
+          <div className="mt-3 space-y-2">
+            <div className="flex items-center justify-between rounded-xl bg-red-50 px-4 py-3">
+              <span className="text-sm text-red-700">เมล็ดกาแฟ House Blend</span>
               <span className="text-sm font-bold text-red-900">ต่ำ</span>
             </div>
-            <div className="flex items-center justify-between rounded-2xl bg-amber-50 px-4 py-3">
+            <div className="flex items-center justify-between rounded-xl bg-amber-50 px-4 py-3">
               <span className="text-sm text-amber-700">นมสด</span>
               <span className="text-sm font-bold text-amber-900">ใกล้หมด</span>
             </div>
