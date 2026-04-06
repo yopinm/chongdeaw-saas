@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-015 complete. store_id binding flow defined in src/lib/tenant.ts — server-side only, never from client.
+TASK-016 complete. Validation layer in src/lib/validate.ts — explicitly rejects client store_id.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -33,9 +33,10 @@ TASK-015 complete. store_id binding flow defined in src/lib/tenant.ts — server
 - TASK-013: DONE — Store, Profile, TenantContext, Insert types in src/types/index.ts
 - TASK-014: DONE — docs/Multi-tenant DB.sql reconciled: columns aligned, RLS policies stripped to TASK-017
 - TASK-015: DONE — getTenantContext() + requireTenantContext() in src/lib/tenant.ts; store_id from DB only
+- TASK-016: DONE — assertNoClientStoreId() + stripClientStoreId() + WithoutStoreId<T> in src/lib/validate.ts
 
 ## Current Task Status
-- TASK-015: DONE
+- TASK-016: DONE
 
 ## In Progress
 - None
@@ -44,7 +45,7 @@ TASK-015 complete. store_id binding flow defined in src/lib/tenant.ts — server
 - None confirmed
 
 ## Next Task
-TASK-016
+TASK-017
 
 ## TASK-001 Result
 - Status: DONE
@@ -292,6 +293,22 @@ When stopping, append a short note with:
   - Prerequisite B: real Supabase session needed (mock login does not create one)
   - Prerequisite C: JWT claim binding in TASK-016+
 - Next Safe Step: TASK-016 — request validation layer that refuses frontend store_id
+
+## TASK-016 Result
+- Status: DONE
+- Changed Files: src/lib/validate.ts (created)
+- Validation: `npm run build` — TypeScript clean, all routes unchanged
+- Commit: feat(task-016): add request validation layer rejecting client store_id
+- What was added:
+  - WithoutStoreId<T> — Omit<T, "store_id"> utility type
+  - assertNoClientStoreId(input, source?) — throws SECURITY error if body has store_id
+  - stripClientStoreId<T>(input) — silently removes store_id, returns WithoutStoreId<T>
+  - Usage pattern comment in file header showing the full Route Handler pattern
+- Enforcement contract:
+  - Hard path: assertNoClientStoreId() at every API boundary (Route Handlers, Server Actions)
+  - Soft path: stripClientStoreId() for internal data-shaping
+  - store_id always from requireTenantContext() — never from the caller
+- Next Safe Step: TASK-017 — RLS baseline scaffold + limitation notes
 
 ## Last Updated
 2026-04-06
