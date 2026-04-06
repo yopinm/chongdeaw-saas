@@ -65,6 +65,7 @@ Begin TASK-021: review and align auth entry points for Phase 1 UAT.
 - TASK-020-ui2: DONE — Polish pass: tap feedback on cards, สั่งกาแฟ primary card style, pt-2 header spacing, footer nav lighter (opacity/size/blur)
 - TASK-021-ui: DONE — Force home page single column layout at all breakpoints; removed all grid-cols-2/3, md:grid, xl:grid patterns; replaced with flex flex-col; removed stale col-span classes
 - TASK-021-ui2: DONE — Center layout (max-w-4xl mx-auto px-4 md:px-6); merge 3 hero stat cards into single "📊 ภาพรวมวันนี้" card with flex rows
+- TASK-022-home-layout: DONE — Remove AppShell from [locale]/layout.tsx (sidebar gone on Home); remove 3 info panel sections from page.tsx; Home is now standalone centered layout (3 sections only: hero + stats + menu)
 
 ## In Progress
 - None

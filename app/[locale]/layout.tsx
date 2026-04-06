@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
-import AppShell from "@/src/components/AppShell";
 
 export function generateStaticParams() {
   return [{ locale: "th" }, { locale: "en" }];
@@ -18,7 +17,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <AppShell>{children}</AppShell>
+      {children}
     </NextIntlClientProvider>
   );
 }

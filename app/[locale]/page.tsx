@@ -112,53 +112,6 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Info panels */}
-      <section className="flex flex-col gap-3">
-        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-          <div className="text-xs font-semibold uppercase tracking-wide text-gray-400">
-            {t("panels.queue.title")}
-          </div>
-          <div className="mt-3 space-y-2">
-            <div className="flex items-center justify-between rounded-xl bg-gray-50 px-4 py-3">
-              <span className="text-sm text-gray-600">{t("panels.queue.waiting")}</span>
-              <span className="text-lg font-bold text-gray-900">5</span>
-            </div>
-            <div className="flex items-center justify-between rounded-xl bg-gray-50 px-4 py-3">
-              <span className="text-sm text-gray-600">{t("panels.queue.brewing")}</span>
-              <span className="text-lg font-bold text-gray-900">2</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-          <div className="text-xs font-semibold uppercase tracking-wide text-gray-400">
-            {t("panels.revenue.title")}
-          </div>
-          <div className="mt-3 space-y-2">
-            <div className="rounded-xl bg-emerald-50 px-4 py-3">
-              <div className="text-sm text-emerald-700">{t("panels.revenue.total")}</div>
-              <div className="mt-1 text-2xl font-bold text-emerald-900">฿2,480</div>
-            </div>
-            <div className="text-sm text-gray-400">{t("panels.revenue.note")}</div>
-          </div>
-        </div>
-
-        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
-          <div className="text-xs font-semibold uppercase tracking-wide text-gray-400">
-            {t("panels.stock.title")}
-          </div>
-          <div className="mt-3 space-y-2">
-            <div className="flex items-center justify-between rounded-xl bg-red-50 px-4 py-3">
-              <span className="text-sm text-red-700">เมล็ดกาแฟ House Blend</span>
-              <span className="text-sm font-bold text-red-900">ต่ำ</span>
-            </div>
-            <div className="flex items-center justify-between rounded-xl bg-amber-50 px-4 py-3">
-              <span className="text-sm text-amber-700">นมสด</span>
-              <span className="text-sm font-bold text-amber-900">ใกล้หมด</span>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
