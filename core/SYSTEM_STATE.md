@@ -63,6 +63,7 @@ Begin TASK-021: review and align auth entry points for Phase 1 UAT.
 - TASK-020-i18n: DONE — src/i18n/request.ts: removed notFound(); invalid/missing locale now falls back to "th"
 - TASK-020-ui: DONE — Home page mobile-first UX refine: hero taller, menu cards vertical stack with row layout, better typography, footer nav tightened
 - TASK-020-ui2: DONE — Polish pass: tap feedback on cards, สั่งกาแฟ primary card style, pt-2 header spacing, footer nav lighter (opacity/size/blur)
+- TASK-021-ui: DONE — Force home page single column layout at all breakpoints; removed all grid-cols-2/3, md:grid, xl:grid patterns; replaced with flex flex-col; removed stale col-span classes
 
 ## In Progress
 - None

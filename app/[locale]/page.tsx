@@ -31,7 +31,7 @@ export default function Index() {
         </p>
 
         {/* Stats */}
-        <div className="mt-5 grid grid-cols-3 gap-3">
+        <div className="mt-5 flex flex-col gap-3">
           <div className="rounded-2xl bg-white/15 px-3 py-3 backdrop-blur-sm">
             <div className="text-[11px] font-medium text-orange-100 leading-snug">
               {t("summary.todayOrders")}
@@ -62,7 +62,7 @@ export default function Index() {
           <p className="text-sm text-gray-500">{t("quickMenuSubtitle")}</p>
         </div>
 
-        <div className="flex flex-col gap-3 md:grid md:grid-cols-2 xl:grid-cols-3">
+        <div className="flex flex-col gap-3">
           {homeMenus.map((menu, i) => {
             const isPrimary = i === 0;
             return (
@@ -114,7 +114,7 @@ export default function Index() {
       </section>
 
       {/* Info panels */}
-      <section className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+      <section className="flex flex-col gap-3">
         <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
           <div className="text-xs font-semibold uppercase tracking-wide text-gray-400">
             {t("panels.queue.title")}
@@ -144,7 +144,7 @@ export default function Index() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm md:col-span-2 xl:col-span-1">
+        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
           <div className="text-xs font-semibold uppercase tracking-wide text-gray-400">
             {t("panels.stock.title")}
           </div>
