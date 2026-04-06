@@ -32,7 +32,7 @@
 - [DONE] TASK-015: วางแนวทาง bind `store_id` เข้ากับ auth/session context
 - [DONE] TASK-016: วาง request validation layer ที่ไม่เชื่อ frontend `store_id`
 - [DONE] TASK-017: scaffold RLS baseline และบันทึก limitation ที่ยังไม่ bind claim จริง
-- [TODO] TASK-018: ทบทวน security baseline เฉพาะ Phase 1
+- [DONE] TASK-018: ทบทวน security baseline เฉพาะ Phase 1
 - [TODO] TASK-019: ตั้งค่า PWA manifest และ config ขั้นพื้นฐาน
 - [TODO] TASK-020: เพิ่ม offline shell หรือ fallback อย่างปลอดภัย
 - [TODO] TASK-021: สร้าง dashboard placeholder ที่เกาะ layout ใหม่

@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-017 complete. RLS baseline in docs/rls-baseline.sql — policies defined, not yet executed, limitations documented.
+TASK-018 complete. Phase 1 security review done — foundations in place, mock items catalogued, clear Phase 2 boundary set.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -35,9 +35,10 @@ TASK-017 complete. RLS baseline in docs/rls-baseline.sql — policies defined, n
 - TASK-015: DONE — getTenantContext() + requireTenantContext() in src/lib/tenant.ts; store_id from DB only
 - TASK-016: DONE — assertNoClientStoreId() + stripClientStoreId() + WithoutStoreId<T> in src/lib/validate.ts
 - TASK-017: DONE — docs/rls-baseline.sql created; 3 policies defined; 3 limitations + 5-item checklist documented
+- TASK-018: DONE — Phase 1 security review complete; foundations confirmed; Phase 2 boundary documented
 
 ## Current Task Status
-- TASK-017: DONE
+- TASK-018: DONE
 
 ## In Progress
 - None
@@ -46,7 +47,7 @@ TASK-017 complete. RLS baseline in docs/rls-baseline.sql — policies defined, n
 - None confirmed
 
 ## Next Task
-TASK-018
+TASK-019
 
 ## TASK-001 Result
 - Status: DONE
@@ -327,6 +328,48 @@ When stopping, append a short note with:
   - C: SUPABASE_SERVICE_ROLE_KEY missing — admin writes not yet possible
 - Phase 2 expansion pattern documented (tenant_isolation + owner_write templates)
 - Next Safe Step: TASK-018 — review Phase 1 security baseline
+
+## TASK-018 Result — Phase 1 Security Baseline Review
+- Status: DONE
+- Changed Files: core/SYSTEM_STATE.md, core/TASK_QUEUE.md (docs only — no code changes)
+- Validation: reviewed src/lib/tenant.ts, src/lib/validate.ts, src/middleware.ts, src/lib/supabase.ts,
+              src/types/index.ts, docs/rls-baseline.sql, docs/Multi-tenant DB.sql
+- Commit: chore(task-018): Phase 1 security baseline review
+
+### FOUNDATIONS COMPLETE (structure enforced in code)
+
+| Area | File | Status |
+|---|---|---|
+| store_id never from client | src/lib/tenant.ts | ✓ getTenantContext() reads from DB via verified user.id |
+| Request validation | src/lib/validate.ts | ✓ assertNoClientStoreId() throws; stripClientStoreId() strips |
+| Type contracts | src/types/index.ts | ✓ TenantContext, Store, Profile, UserRole |
+| Schema baseline | docs/Multi-tenant DB.sql | ✓ aligned with TS types; RLS ENABLE declared |
+| RLS policies | docs/rls-baseline.sql | ✓ defined with prerequisite checklist; not yet executed |
+| Supabase clients | src/lib/supabase.ts | ✓ browser + server (cookies-based) |
+| Auth scaffold | app/[locale]/(auth)/ | ✓ login page + callback at correct static path |
+| Env protection | .gitignore | ✓ .env* excluded; vars documented |
+| i18n middleware | src/middleware.ts | ✓ locale routing; auth redirect noted as TODO |
+
+### MOCK / NOT YET OPERATIONAL (clearly labeled throughout codebase)
+
+| Item | Status | Unblocked By |
+|---|---|---|
+| LINE OAuth callback | 501 STUB | LINE_CHANNEL_ID + LINE_CHANNEL_SECRET in .env.local |
+| Real Supabase session | None exists | Real LINE callback implementation |
+| JWT user_metadata.store_id | Not set | Real callback + Supabase auth.admin.updateUserById |
+| profiles table in Supabase | Not created | Run docs/Multi-tenant DB.sql |
+| RLS policies executed | Not run | 5-item checklist in docs/rls-baseline.sql |
+| SUPABASE_SERVICE_ROLE_KEY | Missing | Manual .env.local addition |
+| Middleware auth redirect | i18n only | After real session exists |
+
+### PHASE 1 VERDICT
+- Security LAYER is phase-complete: all patterns enforced in code, all stubs clearly labeled
+- Phase 1 is NOT yet finished: TASK-019 through 024 remain (PWA, dashboard, integration, docs, readiness)
+- Safe to proceed to TASK-019
+- Mock parts are Phase 2 dependencies — they require LINE credentials + DB migration + real session
+- No security debt introduced by Phase 1 work; all stubs are explicit, none are silent
+
+- Next Safe Step: TASK-019 — PWA manifest and baseline config
 
 ## Last Updated
 2026-04-06
