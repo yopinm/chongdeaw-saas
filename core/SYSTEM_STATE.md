@@ -58,6 +58,7 @@ Only after that should Real Integration UAT begin.
 - TASK-020: DONE
 - TASK-020-routing: DONE — generateStaticParams added to app/[locale]/layout.tsx
 - TASK-020-middleware: DONE — src/middleware.ts simplified to direct export; removed wrapper fn + catch-all matcher that blocked requestLocale resolution for /th
+- TASK-020-i18n: DONE — src/i18n/request.ts: removed notFound(); invalid/missing locale now falls back to "th"
 
 ## In Progress
 - None
