@@ -54,8 +54,8 @@ Only after that should Real Integration UAT begin.
 - TASK-018: DONE — Phase 1 security review complete; foundations confirmed; Phase 2 boundary documented
 
 ## Current Task Status
-- TASK-018: DONE
 - TASK-019: DONE
+- TASK-020: DONE
 
 ## In Progress
 - None
@@ -64,10 +64,24 @@ Only after that should Real Integration UAT begin.
 - None
 
 ## Active Risk
-- None (root route restored)
+- None
 
 ## Next Task
-TASK-020
+TASK-021
+
+## TASK-020 Result
+- Status: DONE
+- Changed Files: app/[locale]/page.tsx (1 edit — added MOCK UI badge)
+- Validation: `npm run build` — TypeScript clean, all 5 routes present
+- Commit: feat(task-020): add MOCK UI badge to home page hero section
+- What exists (was already in baseline):
+  - 6 cards: สั่งกาแฟ, รายการคิว, รายได้ร้าน, ดูสต๊อก-สั่งของ, ติดตามลูกค้า, ตั้งค่าระบบ
+  - Mobile-first card grid (2-col mobile, 3-col tablet, 6-col desktop)
+  - Mock stats panel (18 orders, 5 queue, ฿2,480) — all hardcoded placeholder
+  - i18n via useTranslations — TH/EN both work
+  - All hrefs are "#" — no real routing yet
+- What was added: "MOCK UI" pill badge next to greeting text in hero section
+- No TenantContext, no auth, no Supabase, no middleware touched
 
 ## TASK-019 Result
 - Status: DONE

@@ -34,7 +34,7 @@
 - [DONE] TASK-017: scaffold RLS baseline และบันทึก limitation ที่ยังไม่ bind claim จริง
 - [DONE] TASK-018: ทบทวน security baseline เฉพาะ Phase 1
 - [DONE] TASK-019: แก้ root route ให้ `localhost:3000` ไม่ 404 โดยไม่รื้อ locale/layout architecture
-- [TODO] TASK-020: เพิ่ม mock Home UI ขั้นต่ำบน layout shell เดิม เพื่อให้มีจุดเข้าแอปสำหรับ UAT
+- [DONE] TASK-020: เพิ่ม mock Home UI ขั้นต่ำบน layout shell เดิม เพื่อให้มีจุดเข้าแอปสำหรับ UAT
 - [TODO] TASK-021: ทบทวน auth entry points และ route callback/login/logout ให้พร้อมสำหรับ UAT Phase 1
 - [TODO] TASK-022: เชื่อม Real LINE Auth + Supabase session แบบ safe mode
 - [TODO] TASK-023: bind real session เข้ากับ TenantContext ฝั่ง server โดยไม่เชื่อ client `store_id`

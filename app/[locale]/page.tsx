@@ -48,9 +48,14 @@ export default function Index() {
       <section className="rounded-3xl bg-gradient-to-r from-orange-500 to-amber-400 p-6 text-white shadow-sm">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm font-medium text-orange-50">
-              {t("greeting")}
-            </p>
+            <div className="flex items-center gap-2">
+              <p className="text-sm font-medium text-orange-50">
+                {t("greeting")}
+              </p>
+              <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-semibold text-orange-100">
+                MOCK UI
+              </span>
+            </div>
             <h1 className="mt-1 text-3xl font-bold">{t("title")}</h1>
             <p className="mt-2 max-w-2xl text-sm text-orange-50 md:text-base">
               {t("subtitle")}
