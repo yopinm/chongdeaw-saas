@@ -15,14 +15,15 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-002 complete. Next.js + TypeScript + Tailwind build verified.
+TASK-003 complete. app/ vs src/ route structure confirmed and documented.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
 - TASK-002: DONE — Next.js + TypeScript + Tailwind build passes
+- TASK-003: DONE — app/ vs src/ structure confirmed, route tree documented
 
 ## Current Task Status
-- TASK-002: DONE
+- TASK-003: DONE
 
 ## In Progress
 - None
@@ -31,7 +32,7 @@ TASK-002 complete. Next.js + TypeScript + Tailwind build verified.
 - None confirmed
 
 ## Next Task
-TASK-003
+TASK-004
 
 ## TASK-001 Result
 - Status: DONE
@@ -88,6 +89,19 @@ When stopping, append a short note with:
   - next-intl integrated and routing working ✓
   - Build output: /[locale] dynamic route, /_not-found static ✓
 - Next Safe Step: TASK-003 — confirm app/ vs src/ route structure, reduce ambiguity
+
+## TASK-003 Result
+- Status: DONE
+- Changed Files: core/SYSTEM_STATE.md, core/TASK_QUEUE.md (docs only)
+- Validation: No code changes — build already confirmed in TASK-002
+- Commit: chore(task-003): confirm app/ vs src/ route structure
+- Findings:
+  - app/ = App Router (routing layer): layout.tsx, [locale]/layout.tsx, [locale]/page.tsx
+  - src/ = utilities/config: middleware.ts, i18n/request.ts, lib/supabase.ts, messages/
+  - Route groups confirmed: (auth)/, (dashboard)/, (store)/ all empty, ready for Phase 1
+  - @/* alias maps to ./ (root) in tsconfig but currently unused — all imports are relative
+  - KNOWN ISSUE: en.json has duplicate "settings" key — first entry silently overridden → fix in TASK-007
+- Next Safe Step: TASK-004 — create src/components/, src/services/ for Phase 1 use
 
 ## Last Updated
 2026-04-06
