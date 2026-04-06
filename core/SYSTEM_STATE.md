@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-014 complete. Schema baseline reconciled in docs/Multi-tenant DB.sql — aligned with TASK-013 types.
+TASK-015 complete. store_id binding flow defined in src/lib/tenant.ts — server-side only, never from client.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -32,9 +32,10 @@ TASK-014 complete. Schema baseline reconciled in docs/Multi-tenant DB.sql — al
 - TASK-012: DONE — mock login flow (no LINE API); callback stub at /api/auth/callback (501, documented)
 - TASK-013: DONE — Store, Profile, TenantContext, Insert types in src/types/index.ts
 - TASK-014: DONE — docs/Multi-tenant DB.sql reconciled: columns aligned, RLS policies stripped to TASK-017
+- TASK-015: DONE — getTenantContext() + requireTenantContext() in src/lib/tenant.ts; store_id from DB only
 
 ## Current Task Status
-- TASK-014: DONE
+- TASK-015: DONE
 
 ## In Progress
 - None
@@ -43,7 +44,7 @@ TASK-014 complete. Schema baseline reconciled in docs/Multi-tenant DB.sql — al
 - None confirmed
 
 ## Next Task
-TASK-015
+TASK-016
 
 ## TASK-001 Result
 - Status: DONE
@@ -271,6 +272,26 @@ When stopping, append a short note with:
   - stores: slug, subscription_status, tenant_tier
   - profiles: is_deleted
 - Next Safe Step: TASK-015 — define how store_id binds to auth/session context
+
+## TASK-015 Result
+- Status: DONE
+- Changed Files: src/lib/tenant.ts (created)
+- Validation: `npm run build` — TypeScript clean, all routes unchanged
+- Commit: feat(task-015): define store_id binding flow in getTenantContext()
+- Design:
+  - getTenantContext() → TenantContext | null
+    1. createSupabaseServerClient() (cookies-based, server-side only)
+    2. supabase.auth.getUser() (verifies JWT — trusted)
+    3. SELECT store_id, role FROM profiles WHERE id = user.id AND is_deleted = false
+    4. Return { user_id, store_id, role } — store_id from DB, never from caller
+  - requireTenantContext() → TenantContext | throws
+    - Wraps getTenantContext(), throws if null (TODO: replace with redirect)
+  - ProfileRow internal type used for safe DB result casting
+- Limitations documented in file header:
+  - Prerequisite A: profiles table must exist (run docs/Multi-tenant DB.sql)
+  - Prerequisite B: real Supabase session needed (mock login does not create one)
+  - Prerequisite C: JWT claim binding in TASK-016+
+- Next Safe Step: TASK-016 — request validation layer that refuses frontend store_id
 
 ## Last Updated
 2026-04-06
