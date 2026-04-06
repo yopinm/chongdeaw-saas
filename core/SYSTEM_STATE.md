@@ -15,15 +15,16 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-003 complete. app/ vs src/ route structure confirmed and documented.
+TASK-004 complete. Foundation folders organised for Phase 1.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
 - TASK-002: DONE — Next.js + TypeScript + Tailwind build passes
 - TASK-003: DONE — app/ vs src/ structure confirmed, route tree documented
+- TASK-004: DONE — src/components/ created; src/lib/ already present; src/services/ deferred
 
 ## Current Task Status
-- TASK-003: DONE
+- TASK-004: DONE
 
 ## In Progress
 - None
@@ -32,7 +33,7 @@ TASK-003 complete. app/ vs src/ route structure confirmed and documented.
 - None confirmed
 
 ## Next Task
-TASK-004
+TASK-005
 
 ## TASK-001 Result
 - Status: DONE
@@ -102,6 +103,17 @@ When stopping, append a short note with:
   - @/* alias maps to ./ (root) in tsconfig but currently unused — all imports are relative
   - KNOWN ISSUE: en.json has duplicate "settings" key — first entry silently overridden → fix in TASK-007
 - Next Safe Step: TASK-004 — create src/components/, src/services/ for Phase 1 use
+
+## TASK-004 Result
+- Status: DONE
+- Changed Files: src/components/.gitkeep (created)
+- Validation: `npm run build` — still passes after folder addition
+- Commit: chore(task-004): add src/components/ foundation folder
+- Decisions:
+  - src/components/ created — needed by TASK-005/006/008 (layout shell, nav, language toggle)
+  - src/lib/ already exists — no action needed
+  - src/services/ deferred — no Phase 1 task needs it before TASK-013+
+- Next Safe Step: TASK-005 — create/adjust global layout shell (mobile-first)
 
 ## Last Updated
 2026-04-06
