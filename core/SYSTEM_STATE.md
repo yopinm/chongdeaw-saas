@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-010 complete. Env wiring audited — Supabase keys present; LINE keys missing (needed for TASK-012).
+TASK-011 complete. Auth scaffold — /[locale]/login route live, no logic yet.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -28,9 +28,10 @@ TASK-010 complete. Env wiring audited — Supabase keys present; LINE keys missi
 - TASK-008: DONE — LanguageToggle component created; wired in desktop sidebar + mobile top header
 - TASK-009: DONE — createClient (browser) + createSupabaseServerClient (server) baseline ready
 - TASK-010: DONE — env audit complete; keys documented; .env.local gitignored confirmed
+- TASK-011: DONE — auth layout + login page scaffold; /[locale]/login route confirmed in build
 
 ## Current Task Status
-- TASK-010: DONE
+- TASK-011: DONE
 
 ## In Progress
 - None
@@ -39,7 +40,7 @@ TASK-010 complete. Env wiring audited — Supabase keys present; LINE keys missi
 - None confirmed
 
 ## Next Task
-TASK-011
+TASK-012
 
 ## TASK-001 Result
 - Status: DONE
@@ -203,6 +204,20 @@ When stopping, append a short note with:
 - SUPABASE_SERVICE_ROLE_KEY is not needed until RLS admin operations — safe to defer
 
 - Next Safe Step: TASK-011 — scaffold login entry and auth entry points
+
+## TASK-011 Result
+- Status: DONE
+- Changed Files:
+  - app/[locale]/(auth)/layout.tsx (created) — centered auth layout, no AppShell
+  - app/[locale]/(auth)/login/page.tsx (created) — login page scaffold, disabled LINE button
+- Validation: `npm run build` — /[locale]/login route appears in build output, TypeScript clean
+- Commit: feat(task-011): scaffold auth layout and login page
+- Decisions:
+  - Auth layout is separate from AppShell — no sidebar/nav for login flow
+  - LINE button is disabled + labeled "scaffold only, wired in TASK-012"
+  - No auth logic, no DB calls, no session handling — scaffold only
+  - Callback route deferred to TASK-012 (LINE login integration)
+- Next Safe Step: TASK-012 — LINE login integration point or mock flow
 
 ## Last Updated
 2026-04-06

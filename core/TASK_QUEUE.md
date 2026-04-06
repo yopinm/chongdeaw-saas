@@ -25,7 +25,7 @@
 - [DONE] TASK-008: เพิ่ม language toggle ใน layout shell
 - [DONE] TASK-009: ตั้งค่า Supabase client baseline แบบไม่ฝืนเชื่อม logic ที่ยังไม่พร้อม
 - [DONE] TASK-010: ตรวจสอบ env wiring ที่จำเป็นและสรุปสิ่งที่ยังขาดอย่างปลอดภัย
-- [TODO] TASK-011: scaffold login entry และ auth entry points
+- [DONE] TASK-011: scaffold login entry และ auth entry points
 - [TODO] TASK-012: วาง LINE login integration point หรือ mock flow ให้ชัดเจนว่าอะไรยังไม่จริง
 - [TODO] TASK-013: สร้าง tenant/profile/store contracts ฝั่งโค้ด
 - [TODO] TASK-014: สรุป schema baseline สำหรับ stores และ profiles ในรูปแบบที่ต่อยอดได้
