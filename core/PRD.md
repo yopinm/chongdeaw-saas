@@ -1,71 +1,68 @@
-# PRD.md — ChongDeaw Phase 1 (SaaS Foundation)
+# PRD.md — ChongDeaw Phase 1 (Safe Mode Foundation)
 
 ## 1) Purpose
-สร้างฐานระบบ SaaS สำหรับร้านกาแฟแบบ multi-tenant ให้พร้อมต่อยอดไปยังฟีเจอร์ธุรกิจใน Phase ถัดไป โดยเน้นความถูกต้องของ tenant isolation, authentication, layout, i18n, PWA และความปลอดภัยเป็นหลัก
+สร้างฐานระบบ SaaS สำหรับร้านกาแฟแบบ multi-tenant ให้พร้อมต่อยอด โดยเน้นความปลอดภัยของข้อมูล, ความเสถียรของโครงสร้าง, และการทำงานร่วมกับ Claude Code แบบควบคุมได้
 
-## 2) Phase Scope
-Phase 1 ทำเฉพาะโครงสร้างพื้นฐานของแพลตฟอร์ม
+## 2) Phase Goal
+Phase 1 มีเป้าหมายเพื่อสร้าง “ฐานระบบที่รันได้และไม่พังง่าย” ก่อนเริ่มฟีเจอร์ธุรกิจจริง
 
-### In Scope
-- Next.js 14 App Router + TypeScript + Tailwind CSS
-- โครงสร้างโฟลเดอร์ที่ชัดเจนสำหรับ SaaS
-- Supabase client + environment wiring
-- Authentication flow สำหรับ LINE login (mock flow ได้ก่อน ถ้ายังไม่ได้เชื่อมจริง)
-- โครงสร้าง multi-tenant ด้วย `store_id`
-- ฐานตารางหลัก `stores`, `profiles`
-- RLS enable + baseline policies
-- Global SaaS layout แบบ mobile-first
-- Navigation shell สำหรับหน้า Home / Queue / Revenue / CRM / Settings
-- i18n TH/EN พร้อม toggle
-- PWA shell ขั้นพื้นฐาน
-- Security baseline ที่จำเป็นสำหรับการเริ่มระบบ
-- Git control version ที่ทำงานร่วมกับ Claude Code
+## 3) In Scope
+- Next.js App Router + TypeScript + Tailwind
+- โครงสร้างโฟลเดอร์สำหรับ SaaS foundation
+- Global layout shell แบบ mobile-first
+- Navigation shell
+- TH/EN i18n baseline
+- Supabase client wiring
+- auth scaffold / LINE login integration point หรือ mock ที่ชัดเจน
+- tenant foundation ด้วย `store_id`
+- baseline schema สำหรับ `stores` และ `profiles`
+- baseline RLS concept / scaffold
+- PWA manifest และ offline shell ระดับพื้นฐาน
+- เอกสารควบคุมงานใน `core/`
+- Git control version แบบ 1 task = 1 commit
 
-### Out of Scope
-- Booking system
-- Queue rotation logic
+## 4) Out of Scope
+- booking flow จริง
+- queue rotation
 - CRM logic
-- Stock logic
-- Billing / Omise production flow
-- Reporting business metrics จริง
+- stock logic
+- payment production flow
+- analytics ธุรกิจจริง
+- refactor ใหญ่ทั้งระบบ
 
-## 3) Business Goal
-- ให้ระบบเริ่มใช้งานเป็น SaaS foundation ได้อย่างปลอดภัย
-- ลดความเสี่ยงข้อมูลข้ามร้าน
-- เตรียมโครงสร้างให้ Phase 2+ ต่อได้โดยไม่ต้องรื้อฐาน
+## 5) Success Criteria
+- โปรเจกต์ยังรันได้หลังจากแต่ละ task สำคัญ
+- Claude Code ทำงานตาม task queue ได้โดยไม่มั่วข้าม scope
+- มี tenant foundation ที่ชัดเจน
+- i18n TH/EN มี baseline ใช้งานได้
+- layout shell ใช้งานได้บน mobile/desktop
+- มี baseline commit history ที่ rollback ได้ง่าย
+- สามารถ resume งานต่อจาก `core/SYSTEM_STATE.md` ได้
 
-## 4) Success Criteria
-- ผู้ใช้สามารถเข้า flow auth ได้
-- ระบบมี tenant context ชัดเจนผ่าน `store_id`
-- table หลักรองรับ RLS
-- UI shell ใช้งานได้ทั้งมือถือและ desktop
-- ภาษา TH/EN สลับได้
-- โปรเจกต์มี commit history ที่ย้อนได้ทุก task
-- Claude Code ทำงานต่อเนื่องตาม task queue ได้โดยไม่ต้อง scan ทั้งโปรเจกต์
+## 6) Product Rules
+- ทุก task ต้องเล็กพอให้ commit ได้ภายในรอบเดียว
+- ถ้าความเสี่ยงสูง ให้หยุดก่อน ไม่ฝืนทำหลายเรื่องพร้อมกัน
+- ห้ามแก้ไฟล์นอก task โดยไม่มีเหตุผลจำเป็น
+- ห้ามนับงานว่าเสร็จ ถ้ายังไม่ update state และยังไม่ commit
+- ห้ามใช้ frontend `store_id` เป็น source of truth
 
-## 5) Product Rules
-- ทุก request เชื่อถือ frontend ไม่ได้ในเรื่อง `store_id`
-- ทุก task ต้องเล็กพอให้ทำจบใน 1 commit
-- ห้ามข้าม task queue เอง
-- ห้ามแก้ business feature นอก scope ของ Phase 1
-- ห้าม refactor ทั้ง repo โดยไม่มีเหตุผลจำเป็น
-
-## 6) Deliverables
-- Project structure พร้อมรัน
+## 7) Deliverables
+- app structure ที่รองรับ SaaS foundation
+- layout shell
+- i18n baseline
+- auth scaffold
+- supabase wiring
+- tenant/store/profile contracts
+- RLS scaffold/baseline note
+- PWA baseline
 - `core/PRD.md`
 - `core/RRD.md`
 - `core/SYSTEM_STATE.md`
 - `core/TASK_QUEUE.md`
 - `core/CLAUDE.md`
-- baseline commit ก่อนเริ่ม auto loop
 
-## 7) Definition of Done (Phase 1)
-- App รันได้
-- มี layout shell
-- i18n toggle ทำงาน
-- Supabase client พร้อม
-- auth scaffold พร้อม
-- `stores` และ `profiles` schema พร้อม
-- RLS baseline พร้อม
-- PWA shell พร้อม
-- Git workflow ใช้งานได้จริงกับ Claude Code
+## 8) Definition of Done for Phase 1
+- foundation พร้อมต่อยอดไป Phase 2
+- โครงสร้างไม่สับสน
+- เอกสาร core สะท้อนสถานะจริง
+- มี commit history ที่ย้อนกลับได้ตลอดสาย

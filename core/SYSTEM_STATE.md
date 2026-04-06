@@ -4,7 +4,7 @@
 Phase 1 — SaaS Foundation
 
 ## Execution Mode
-Manual start, then continuous task loop by Claude Code
+SAFE MODE — one task at a time, one commit per task
 
 ## Source of Truth Paths
 - core/PRD.md
@@ -15,9 +15,12 @@ Manual start, then continuous task loop by Claude Code
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-Ready to start
+Ready to start in safe mode
 
 ## Completed Tasks
+- None
+
+## Current Task Status
 - None
 
 ## In Progress
@@ -30,17 +33,33 @@ Ready to start
 TASK-001
 
 ## Last Safe Baseline
-Create a git baseline commit before running Claude continuous loop:
-`git add . && git commit -m "baseline: before claude auto run"`
+Confirmed baseline commit exists before safe mode run.
+If more manual edits are made before running Claude again, create a new safety commit first.
 
-## Working Rules
+## Safe Mode Working Rules
 - Execute only one task at a time
-- Update this file after each completed task
-- Do not mark task done unless code/files are actually updated
-- If stopped due to token or unresolved error, leave continuation notes here
+- Update this file after every task
+- Record task result as DONE, PARTIAL, or BLOCKED
+- Record changed files
+- Record light validation performed
+- Record commit message used
+- If token/context risk increases, stop before starting the next task
 
-## Continuation Note
-When resuming, Claude must read this file first and continue from `Next Task`
+## Resume Rule
+When resuming, Claude must:
+1. read this file first
+2. verify current task status
+3. trust committed state over memory
+4. continue only from `Next Task`
+
+## Safe Stop Template
+When stopping, append a short note with:
+- Task: TASK-XXX
+- Status: DONE / PARTIAL / BLOCKED
+- Changed Files:
+- Validation:
+- Commit:
+- Next Safe Step:
 
 ## Last Updated
 2026-04-06
