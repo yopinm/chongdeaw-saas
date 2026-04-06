@@ -56,6 +56,7 @@ Only after that should Real Integration UAT begin.
 ## Current Task Status
 - TASK-019: DONE
 - TASK-020: DONE
+- TASK-020-routing: DONE — generateStaticParams added to app/[locale]/layout.tsx; /th no longer 404
 
 ## In Progress
 - None
