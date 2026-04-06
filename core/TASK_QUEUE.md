@@ -16,7 +16,7 @@
 ## Phase 1 Tasks
 
 - [DONE] TASK-001: ตรวจสอบ project root และยืนยันไฟล์/โฟลเดอร์ที่จำเป็นต่อ Phase 1 โดยไม่รื้อโครงเดิม
-- [TODO] TASK-002: ตรวจสอบว่า Next.js + TypeScript + Tailwind setup ยังอยู่ในสภาพพร้อมใช้งาน
+- [DONE] TASK-002: ตรวจสอบว่า Next.js + TypeScript + Tailwind setup ยังอยู่ในสภาพพร้อมใช้งาน
 - [TODO] TASK-003: ยืนยันโครงสร้างเส้นทางหลักของ app และลดความสับสนระหว่าง `app/` กับ `src/` ตามของจริงในโปรเจกต์
 - [TODO] TASK-004: จัดระเบียบ foundation folders ที่จำเป็น เช่น components, lib, services เฉพาะเท่าที่ Phase 1 ต้องใช้
 - [TODO] TASK-005: สร้างหรือปรับ global layout shell แบบ mobile-first โดยไม่แตะ business UI เกินจำเป็น

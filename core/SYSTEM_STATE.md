@@ -15,13 +15,14 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-001 complete. Project root verified.
+TASK-002 complete. Next.js + TypeScript + Tailwind build verified.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
+- TASK-002: DONE — Next.js + TypeScript + Tailwind build passes
 
 ## Current Task Status
-- TASK-001: DONE
+- TASK-002: DONE
 
 ## In Progress
 - None
@@ -30,7 +31,7 @@ TASK-001 complete. Project root verified.
 - None confirmed
 
 ## Next Task
-TASK-002
+TASK-003
 
 ## TASK-001 Result
 - Status: DONE
@@ -74,6 +75,19 @@ When stopping, append a short note with:
 - Validation:
 - Commit:
 - Next Safe Step:
+
+## TASK-002 Result
+- Status: DONE
+- Changed Files: core/SYSTEM_STATE.md, core/TASK_QUEUE.md
+- Validation: `npm run build` — succeeded, TypeScript clean, static pages generated
+- Commit: chore(task-002): verify Next.js + TypeScript + Tailwind build
+- Findings:
+  - Next.js 16.2.2 with Turbopack ✓
+  - TypeScript strict mode, no errors ✓
+  - Tailwind v4 via @tailwindcss/postcss (`@import "tailwindcss"` in globals.css) ✓
+  - next-intl integrated and routing working ✓
+  - Build output: /[locale] dynamic route, /_not-found static ✓
+- Next Safe Step: TASK-003 — confirm app/ vs src/ route structure, reduce ambiguity
 
 ## Last Updated
 2026-04-06
