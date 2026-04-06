@@ -27,7 +27,7 @@
 - [DONE] TASK-010: ตรวจสอบ env wiring ที่จำเป็นและสรุปสิ่งที่ยังขาดอย่างปลอดภัย
 - [DONE] TASK-011: scaffold login entry และ auth entry points
 - [DONE] TASK-012: วาง LINE login integration point หรือ mock flow ให้ชัดเจนว่าอะไรยังไม่จริง
-- [TODO] TASK-013: สร้าง tenant/profile/store contracts ฝั่งโค้ด
+- [DONE] TASK-013: สร้าง tenant/profile/store contracts ฝั่งโค้ด
 - [TODO] TASK-014: สรุป schema baseline สำหรับ stores และ profiles ในรูปแบบที่ต่อยอดได้
 - [TODO] TASK-015: วางแนวทาง bind `store_id` เข้ากับ auth/session context
 - [TODO] TASK-016: วาง request validation layer ที่ไม่เชื่อ frontend `store_id`

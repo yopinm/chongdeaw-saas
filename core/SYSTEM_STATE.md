@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-012 complete. LINE login mock flow active; callback stub at /api/auth/callback.
+TASK-013 complete. Tenant/profile/store TypeScript contracts defined in src/types/index.ts.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -30,9 +30,10 @@ TASK-012 complete. LINE login mock flow active; callback stub at /api/auth/callb
 - TASK-010: DONE — env audit complete; keys documented; .env.local gitignored confirmed
 - TASK-011: DONE — auth layout + login page scaffold; /[locale]/login route confirmed in build
 - TASK-012: DONE — mock login flow (no LINE API); callback stub at /api/auth/callback (501, documented)
+- TASK-013: DONE — Store, Profile, TenantContext, Insert types in src/types/index.ts
 
 ## Current Task Status
-- TASK-012: DONE
+- TASK-013: DONE
 
 ## In Progress
 - None
@@ -41,7 +42,7 @@ TASK-012 complete. LINE login mock flow active; callback stub at /api/auth/callb
 - None confirmed
 
 ## Next Task
-TASK-013
+TASK-014
 
 ## TASK-001 Result
 - Status: DONE
@@ -237,6 +238,24 @@ When stopping, append a short note with:
   - Comment in route.ts describes full real flow step-by-step
   - Required env vars listed in comment (LINE_CHANNEL_ID, LINE_CHANNEL_SECRET)
 - Next Safe Step: TASK-013 — tenant/profile/store contracts in code
+
+## TASK-013 Result
+- Status: DONE
+- Changed Files: src/types/index.ts (created)
+- Validation: `npm run build` — TypeScript clean, all routes still present
+- Commit: feat(task-013): define Store, Profile, TenantContext type contracts
+- Contracts defined:
+  - UserRole = "owner" | "staff"
+  - Locale = "th" | "en"
+  - Store — id, name, owner_id, line_channel_id, locale, created_at
+  - Profile — id, store_id, line_user_id, display_name, picture_url, role, created_at
+  - TenantContext — user_id, store_id, role (server-resolved, never from client)
+  - StoreInsert / ProfileInsert — Omit<..., "id" | "created_at"> for DB writes
+- What is NOT done (by design):
+  - No DB migration — TASK-014
+  - No RLS policies — TASK-017
+  - No session binding — TASK-015
+- Next Safe Step: TASK-014 — schema baseline summary for stores + profiles
 
 ## Last Updated
 2026-04-06
