@@ -15,7 +15,7 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-009 complete. Supabase client baseline — browser + server clients in src/lib/supabase.ts.
+TASK-010 complete. Env wiring audited — Supabase keys present; LINE keys missing (needed for TASK-012).
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
@@ -27,9 +27,10 @@ TASK-009 complete. Supabase client baseline — browser + server clients in src/
 - TASK-007: DONE — en.json duplicate key fixed; Nav section added to both en.json and th.json
 - TASK-008: DONE — LanguageToggle component created; wired in desktop sidebar + mobile top header
 - TASK-009: DONE — createClient (browser) + createSupabaseServerClient (server) baseline ready
+- TASK-010: DONE — env audit complete; keys documented; .env.local gitignored confirmed
 
 ## Current Task Status
-- TASK-009: DONE
+- TASK-010: DONE
 
 ## In Progress
 - None
@@ -38,7 +39,7 @@ TASK-009 complete. Supabase client baseline — browser + server clients in src/
 - None confirmed
 
 ## Next Task
-TASK-010
+TASK-011
 
 ## TASK-001 Result
 - Status: DONE
@@ -178,6 +179,30 @@ When stopping, append a short note with:
   - No routes or components wired to these clients yet — auth binding comes in TASK-015+
   - Both clients require NEXT_PUBLIC_SUPABASE_URL + NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local
 - Next Safe Step: TASK-010 — check env wiring, document what's missing
+
+## TASK-010 Result
+- Status: DONE
+- Changed Files: core/SYSTEM_STATE.md, core/TASK_QUEUE.md (docs only — no code changes)
+- Validation: env keys confirmed present; .gitignore confirmed protecting .env.local; build still passes
+- Commit: chore(task-010): env wiring audit — Supabase present, LINE missing
+
+### Env Audit Summary
+
+| Var | Status | Used By |
+|-----|--------|---------|
+| NEXT_PUBLIC_SUPABASE_URL | SET (41 chars) | src/lib/supabase.ts |
+| NEXT_PUBLIC_SUPABASE_ANON_KEY | SET | src/lib/supabase.ts |
+| LINE_CHANNEL_ID | MISSING | TASK-012 (LINE login) |
+| LINE_CHANNEL_SECRET | MISSING | TASK-012 (LINE login) |
+| SUPABASE_SERVICE_ROLE_KEY | MISSING | TASK-017 (RLS admin ops, can defer to Phase 2) |
+
+### Notes
+- .env.local is gitignored via `.env*` rule — safe
+- Supabase wiring is ready for TASK-011+ (auth scaffold)
+- LINE keys must be added before TASK-012 can be made real (mock flow acceptable as placeholder)
+- SUPABASE_SERVICE_ROLE_KEY is not needed until RLS admin operations — safe to defer
+
+- Next Safe Step: TASK-011 — scaffold login entry and auth entry points
 
 ## Last Updated
 2026-04-06
