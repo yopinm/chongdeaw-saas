@@ -15,9 +15,9 @@ SAFE MODE — one task at a time, one commit per task
 - core/chongdeaw-milestone-driven.md
 
 ## Current Status
-TASK-018 complete. Phase 1 security foundation is in place.
-However, runtime entry is currently blocked because `localhost:3000` returns 404.
-Before starting Real Integration UAT (LINE Auth, Supabase session, JWT claim, RLS), the app must first restore a safe root route and expose a minimal mock Home UI.
+TASK-020 and all sub-tasks complete. Runtime entry is restored and mock Home UI is live.
+`/` redirects to `/th`. `/th` renders the mock Home screen without 404.
+Ready to begin Real Integration UAT (LINE Auth, Supabase session, JWT claim, RLS).
 
 ## Current Reality Summary
 - Phase 1 design baseline exists
@@ -27,11 +27,13 @@ Before starting Real Integration UAT (LINE Auth, Supabase session, JWT claim, RL
 - RLS baseline is defined but not yet executed
 - Auth is still mock
 - Supabase env baseline is ready
-- Root route is currently not usable for safe UAT because `/` returns 404
+- Root route restored: `/` → `/th` redirect works
+- `/th` renders mock Home UI (6 cards, stats panel, i18n TH/EN)
+- Middleware uses next-intl v4 direct export; matcher correct
+- i18n request.ts: no notFound(); invalid locale falls back to "th"
 
 ## Immediate Goal
-Restore a safe runtime entry and make the app visible again.
-Only after that should Real Integration UAT begin.
+Begin TASK-021: review and align auth entry points for Phase 1 UAT.
 
 ## Completed Tasks
 - TASK-001: DONE — project root and folder structure verified
