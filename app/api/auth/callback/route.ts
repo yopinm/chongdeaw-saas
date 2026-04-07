@@ -101,7 +101,7 @@ export async function GET(req: NextRequest) {
   // Upsert auth user — try create first, fall back to lookup if email already exists
   let userId: string;
 
-  const { data: newUser } = await admin.auth.admin.createUser({
+  const { data: newUser, error: createErr } = await admin.auth.admin.createUser({
     email: lineEmail,
     email_confirm: true,
     user_metadata: {
@@ -111,12 +111,16 @@ export async function GET(req: NextRequest) {
     },
   });
 
+  console.log("[auth/callback] createUser result:", newUser?.user?.id ?? "null", "error:", createErr?.message ?? "none");
+
   if (newUser?.user) {
     userId = newUser.user.id;
   } else {
     // Email already exists — look up the existing user
-    const { data: list } = await admin.auth.admin.listUsers({ perPage: 1000 });
+    const { data: list, error: listErr } = await admin.auth.admin.listUsers({ perPage: 1000 });
+    console.log("[auth/callback] listUsers count:", list?.users?.length ?? 0, "error:", listErr?.message ?? "none");
     const found = list?.users.find((u) => u.email === lineEmail);
+    console.log("[auth/callback] found existing user:", found?.id ?? "NOT FOUND");
     if (!found) {
       console.error("[auth/callback] cannot find or create user for", lineEmail);
       return makeRedirect(req, "/th/login?error=user_create_failed");
