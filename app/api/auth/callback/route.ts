@@ -198,11 +198,10 @@ export async function GET(req: NextRequest) {
     return makeRedirect(req, "/th/login?error=session_create_failed");
   }
 
-  // 5. Redirect to the magic-link confirm URL to establish a real cookie session
-  const confirmUrl = new URL(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/auth/v1/verify`);
-  confirmUrl.searchParams.set("token", linkData.properties.hashed_token);
-  confirmUrl.searchParams.set("type", "magiclink");
-  confirmUrl.searchParams.set("redirect_to", `${appUrl}/th`);
+  // 5. Redirect to our own confirm route — verifyOtp server-side to set session cookies
+  const confirmUrl = new URL(`${appUrl}/api/auth/confirm`);
+  confirmUrl.searchParams.set("token_hash", linkData.properties.hashed_token);
+  confirmUrl.searchParams.set("next", "/th");
 
   const res = NextResponse.redirect(confirmUrl);
   res.cookies.delete("line_state");
