@@ -7,8 +7,8 @@
 **TASK-1A-023** — bind real session เข้ากับ TenantContext ฝั่ง server — ไม่เชื่อ client `store_id`
 
 ## ✅ Last Done
-**TASK-1A-022** — LINE login flow จริงผ่าน ngrok ✅ · แก้ปุ่ม login ถูก disabled เพราะ env vars ไม่ถูก inject
-`commit: fix(login): remove disabled button, show error message on click when env vars not loaded`
+**TASK-1A-022** — LINE Auth ทำงานได้จริง end-to-end ✅ · fix disabled button + add allowedDevOrigins สำหรับ ngrok
+`commit: fix(task-1a-022): add allowedDevOrigins for ngrok dev`
 
 ## 📍 Current Phase
 **Phase 1A** — Auth real integration (In Progress ~80%)
