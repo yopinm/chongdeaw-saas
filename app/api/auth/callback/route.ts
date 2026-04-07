@@ -183,10 +183,7 @@ export async function GET(req: NextRequest) {
       {
         id: userId,
         store_id: resolvedStoreId,
-        line_user_id: lineProfile.userId,
-        display_name: lineProfile.displayName,
-        picture_url: lineProfile.pictureUrl ?? null,
-        role: "owner",
+        role: "OWNER",
         is_deleted: false,
       },
       { onConflict: "id" },
@@ -202,7 +199,7 @@ export async function GET(req: NextRequest) {
     // Subsequent login: refresh display name + picture, undelete if needed
     await admin
       .from("profiles")
-      .update({ display_name: lineProfile.displayName, picture_url: lineProfile.pictureUrl ?? null, is_deleted: false })
+      .update({ is_deleted: false })
       .eq("id", userId);
 
     storeId = existingProfile.store_id;
