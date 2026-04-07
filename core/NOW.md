@@ -4,11 +4,11 @@
 ---
 
 ## ▶️ Next Task
-**TASK-1A-026** — RLS เปิดครบทุก table หลัก · Tenant isolation UAT
+**TASK-1A-026** — RLS เปิดครบทุก table หลัก · Tenant isolation UAT · ทดสอบ login ผ่าน ngrok
 
 ## ✅ Last Done
-**store_create_failed ✅** — แก้ profile check ไม่กรอง is_deleted + รองรับ slug conflict (23505) + upsert profile
-`commit: fix(auth): resolve store_create_failed — handle slug conflict and drop is_deleted filter on profile lookup`
+**PGRST204 + policy conflict ✅** — ลบ locale ออกจาก stores insert + migration idempotent ด้วย DROP POLICY IF EXISTS
+`commit: fix(auth): drop locale from stores insert, make migration idempotent`
 
 ## 📍 Current Phase
 **Phase 1A** — Auth real integration (In Progress ~85%)

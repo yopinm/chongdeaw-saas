@@ -41,6 +41,7 @@ ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 -- ─── 4. Minimal policy — user can read their own profile row ─────────────────
 -- Required for getTenantContext() (src/lib/tenant.ts) to work.
 -- Full tenant isolation policies come in TASK-1A-025.
+DROP POLICY IF EXISTS "profiles_self_rw" ON profiles;
 CREATE POLICY "profiles_self_rw" ON profiles
 FOR ALL
 USING     (id = auth.uid())
