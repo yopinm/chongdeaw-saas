@@ -4,11 +4,11 @@
 ---
 
 ## ▶️ Next Task
-**TASK-1A-024** — inject store_id เข้า JWT claim · verify ผ่าน /api/auth/me → ต้องเห็น store_id ใน user_metadata
+**TASK-1A-025** — เปิด RLS ทีละ table · stores + profiles · verify tenant isolation
 
 ## ✅ Last Done
-**TASK-1A-023 ✅** — login ผ่าน · store + profile สร้างถูกต้องตาม schema จริง
-`commit: fix(auth): align profiles upsert/update with actual schema columns`
+**TASK-1A-024 ✅** — JWT มี store_id + role ถูกต้อง · /api/auth/me → authenticated:true, store_id มีค่า, role:OWNER
+`commit: feat(auth): TASK-1A-024 — inject store_id+role into app_metadata (server-only JWT claim)`
 
 ## 📍 Current Phase
 **Phase 1A** — Auth real integration (In Progress ~85%)
