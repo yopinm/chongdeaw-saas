@@ -123,22 +123,16 @@ export async function GET(req: NextRequest) {
     userId = newUser.user.id;
   }
 
-  // Update LINE metadata on every login
-  await admin.auth.admin.updateUserById(userId, {
-    user_metadata: {
-      line_user_id: lineProfile.userId,
-      display_name: lineProfile.displayName,
-      picture_url: lineProfile.pictureUrl,
-    },
-  });
-
   // 3b. Upsert store + profile (TASK-1A-023)
   const { data: existingProfile } = await admin
     .from("profiles")
-    .select("store_id")
+    .select("store_id, role")
     .eq("id", userId)
     .eq("is_deleted", false)
     .maybeSingle();
+
+  let storeId: string;
+  let userRole = "owner";
 
   if (!existingProfile) {
     // First login: create store then profile
@@ -167,13 +161,30 @@ export async function GET(req: NextRequest) {
       console.error("[auth/callback] profile create failed", profileErr);
       return makeRedirect(req, "/th/login?error=profile_create_failed");
     }
+
+    storeId = newStore.id;
   } else {
     // Subsequent login: refresh display name + picture
     await admin
       .from("profiles")
       .update({ display_name: lineProfile.displayName, picture_url: lineProfile.pictureUrl ?? null })
       .eq("id", userId);
+
+    storeId = existingProfile.store_id;
+    userRole = existingProfile.role;
   }
+
+  // 3c. Inject store_id + role into JWT user_metadata (TASK-1A-024)
+  // Must happen before generateLink so the issued token carries these claims.
+  await admin.auth.admin.updateUserById(userId, {
+    user_metadata: {
+      line_user_id: lineProfile.userId,
+      display_name: lineProfile.displayName,
+      picture_url: lineProfile.pictureUrl ?? null,
+      store_id: storeId,
+      role: userRole,
+    },
+  });
 
   // 4. Generate magic-link token to create a real session
   const { data: linkData, error: linkErr } = await admin.auth.admin.generateLink({

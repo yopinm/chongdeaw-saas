@@ -4,18 +4,18 @@
 ---
 
 ## ▶️ Next Task
-**TASK-1A-024** — inject `store_id` เข้า JWT claim (additive mode)
+**TASK-1A-025** — เปิด RLS ทีละ table — low-risk → high-risk
 
 ## ✅ Last Done
-**TASK-1A-023** — auto-upsert store+profile หลัง LINE login · migration SQL พร้อม · getTenantContext() ทำงานได้จริง
-`commit: feat(task-1a-023): auto-upsert store+profile on LINE login, add tenant tables migration`
+**TASK-1A-024** — inject store_id + role เข้า JWT user_metadata ก่อน generateLink · ทุก request มี store_id ใน JWT แล้ว
+`commit: feat(task-1a-024): inject store_id+role into JWT user_metadata before session creation`
 
 ## 📍 Current Phase
-**Phase 1A** — Auth real integration (In Progress ~80%)
+**Phase 1A** — Auth real integration (In Progress ~85%)
 
 Next phase gate ที่ต้องผ่านก่อนเข้า **Phase 1B**:
 - [x] LINE Auth flow จริง (ไม่ใช่ mock)
-- [ ] JWT มี store_id จาก server
+- [x] JWT มี store_id จาก server
 - [ ] RLS เปิดครบทุก table หลัก
 - [ ] Tenant isolation UAT ผ่าน
 - [ ] ทุก query มี `AND is_deleted = false`
