@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 export default function LoginPage() {
@@ -12,6 +12,11 @@ export default function LoginPage() {
   const missingConfig = !channelId || !appUrl;
 
   const [clickError, setClickError] = useState<string | null>(null);
+  const [loginError, setLoginError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setLoginError(new URLSearchParams(window.location.search).get("error"));
+  }, []);
 
   function handleLineLogin() {
     if (missingConfig) {
@@ -31,13 +36,6 @@ export default function LoginPage() {
     lineUrl.searchParams.set("scope", "profile openid");
     window.location.href = lineUrl.toString();
   }
-
-  // Show error if redirected back from callback with ?error=
-  const searchParams =
-    typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search)
-      : null;
-  const loginError = searchParams?.get("error");
 
   return (
     <div className="w-full max-w-sm rounded-3xl bg-white p-8 shadow-sm">

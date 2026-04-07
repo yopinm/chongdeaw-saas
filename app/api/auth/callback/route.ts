@@ -96,7 +96,8 @@ export async function GET(req: NextRequest) {
   );
 
   // Use a deterministic email derived from LINE userId (never shown to user)
-  const lineEmail = `line_${lineProfile.userId}@line.user`;
+  // lowercase so email matches what Supabase stores (Supabase auto-lowercases all emails)
+  const lineEmail = `line_${lineProfile.userId.toLowerCase()}@line.user`;
 
   // Upsert auth user — try create first, fall back to lookup if email already exists
   let userId: string;
