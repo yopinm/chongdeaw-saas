@@ -4,11 +4,11 @@
 ---
 
 ## ▶️ Next Task
-**debug store_create_failed** — stores upsert ล้มเหลวใน /api/auth/callback · ต้อง resolve ก่อน TASK-1A-026
+**TASK-1A-026** — RLS เปิดครบทุก table หลัก · Tenant isolation UAT
 
 ## ✅ Last Done
-**TASK-1A-022 ✅ TASK-1A-023 partial** — LINE Auth flow ทำงานได้ · fix email case bug + hydration mismatch · RLS migration พร้อม
-`commit: fix(auth): lowercase lineEmail to match Supabase storage, fix hydration mismatch on login page`
+**store_create_failed ✅** — แก้ profile check ไม่กรอง is_deleted + รองรับ slug conflict (23505) + upsert profile
+`commit: fix(auth): resolve store_create_failed — handle slug conflict and drop is_deleted filter on profile lookup`
 
 ## 📍 Current Phase
 **Phase 1A** — Auth real integration (In Progress ~85%)
@@ -21,8 +21,7 @@ Next phase gate ที่ต้องผ่านก่อนเข้า **Phas
 - [ ] ทุก query มี `AND is_deleted = false`
 
 ## 🚨 Blocker
-`store_create_failed` — stores/profiles upsert ใน /api/auth/callback ล้มเหลว
-ต้องดู error จริงจาก terminal log ก่อน แล้วค่อยแก้
+_(ไม่มี blocker ปัจจุบัน)_
 
 ## 🔧 Dev Setup (พร้อมแล้ว ✅)
 - ngrok: `https://kira-unpenetrating-uncogently.ngrok-free.dev` → localhost:3000 ✅
