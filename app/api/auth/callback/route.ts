@@ -111,7 +111,8 @@ export async function GET(req: NextRequest) {
     },
   });
 
-  console.log("[auth/callback] createUser result:", newUser?.user?.id ?? "null", "error:", createErr?.message ?? "none");
+  console.log("[auth/callback] createUser result:", newUser?.user?.id ?? "null");
+  if (createErr) console.error("[auth/callback] createUser ERROR:", JSON.stringify(createErr));
 
   if (newUser?.user) {
     userId = newUser.user.id;
