@@ -4,17 +4,17 @@
 ---
 
 ## ▶️ Next Task
-**TASK-1A-022** — เพิ่ม env vars จริง (LINE_CHANNEL_ID + SERVICE_ROLE_KEY) + ทดสอบ LINE login flow จริงด้วย ngrok
+**TASK-1A-023** — bind real session เข้ากับ TenantContext ฝั่ง server — ไม่เชื่อ client `store_id`
 
 ## ✅ Last Done
-**TASK-1A-021** — Auth entry points พร้อม UAT: login redirects ไป LINE จริง, callback exchange token + upsert Supabase user + session via magic-link, logout route สร้างแล้ว
-`commit: feat(task-1a-021): implement real LINE OAuth login/callback/logout`
+**TASK-1A-022** — LINE login flow จริงผ่าน ngrok ✅ · แก้ปุ่ม login ถูก disabled เพราะ env vars ไม่ถูก inject
+`commit: fix(login): remove disabled button, show error message on click when env vars not loaded`
 
 ## 📍 Current Phase
-**Phase 1A** — Auth real integration (In Progress ~70%)
+**Phase 1A** — Auth real integration (In Progress ~80%)
 
 Next phase gate ที่ต้องผ่านก่อนเข้า **Phase 1B**:
-- [ ] LINE Auth flow จริง (ไม่ใช่ mock)
+- [x] LINE Auth flow จริง (ไม่ใช่ mock)
 - [ ] JWT มี store_id จาก server
 - [ ] RLS เปิดครบทุก table หลัก
 - [ ] Tenant isolation UAT ผ่าน

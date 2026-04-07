@@ -59,8 +59,8 @@
 - [DONE] TASK-018: ทบทวน security baseline Phase 1A
 
 ### Auth Real Integration (TODO ← NEXT)
-- [TODO] TASK-1A-021: ทบทวน auth entry points และ route callback/login/logout ให้พร้อม UAT ← **NEXT**
-- [TODO] TASK-1A-022: เชื่อม Real LINE Auth + Supabase session (ngrok callback)
+- [DONE] TASK-1A-021: ทบทวน auth entry points และ route callback/login/logout ให้พร้อม UAT
+- [DONE] TASK-1A-022: เชื่อม Real LINE Auth + Supabase session (ngrok callback)
 - [TODO] TASK-1A-023: bind real session เข้ากับ TenantContext ฝั่ง server — ไม่เชื่อ client `store_id`
 - [TODO] TASK-1A-024: inject `store_id` เข้า JWT claim (additive mode)
 - [TODO] TASK-1A-025: เปิด RLS ทีละ table — low-risk → high-risk
