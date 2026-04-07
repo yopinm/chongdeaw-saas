@@ -1,24 +1,36 @@
 "use client";
-// MOCK FLOW — LINE OAuth is not connected yet.
-// Real flow requires LINE_CHANNEL_ID + LINE_CHANNEL_SECRET in .env.local (see TASK-010 audit).
-// Clicking the button simulates a login and redirects to home with no real session.
-// Real implementation: TASK-015+ (after store_id / session binding is designed).
 
-import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 
 export default function LoginPage() {
-  const router = useRouter();
   const params = useParams();
   const locale = (params.locale as string) ?? "th";
-  const [loading, setLoading] = useState(false);
 
-  function handleMockLogin() {
-    setLoading(true);
-    // MOCK: simulates auth delay then redirects home — no session is created
-    // Real flow: build LINE OAuth URL → redirect → receive callback at /api/auth/callback
-    setTimeout(() => router.push(`/${locale}`), 800);
+  const channelId = process.env.NEXT_PUBLIC_LINE_CHANNEL_ID;
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL;
+  const missingConfig = !channelId || !appUrl;
+
+  function handleLineLogin() {
+    if (missingConfig) return;
+    const state = crypto.randomUUID();
+    // Store state in cookie for server-side validation in callback
+    document.cookie = `line_state=${state}; path=/; max-age=300; SameSite=Lax`;
+    const callbackUrl = `${appUrl}/api/auth/callback`;
+    const lineUrl = new URL("https://access.line.me/oauth2/v2.1/authorize");
+    lineUrl.searchParams.set("response_type", "code");
+    lineUrl.searchParams.set("client_id", channelId!);
+    lineUrl.searchParams.set("redirect_uri", callbackUrl);
+    lineUrl.searchParams.set("state", state);
+    lineUrl.searchParams.set("scope", "profile openid");
+    window.location.href = lineUrl.toString();
   }
+
+  // Show error if redirected back from callback with ?error=
+  const searchParams =
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search)
+      : null;
+  const loginError = searchParams?.get("error");
 
   return (
     <div className="w-full max-w-sm rounded-3xl bg-white p-8 shadow-sm">
@@ -31,20 +43,32 @@ export default function LoginPage() {
 
       <div className="mt-8 space-y-4">
         <button
-          onClick={handleMockLogin}
-          disabled={loading}
-          className="flex w-full items-center justify-center gap-3 rounded-2xl bg-[#06C755] px-4 py-3 text-sm font-semibold text-white disabled:opacity-60"
+          onClick={handleLineLogin}
+          disabled={missingConfig}
+          className="flex w-full items-center justify-center gap-3 rounded-2xl bg-[#06C755] px-4 py-3 text-sm font-semibold text-white disabled:opacity-40"
         >
           <span className="text-lg">💬</span>
-          {loading ? "กำลังเข้าสู่ระบบ..." : "เข้าสู่ระบบด้วย LINE"}
+          เข้าสู่ระบบด้วย LINE
         </button>
 
-        <div className="rounded-xl bg-amber-50 px-4 py-3 text-xs text-amber-700">
-          <strong>MOCK MODE</strong> — ยังไม่ต่อ LINE OAuth จริง
-          <br />
-          กดปุ่มจะ redirect ตรงไปหน้าหลัก (ไม่มี session จริง)
-        </div>
+        {missingConfig && (
+          <div className="rounded-xl bg-red-50 px-4 py-3 text-xs text-red-700">
+            <strong>ยังไม่พร้อม:</strong> ต้องเพิ่ม{" "}
+            <code>NEXT_PUBLIC_LINE_CHANNEL_ID</code> และ{" "}
+            <code>NEXT_PUBLIC_APP_URL</code> ใน .env.local
+          </div>
+        )}
+
+        {loginError && !missingConfig && (
+          <div className="rounded-xl bg-red-50 px-4 py-3 text-xs text-red-700">
+            เข้าสู่ระบบไม่สำเร็จ ({loginError}) — กรุณาลองใหม่
+          </div>
+        )}
       </div>
+
+      <p className="mt-6 text-center text-xs text-gray-400">
+        locale: {locale}
+      </p>
     </div>
   );
 }
