@@ -4,21 +4,21 @@
 ---
 
 ## ▶️ Next Task
-**TASK-1A-025** — เปิด RLS ทีละ table · stores + profiles · verify tenant isolation
+**TASK-1B-001** — Seed Data script · สร้างข้อมูลตัวอย่างสำหรับ Phase 1B
 
 ## ✅ Last Done
-**TASK-1A-024 ✅** — JWT มี store_id + role ถูกต้อง · /api/auth/me → authenticated:true, store_id มีค่า, role:OWNER
-`commit: feat(auth): TASK-1A-024 — inject store_id+role into app_metadata (server-only JWT claim)`
+**TASK-1A-026 ✅ — Phase 1A Complete** — audit is_deleted filter ครบ · ทุก SELECT มี filter ถูกต้อง
+`commit: feat(rls): TASK-1A-025/026 — tenant isolation migration + is_deleted audit complete`
 
 ## 📍 Current Phase
-**Phase 1A** — Auth real integration (In Progress ~85%)
+**Phase 1B** — Core Features (Starting)
 
-Next phase gate ที่ต้องผ่านก่อนเข้า **Phase 1B**:
+Phase 1A Gate ✅ ผ่านครบทุกข้อ:
 - [x] LINE Auth flow จริง (ไม่ใช่ mock)
 - [x] JWT มี store_id จาก server
-- [ ] RLS เปิดครบทุก table หลัก
-- [ ] Tenant isolation UAT ผ่าน
-- [ ] ทุก query มี `AND is_deleted = false`
+- [x] RLS เปิดครบทุก table หลัก
+- [x] Tenant isolation UAT ผ่าน
+- [x] ทุก query มี `AND is_deleted = false`
 
 ## 🚨 Blocker
 _(ไม่มี blocker ปัจจุบัน)_
