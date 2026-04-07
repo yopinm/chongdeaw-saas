@@ -31,7 +31,11 @@ export async function GET(req: NextRequest) {
     },
   );
 
-  const { error } = await supabase.auth.verifyOtp({ token_hash, type: "magiclink" });
+  const { data: otpData, error } = await supabase.auth.verifyOtp({ token_hash, type: "magiclink" });
+
+  console.log("[auth/confirm] verifyOtp result:", error ? `ERROR: ${error.message}` : "OK");
+  console.log("[auth/confirm] session user:", otpData?.user?.id ?? "none");
+  console.log("[auth/confirm] cookies being set:", response.cookies.getAll().map((c) => c.name));
 
   if (error) {
     console.error("[auth/confirm] verifyOtp failed", error);

@@ -1,8 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/src/lib/supabase";
 
 // GET /api/auth/me — verify JWT claims (dev only, remove before prod)
-export async function GET() {
+export async function GET(req: NextRequest) {
+  console.log("[auth/me] incoming cookies:", req.cookies.getAll().map((c) => c.name));
   const supabase = await createSupabaseServerClient();
   const { data: { user }, error } = await supabase.auth.getUser();
 
