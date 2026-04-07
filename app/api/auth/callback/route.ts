@@ -98,29 +98,30 @@ export async function GET(req: NextRequest) {
   // Use a deterministic email derived from LINE userId (never shown to user)
   const lineEmail = `line_${lineProfile.userId}@line.user`;
 
-  // Upsert auth user
-  const { data: existingUser } = await admin.auth.admin.listUsers();
-  const found = existingUser?.users.find((u) => u.email === lineEmail);
-
+  // Upsert auth user — try create first, fall back to lookup if email already exists
   let userId: string;
 
-  if (found) {
-    userId = found.id;
+  const { data: newUser } = await admin.auth.admin.createUser({
+    email: lineEmail,
+    email_confirm: true,
+    user_metadata: {
+      line_user_id: lineProfile.userId,
+      display_name: lineProfile.displayName,
+      picture_url: lineProfile.pictureUrl,
+    },
+  });
+
+  if (newUser?.user) {
+    userId = newUser.user.id;
   } else {
-    const { data: newUser, error: createErr } = await admin.auth.admin.createUser({
-      email: lineEmail,
-      email_confirm: true,
-      user_metadata: {
-        line_user_id: lineProfile.userId,
-        display_name: lineProfile.displayName,
-        picture_url: lineProfile.pictureUrl,
-      },
-    });
-    if (createErr || !newUser.user) {
-      console.error("[auth/callback] createUser failed", createErr);
+    // Email already exists — look up the existing user
+    const { data: list } = await admin.auth.admin.listUsers({ perPage: 1000 });
+    const found = list?.users.find((u) => u.email === lineEmail);
+    if (!found) {
+      console.error("[auth/callback] cannot find or create user for", lineEmail);
       return makeRedirect(req, "/th/login?error=user_create_failed");
     }
-    userId = newUser.user.id;
+    userId = found.id;
   }
 
   // 3b. Upsert store + profile (TASK-1A-023)
