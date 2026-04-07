@@ -206,13 +206,11 @@ export async function GET(req: NextRequest) {
     userRole = existingProfile.role;
   }
 
-  // 3c. Inject store_id + role into JWT user_metadata (TASK-1A-024)
+  // 3c. Inject store_id + role into JWT app_metadata (TASK-1A-024)
+  // app_metadata is server-only — clients cannot override it via supabase.auth.updateUser().
   // Must happen before generateLink so the issued token carries these claims.
   await admin.auth.admin.updateUserById(userId, {
-    user_metadata: {
-      line_user_id: lineProfile.userId,
-      display_name: lineProfile.displayName,
-      picture_url: lineProfile.pictureUrl ?? null,
+    app_metadata: {
       store_id: storeId,
       role: userRole,
     },

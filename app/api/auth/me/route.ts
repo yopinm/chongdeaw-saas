@@ -15,6 +15,7 @@ export async function GET(req: NextRequest) {
     authenticated: true,
     user_id: user.id,
     email: user.email,
-    user_metadata: user.user_metadata,
+    store_id: user.app_metadata?.store_id ?? null,
+    role: user.app_metadata?.role ?? null,
   });
 }
