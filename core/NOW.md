@@ -4,11 +4,11 @@
 ---
 
 ## ▶️ Next Task
-**TASK-1A-023** — bind real session เข้ากับ TenantContext ฝั่ง server — ไม่เชื่อ client `store_id`
+**TASK-1A-024** — inject `store_id` เข้า JWT claim (additive mode)
 
 ## ✅ Last Done
-**TASK-1A-022** — LINE Auth ทำงานได้จริง end-to-end ✅ · fix disabled button + add allowedDevOrigins สำหรับ ngrok
-`commit: fix(task-1a-022): add allowedDevOrigins for ngrok dev`
+**TASK-1A-023** — auto-upsert store+profile หลัง LINE login · migration SQL พร้อม · getTenantContext() ทำงานได้จริง
+`commit: feat(task-1a-023): auto-upsert store+profile on LINE login, add tenant tables migration`
 
 ## 📍 Current Phase
 **Phase 1A** — Auth real integration (In Progress ~80%)

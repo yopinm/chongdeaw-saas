@@ -132,6 +132,49 @@ export async function GET(req: NextRequest) {
     },
   });
 
+  // 3b. Upsert store + profile (TASK-1A-023)
+  const { data: existingProfile } = await admin
+    .from("profiles")
+    .select("store_id")
+    .eq("id", userId)
+    .eq("is_deleted", false)
+    .maybeSingle();
+
+  if (!existingProfile) {
+    // First login: create store then profile
+    const slug = `store-${lineProfile.userId.slice(1, 13).toLowerCase()}`;
+    const { data: newStore, error: storeErr } = await admin
+      .from("stores")
+      .insert({ name: lineProfile.displayName, slug, owner_id: userId, locale: "th" })
+      .select("id")
+      .single();
+
+    if (storeErr || !newStore) {
+      console.error("[auth/callback] store create failed", storeErr);
+      return makeRedirect(req, "/th/login?error=store_create_failed");
+    }
+
+    const { error: profileErr } = await admin.from("profiles").insert({
+      id: userId,
+      store_id: newStore.id,
+      line_user_id: lineProfile.userId,
+      display_name: lineProfile.displayName,
+      picture_url: lineProfile.pictureUrl ?? null,
+      role: "owner",
+    });
+
+    if (profileErr) {
+      console.error("[auth/callback] profile create failed", profileErr);
+      return makeRedirect(req, "/th/login?error=profile_create_failed");
+    }
+  } else {
+    // Subsequent login: refresh display name + picture
+    await admin
+      .from("profiles")
+      .update({ display_name: lineProfile.displayName, picture_url: lineProfile.pictureUrl ?? null })
+      .eq("id", userId);
+  }
+
   // 4. Generate magic-link token to create a real session
   const { data: linkData, error: linkErr } = await admin.auth.admin.generateLink({
     type: "magiclink",
