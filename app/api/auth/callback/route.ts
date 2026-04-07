@@ -148,7 +148,7 @@ export async function GET(req: NextRequest) {
 
     const { data: newStore, error: storeErr } = await admin
       .from("stores")
-      .insert({ name: lineProfile.displayName, slug, owner_id: userId })
+      .insert({ name_th: lineProfile.displayName, slug, subscription_status: "active", tenant_tier: "basic" })
       .select("id")
       .single();
 
