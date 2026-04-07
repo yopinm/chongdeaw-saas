@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
 
 // GET /api/auth/confirm?token_hash=...&next=/th
 // Exchanges the magic-link token for a real server-side session (sets cookies).
@@ -14,16 +13,18 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(new URL("/th/login?error=missing_token", base));
   }
 
-  const cookieStore = await cookies();
+  // Create response first — cookies must be set on this object directly
+  const response = NextResponse.redirect(new URL(next, base));
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        getAll() { return cookieStore.getAll(); },
+        getAll() { return req.cookies.getAll(); },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options),
+            response.cookies.set(name, value, options),
           );
         },
       },
@@ -37,5 +38,5 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(new URL("/th/login?error=session_create_failed", base));
   }
 
-  return NextResponse.redirect(new URL(next, base));
+  return response;
 }
