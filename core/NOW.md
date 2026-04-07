@@ -23,8 +23,10 @@ Next phase gate ที่ต้องผ่านก่อนเข้า **Phas
 ## 🚨 Blocker
 None
 
-## 🔧 Dev Setup (ต้องมีก่อน UAT)
-- ngrok: `ngrok http 3000` → copy URL → ตั้ง LINE callback + Omise webhook
+## 🔧 Dev Setup (พร้อมแล้ว ✅)
+- ngrok: `https://kira-unpenetrating-uncogently.ngrok-free.dev` → localhost:3000 ✅
+- Next.js dev server: รันอยู่ที่ localhost:3000 ✅
+- `.env.local`: ครบทุก key (LINE_CHANNEL_ID, LINE_CHANNEL_SECRET, NEXT_PUBLIC_LINE_CHANNEL_ID, SUPABASE_SERVICE_ROLE_KEY, NEXT_PUBLIC_APP_URL) ✅
 - Omise test key: พร้อมแล้ว ✅
 - Playwright: `npm i -D @playwright/test` (ใช้ Phase 1B)
 - Supabase CLI: `supabase start` สำหรับ local DB
