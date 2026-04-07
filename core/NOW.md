@@ -4,11 +4,11 @@
 ---
 
 ## ▶️ Next Task
-**TASK-1A-026** — RLS เปิดครบทุก table หลัก · Tenant isolation UAT · ทดสอบ login ผ่าน ngrok
+**TASK-1A-024** — inject store_id เข้า JWT claim · verify ผ่าน /api/auth/me → ต้องเห็น store_id ใน user_metadata
 
 ## ✅ Last Done
-**PGRST204 + policy conflict ✅** — ลบ locale ออกจาก stores insert + migration idempotent ด้วย DROP POLICY IF EXISTS
-`commit: fix(auth): drop locale from stores insert, make migration idempotent`
+**TASK-1A-023 ✅** — login ผ่าน · store + profile สร้างถูกต้องตาม schema จริง
+`commit: fix(auth): align profiles upsert/update with actual schema columns`
 
 ## 📍 Current Phase
 **Phase 1A** — Auth real integration (In Progress ~85%)
