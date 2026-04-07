@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useParams } from "next/navigation";
 
 export default function LoginPage() {
@@ -10,8 +11,14 @@ export default function LoginPage() {
   const appUrl = process.env.NEXT_PUBLIC_APP_URL;
   const missingConfig = !channelId || !appUrl;
 
+  const [clickError, setClickError] = useState<string | null>(null);
+
   function handleLineLogin() {
-    if (missingConfig) return;
+    if (missingConfig) {
+      setClickError("ยังไม่พร้อม: กรุณา restart dev server เพื่อโหลด env vars ใหม่");
+      return;
+    }
+    setClickError(null);
     const state = crypto.randomUUID();
     // Store state in cookie for server-side validation in callback
     document.cookie = `line_state=${state}; path=/; max-age=300; SameSite=Lax`;
@@ -44,18 +51,21 @@ export default function LoginPage() {
       <div className="mt-8 space-y-4">
         <button
           onClick={handleLineLogin}
-          disabled={missingConfig}
-          className="flex w-full items-center justify-center gap-3 rounded-2xl bg-[#06C755] px-4 py-3 text-sm font-semibold text-white disabled:opacity-40"
+          className="flex w-full items-center justify-center gap-3 rounded-2xl bg-[#06C755] px-4 py-3 text-sm font-semibold text-white"
         >
           <span className="text-lg">💬</span>
           เข้าสู่ระบบด้วย LINE
         </button>
 
-        {missingConfig && (
+        {(missingConfig || clickError) && (
           <div className="rounded-xl bg-red-50 px-4 py-3 text-xs text-red-700">
-            <strong>ยังไม่พร้อม:</strong> ต้องเพิ่ม{" "}
-            <code>NEXT_PUBLIC_LINE_CHANNEL_ID</code> และ{" "}
-            <code>NEXT_PUBLIC_APP_URL</code> ใน .env.local
+            {clickError ?? (
+              <>
+                <strong>ยังไม่พร้อม:</strong> ต้องเพิ่ม{" "}
+                <code>NEXT_PUBLIC_LINE_CHANNEL_ID</code> และ{" "}
+                <code>NEXT_PUBLIC_APP_URL</code> ใน .env.local
+              </>
+            )}
           </div>
         )}
 
