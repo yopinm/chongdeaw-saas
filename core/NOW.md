@@ -11,7 +11,7 @@
 - `app/[slug]/menu/page.tsx` — Server Component, fetch by slug → store_id
 - `app/[slug]/menu/AvailabilityToggle.tsx` — Client toggle, calls API
 - `app/api/menu/[slug]/toggle/route.ts` — POST, verify session store_id ≠ client-supplied
-`commit: feat(task-1b-003): menu page + availability toggle API`
+`commit: fix(task-1b-003): move menu to app/store/[slug]/menu — fix [locale] conflict`
 
 ## 📍 Current Phase
 **Phase 1B** — Core Features (Starting)
