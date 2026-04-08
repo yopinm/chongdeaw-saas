@@ -187,10 +187,10 @@ SELECT cron.unschedule('dunning-check-dev');
 #### Deliverables
 
 **Setup & Data**
-- [ ] Seed Data script: สร้าง 3 ร้านทดสอบ + เมนู 10 รายการ + stock + orders 50 ใบ
+- [x] Seed Data script: สร้าง 3 ร้านทดสอบ + เมนู 10 รายการ + stock + orders 50 ใบ
   - ใช้สำหรับทดสอบ P&L, Best Seller, Stock movement ได้ทันที
   - `supabase/seed.sql` — รัน `supabase db reset` แล้วได้ข้อมูลพร้อมเลย
-- [ ] Playwright setup: multi-context config สำหรับ simulate 2 Staff พร้อมกัน
+- [x] Playwright setup: multi-context config สำหรับ simulate 2 Staff พร้อมกัน
 
 **Menu & Ordering**
 - [ ] เมนูหน้าร้านต่อ store (`/[slug]/menu`) + Availability Toggle Realtime (`is_available`)

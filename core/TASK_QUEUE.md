@@ -83,8 +83,8 @@
 > เป้าหมาย: ร้านสั่งได้ · Staff รับออเดอร์ได้ · จ่ายเงินได้ · ทดสอบได้บน local + ngrok
 > Dependency: Phase 1A Hard Gate ผ่านครบก่อน
 
-- [TODO] TASK-1B-001: Setup Seed Data script — 3 ร้าน + เมนู 10 รายการ + stock + 50 orders (`supabase/seed.sql`)
-- [TODO] TASK-1B-002: Setup Playwright multi-context สำหรับ simulate 2 Staff พร้อมกัน
+- [DONE] TASK-1B-001: Setup Seed Data script — 3 ร้าน + เมนู 10 รายการ + stock + 50 orders (`supabase/seed.sql`)
+- [DONE] TASK-1B-002: Setup Playwright multi-context สำหรับ simulate 2 Staff พร้อมกัน
 - [TODO] TASK-1B-003: เมนูหน้าร้าน `/[slug]/menu` + Availability Toggle Realtime (`is_available`)
   - Cache Key ต้องรวม `store_id` — ป้องกัน ISR cache ข้ามร้าน
 - [TODO] TASK-1B-004: QR โต๊ะ → bind `table_no` เข้า order อัตโนมัติ
