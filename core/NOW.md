@@ -4,12 +4,14 @@
 ---
 
 ## ▶️ Next Task
-**TASK-1B-003** — เมนูหน้าร้าน `/[slug]/menu` + Availability Toggle Realtime (`is_available`)
-- Cache Key ต้องรวม `store_id` — ป้องกัน ISR cache ข้ามร้าน
+**TASK-1B-004** — QR โต๊ะ → bind `table_no` เข้า order อัตโนมัติ
 
 ## ✅ Last Done
-**TASK-1B-002 ✅ — Playwright multi-context** — test ผ่าน: 2 owners tenant isolation confirmed
-`commit: fix(task-1b-002): destructure store_id+role in globalSetup loop + set app_metadata`
+**TASK-1B-003 ✅ — เมนูหน้าร้าน + Availability Toggle**
+- `app/[slug]/menu/page.tsx` — Server Component, fetch by slug → store_id
+- `app/[slug]/menu/AvailabilityToggle.tsx` — Client toggle, calls API
+- `app/api/menu/[slug]/toggle/route.ts` — POST, verify session store_id ≠ client-supplied
+`commit: feat(task-1b-003): menu page + availability toggle API`
 
 ## 📍 Current Phase
 **Phase 1B** — Core Features (Starting)
