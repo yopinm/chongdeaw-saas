@@ -4,10 +4,23 @@
 ---
 
 ## ▶️ Next Task
-**TASK-1B-004** — QR โต๊ะ → bind `table_no` เข้า order อัตโนมัติ
+**TASK-1B-003** — ยังไม่เสร็จ (PARTIAL)
+
+### 🔄 TASK-1B-003 Status: BLOCKED
+- ✅ `app/store/[slug]/menu/page.tsx` สร้างแล้ว
+- ✅ `app/store/[slug]/menu/AvailabilityToggle.tsx` สร้างแล้ว
+- ✅ `app/api/menu/[slug]/toggle/route.ts` สร้างแล้ว
+- ✅ Migration 004 แก้ stores schema (name→name_th) ขึ้น cloud แล้ว
+- ❌ 404 เพราะ cloud stores ไม่มี seed data — มีแค่ slug `store-2a30860848bb` (จาก LINE auth)
+
+**Next safe step**: seed stores/categories/products ขึ้น cloud Supabase
+- option A: รัน seed SQL บน cloud โดยตรงผ่าน Dashboard → SQL Editor
+- option B: เพิ่ม cloud seed ใน `tests/global-setup.ts`
+- slug ที่ต้องการ: `chongdeaw-1`, `mum-nam`, `test-coffee`
+- store UUIDs: `a1000000-0000-0000-0000-000000000001` ฯลฯ (ดู seed.sql)
 
 ## ✅ Last Done
-**TASK-1B-003 ✅ — เมนูหน้าร้าน + Availability Toggle**
+**TASK-1B-003 PARTIAL — เมนูหน้าร้าน + Availability Toggle**
 - `app/[slug]/menu/page.tsx` — Server Component, fetch by slug → store_id
 - `app/[slug]/menu/AvailabilityToggle.tsx` — Client toggle, calls API
 - `app/api/menu/[slug]/toggle/route.ts` — POST, verify session store_id ≠ client-supplied
