@@ -4,11 +4,12 @@
 ---
 
 ## ▶️ Next Task
-**TASK-1B-003** — (ดู TASK_QUEUE.md)
+**TASK-1B-003** — เมนูหน้าร้าน `/[slug]/menu` + Availability Toggle Realtime (`is_available`)
+- Cache Key ต้องรวม `store_id` — ป้องกัน ISR cache ข้ามร้าน
 
 ## ✅ Last Done
-**TASK-1B-002 ✅ — Playwright multi-context setup** — `playwright.config.ts` + `app/api/test/login/route.ts` + `tests/helpers/auth.ts` + `tests/multi-context/two-staff.spec.ts`
-`commit: feat(task-1b-002): playwright multi-context + test login route`
+**TASK-1B-002 ✅ — Playwright multi-context** — test ผ่าน: 2 owners tenant isolation confirmed
+`commit: fix(task-1b-002): destructure store_id+role in globalSetup loop + set app_metadata`
 
 ## 📍 Current Phase
 **Phase 1B** — Core Features (Starting)
