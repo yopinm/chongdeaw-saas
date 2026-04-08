@@ -10,7 +10,7 @@ SET session_replication_role = replica;
 -- with fixed UUIDs matching the IDs used below.
 
 -- 2. STORES (name, slug, owner_id, subscription_status, tenant_tier) --
-INSERT INTO stores (id, name, slug, owner_id, subscription_status, tenant_tier, is_deleted)
+INSERT INTO stores (id, name_th, slug, owner_id, subscription_status, tenant_tier, is_deleted)
 VALUES
   ('a1000000-0000-0000-0000-000000000001','ชงเดี่ยว สาขา 1','chongdeaw-1','00000001-0000-0000-0000-000000000001','active','basic',false),
   ('a2000000-0000-0000-0000-000000000002','คาเฟ่มุมน้ำ',     'mum-nam',   '00000002-0000-0000-0000-000000000002','active','basic',false),

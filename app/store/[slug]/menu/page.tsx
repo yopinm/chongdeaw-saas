@@ -2,28 +2,26 @@ import { createClient } from "@supabase/supabase-js";
 import { notFound } from "next/navigation";
 import AvailabilityToggle from "./AvailabilityToggle";
 
-// Public customer-facing menu page.
-// Uses service role to bypass RLS — we filter by store_id ourselves.
-const admin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  { auth: { autoRefreshToken: false, persistSession: false } },
-);
-
 type Props = { params: Promise<{ slug: string }> };
 
 export default async function MenuPage({ params }: Props) {
   const { slug } = await params;
 
+  // Admin client inside function — ensures env vars are resolved at request time
+  const admin = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { autoRefreshToken: false, persistSession: false } },
+  );
+
   // 1. Resolve store by slug — slug is public, store_id is internal
-  const { data: store } = await admin
+  const { data: store, error: storeErr } = await admin
     .from("stores")
-    .select("id, name")
+    .select("id, name_th")
     .eq("slug", slug)
-    .eq("is_deleted", false)
     .single();
 
-  if (!store) notFound();
+  if (storeErr || !store) notFound();
 
   const storeId = store.id;
 
@@ -59,7 +57,7 @@ export default async function MenuPage({ params }: Props) {
 
   return (
     <div className="w-full max-w-2xl mx-auto px-4 py-6 flex flex-col gap-6">
-      <h1 className="text-2xl font-extrabold text-gray-900">{store.name}</h1>
+      <h1 className="text-2xl font-extrabold text-gray-900">{store.name_th}</h1>
 
       {productsByCategory.map((cat) => (
         <section key={cat.id}>
