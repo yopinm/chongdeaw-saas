@@ -6,6 +6,14 @@
 ## ▶️ Next Task
 **TASK-1B-002** — Setup Playwright multi-context สำหรับ simulate 2 Staff พร้อมกัน
 
+### 🔄 TASK-1B-002 Status: IN PROGRESS (PARTIAL)
+- ✅ `npm i -D @playwright/test` → package.json updated
+- ⏳ ยังไม่ได้สร้าง: `playwright.config.ts`, `tests/helpers/auth.ts`, `tests/multi-context/two-staff.spec.ts`
+- 📌 Strategy ตัดสินใจแล้ว: ใช้ test-only API route (`/api/test/login`) inject session → Playwright ไม่ต้องผ่าน LINE OAuth
+- 📌 Target: Local Supabase (`http://127.0.0.1:54321`) — seed users: `owner1@chongdeaw.test`, `owner2@chongdeaw.test` / pw: `password123`
+
+**Next safe step**: สร้าง `playwright.config.ts` → `app/api/test/login/route.ts` → `tests/helpers/auth.ts` → `tests/multi-context/two-staff.spec.ts`
+
 ## ✅ Last Done
 **TASK-1B-001 ✅ — Seed Data** — migration phase1b core tables + seed 3 ร้าน / 30 products / 50 orders
 `commit: feat(task-1b-001): seed data + phase1b core tables migration`
