@@ -6,16 +6,8 @@
 
 SET session_replication_role = replica;
 
--- 1. AUTH USERS -------------------------------------------------------
-INSERT INTO auth.users (
-  id, email, encrypted_password, email_confirmed_at,
-  raw_app_meta_data, raw_user_meta_data,
-  created_at, updated_at, aud, role
-) VALUES
-  ('00000001-0000-0000-0000-000000000001','owner1@chongdeaw.test',crypt('password123',gen_salt('bf')),NOW(),jsonb_build_object('store_id','a1000000-0000-0000-0000-000000000001'),'{}',NOW(),NOW(),'authenticated','authenticated'),
-  ('00000002-0000-0000-0000-000000000002','owner2@chongdeaw.test',crypt('password123',gen_salt('bf')),NOW(),jsonb_build_object('store_id','a2000000-0000-0000-0000-000000000002'),'{}',NOW(),NOW(),'authenticated','authenticated'),
-  ('00000003-0000-0000-0000-000000000003','owner3@chongdeaw.test',crypt('password123',gen_salt('bf')),NOW(),jsonb_build_object('store_id','a3000000-0000-0000-0000-000000000003'),'{}',NOW(),NOW(),'authenticated','authenticated'),
-  ('00000004-0000-0000-0000-000000000004','staff1@chongdeaw.test', crypt('password123',gen_salt('bf')),NOW(),jsonb_build_object('store_id','a1000000-0000-0000-0000-000000000001'),'{}',NOW(),NOW(),'authenticated','authenticated');
+-- NOTE: auth.users are created via GoTrue admin API in tests/global-setup.ts
+-- with fixed UUIDs matching the IDs used below.
 
 -- 2. STORES (name, slug, owner_id, subscription_status, tenant_tier) --
 INSERT INTO stores (id, name, slug, owner_id, subscription_status, tenant_tier, is_deleted)
