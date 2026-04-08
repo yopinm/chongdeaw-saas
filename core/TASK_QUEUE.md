@@ -85,7 +85,7 @@
 
 - [DONE] TASK-1B-001: Setup Seed Data script — 3 ร้าน + เมนู 10 รายการ + stock + 50 orders (`supabase/seed.sql`)
 - [DONE] TASK-1B-002: Setup Playwright multi-context สำหรับ simulate 2 Staff พร้อมกัน
-- [TODO] TASK-1B-003: เมนูหน้าร้าน `/[slug]/menu` + Availability Toggle Realtime (`is_available`)
+- [DONE] TASK-1B-003: เมนูหน้าร้าน `/[slug]/menu` + Availability Toggle Realtime (`is_available`)
   - Cache Key ต้องรวม `store_id` — ป้องกัน ISR cache ข้ามร้าน
 - [TODO] TASK-1B-004: QR โต๊ะ → bind `table_no` เข้า order อัตโนมัติ
 - [TODO] TASK-1B-005: สร้าง Order + Order Items (Atomic transaction)

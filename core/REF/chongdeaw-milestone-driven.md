@@ -193,7 +193,7 @@ SELECT cron.unschedule('dunning-check-dev');
 - [x] Playwright setup: multi-context config สำหรับ simulate 2 Staff พร้อมกัน
 
 **Menu & Ordering**
-- [ ] เมนูหน้าร้านต่อ store (`/[slug]/menu`) + Availability Toggle Realtime (`is_available`)
+- [x] เมนูหน้าร้านต่อ store (`/[slug]/menu`) + Availability Toggle Realtime (`is_available`)
   - **Cache Key ต้องรวม `store_id`** — ป้องกันเมนูร้าน A โผล่ที่ร้าน B
   - ISR 60s + Edge Cache · LCP < 1.5s
 - [ ] สแกน QR โต๊ะ → bind `table_no` เข้า order อัตโนมัติ
