@@ -8,10 +8,10 @@ const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
 
 const TEST_USERS = [
-  { id: "00000001-0000-0000-0000-000000000001", email: "owner1@chongdeaw.test" },
-  { id: "00000002-0000-0000-0000-000000000002", email: "owner2@chongdeaw.test" },
-  { id: "00000003-0000-0000-0000-000000000003", email: "owner3@chongdeaw.test" },
-  { id: "00000004-0000-0000-0000-000000000004", email: "staff1@chongdeaw.test" },
+  { id: "00000001-0000-0000-0000-000000000001", email: "owner1@chongdeaw.test", store_id: "a1000000-0000-0000-0000-000000000001", role: "owner" },
+  { id: "00000002-0000-0000-0000-000000000002", email: "owner2@chongdeaw.test", store_id: "a2000000-0000-0000-0000-000000000002", role: "owner" },
+  { id: "00000003-0000-0000-0000-000000000003", email: "owner3@chongdeaw.test", store_id: "a3000000-0000-0000-0000-000000000003", role: "owner" },
+  { id: "00000004-0000-0000-0000-000000000004", email: "staff1@chongdeaw.test",  store_id: "a1000000-0000-0000-0000-000000000001", role: "staff" },
 ];
 
 export default async function globalSetup() {
@@ -23,7 +23,7 @@ export default async function globalSetup() {
     auth: { autoRefreshToken: false, persistSession: false },
   });
 
-  for (const { id, email } of TEST_USERS) {
+  for (const { id, email, store_id, role } of TEST_USERS) {
     await admin.auth.admin.deleteUser(id);
 
     const { error } = await admin.auth.admin.createUser({
@@ -31,6 +31,7 @@ export default async function globalSetup() {
       email,
       password: "password123",
       email_confirm: true,
+      app_metadata: { store_id, role },
     });
 
     if (error) {
