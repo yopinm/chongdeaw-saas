@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS categories (
 
 ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "categories_tenant_access" ON categories;
 CREATE POLICY "categories_tenant_access" ON categories
 FOR ALL
 USING (
@@ -43,6 +44,7 @@ CREATE TABLE IF NOT EXISTS products (
 
 ALTER TABLE products ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "products_tenant_access" ON products;
 CREATE POLICY "products_tenant_access" ON products
 FOR ALL
 USING (
@@ -69,6 +71,7 @@ CREATE TABLE IF NOT EXISTS orders (
 
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "orders_tenant_access" ON orders;
 CREATE POLICY "orders_tenant_access" ON orders
 FOR ALL
 USING (
@@ -93,6 +96,7 @@ CREATE TABLE IF NOT EXISTS order_items (
 
 ALTER TABLE order_items ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "order_items_tenant_access" ON order_items;
 CREATE POLICY "order_items_tenant_access" ON order_items
 FOR ALL
 USING (
@@ -116,6 +120,7 @@ CREATE TABLE IF NOT EXISTS members (
 
 ALTER TABLE members ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "members_tenant_access" ON members;
 CREATE POLICY "members_tenant_access" ON members
 FOR ALL
 USING (
@@ -140,6 +145,7 @@ CREATE TABLE IF NOT EXISTS subscriptions (
 
 ALTER TABLE subscriptions ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "subscriptions_tenant_access" ON subscriptions;
 CREATE POLICY "subscriptions_tenant_access" ON subscriptions
 FOR ALL
 USING (
@@ -165,6 +171,7 @@ CREATE TABLE IF NOT EXISTS stock_items (
 
 ALTER TABLE stock_items ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "stock_items_tenant_access" ON stock_items;
 CREATE POLICY "stock_items_tenant_access" ON stock_items
 FOR ALL
 USING (
