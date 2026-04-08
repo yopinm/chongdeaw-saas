@@ -4,11 +4,11 @@
 ---
 
 ## ▶️ Next Task
-**TASK-1B-001** — Seed Data script · สร้างข้อมูลตัวอย่างสำหรับ Phase 1B
+**TASK-1B-002** — Setup Playwright multi-context สำหรับ simulate 2 Staff พร้อมกัน
 
 ## ✅ Last Done
-**TASK-1A-026 ✅ — Phase 1A Complete** — audit is_deleted filter ครบ · ทุก SELECT มี filter ถูกต้อง
-`commit: feat(rls): TASK-1A-025/026 — tenant isolation migration + is_deleted audit complete`
+**TASK-1B-001 ✅ — Seed Data** — migration phase1b core tables + seed 3 ร้าน / 30 products / 50 orders
+`commit: feat(task-1b-001): seed data + phase1b core tables migration`
 
 ## 📍 Current Phase
 **Phase 1B** — Core Features (Starting)
